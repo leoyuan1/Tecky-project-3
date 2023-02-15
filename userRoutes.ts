@@ -1,10 +1,11 @@
 import express from "express";
 import { checkPassword, hashPassword } from "./util/bcrypt";
 import { userFormidablePromise } from "./util/formidable";
-import knex from "knex";
 import { User } from "./util/session";
 import fetch from 'cross-fetch';
 import crypto from "crypto"
+import { userController } from "./app";
+
 // import session from "express-session";
 
 export const userRoutes = express.Router()
@@ -12,100 +13,10 @@ export const userRoutes = express.Router()
 userRoutes.post('/signup', signup)
 userRoutes.post('/login', login)
 userRoutes.get('/login/google', loginGoogle)
-userRoutes.get('/session', isUser)
+userRoutes.get('/session', userController.isUser)
 userRoutes.post('/change', changePassword)
 userRoutes.get('/logout', logout)
-userRoutes.get('/user-id', getUserID)
-
-declare module "express-session" {
-    interface SessionData {
-        user?: User;
-    }
-}
-
-export async function isUser(req: express.Request, res: express.Response) {
-    if (!req.session.user) {
-        res.json({
-            message: 'no session data',
-        })
-        return
-    }
-    res.json({
-        message: 'isUser',
-        user: req.session.user
-    })
-}
-
-async function getUserID(req: express.Request, res: express.Response) {
-    if (!req.session.user) {
-        res.json({
-            message: 'no session data',
-        })
-        return
-    }
-    const userID = req.session.user['id'];
-    res.json({ data: userID })
-}
-
-// export async function keepLogin(req: express.Request, res: express.Response) {
-//     let result = req.session.user
-//     if (!result) {
-//         res.json({
-//             message: 'no session data',
-//         })
-//     }
-//     res.json({
-//         message: 'isUser',
-//         user: req.session.user
-//     })
-// }
-
-async function signup(req: express.Request, res: express.Response) {
-    try {
-        let { fields, files } = await userFormidablePromise(req)
-        let selectUserResult = await .query(`select * from users where email = $1`, [fields.email])
-        let foundUser = selectUserResult.rows[0]
-        if (foundUser) {
-            res.json({
-                message: "email registered"
-            })
-            return
-        }
-
-        let selectUsernameResult = await .query(`select * from users where username = $1`, [fields.username])
-        let foundUsername = selectUsernameResult.rows[0]
-
-        if (foundUsername) {
-            res.json({
-                message: "username registered"
-            })
-            return
-        }
-
-        let fileName = files.image ? files.image['newFilename'] : ''
-
-        let hashedPassword = await hashPassword(fields.password)
-        let user = (await client.query('INSERT INTO users (email,password,icon,username,created_at,updated_at) values ($1,$2,$3,$4,now(),now()) returning *',
-            [fields.email,
-                hashedPassword,
-                fileName,
-            fields.username,
-            ]
-        )).rows[0]
-        await client.query('insert into community_members (community_id,user_id, created_at, updated_at) values ($1,$2,now(),now())',
-            [
-                "1",
-                user.id
-            ])
-        req.session.user = user
-        res.json({
-            message: "OK"
-        })
-    } catch (error) {
-        console.log(error);
-        res.end('not ok')
-    }
-}
+userRoutes.get('/user-id', userController.getUserID)
 
 async function login(req: express.Request, res: express.Response) {
     try {
@@ -171,19 +82,6 @@ async function loginGoogle(req: express.Request, res: express.Response) {
     res.redirect('/')
 }
 
-// const isLoggedIn = (
-//     req: express.Request,
-//     res: express.Response,
-//     next: express.NextFunction
-// ) => {
-//     if (req.session?.user) {
-//         next()
-//     } else {
-//         res.redirect('/?error=no access right')
-//     }
-// };
-// // admin.html should be inside protected
-// app.use(isLoggedIn, express.static("protected"));
 
 async function changePassword(req: express.Request, res: express.Response) {
     let { existPassword, newPasswordValue } = req.body
