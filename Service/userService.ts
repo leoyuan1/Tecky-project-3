@@ -25,5 +25,8 @@ export class UserService {
         )).rows[0]
         return user
     }
+    async changePassword(userEmail: string,hashedPassword: string){
+        await this.knex.raw(`UPDATE users SET password = $1, updated_at = now() WHERE email = $2`, [hashedPassword, userEmail])
+    }
 }
 

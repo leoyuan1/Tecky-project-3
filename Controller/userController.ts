@@ -1,9 +1,10 @@
 
 import express from "express"
 import { UserService } from "../Service/userService"
-import { hashPassword } from "../util/bcrypt"
+import { checkPassword, hashPassword } from "../util/bcrypt"
 import { userFormidablePromise } from "../util/formidable"
 import { logger } from "../util/logger"
+import crypto from "crypto"
 
 
 export class UserController {
@@ -33,9 +34,6 @@ export class UserController {
         res.json({ data: userID })
     }
     signup = async (req: express.Request, res: express.Response) => {
-        // let { fields, files } = await userFormidablePromise(req)
-        // let selectUserResult = await .query(`select * from users where email = $1`, [fields.email])
-        // let foundUser = selectUserResult.rows[0]
         try {
             let { fields, files } = await userFormidablePromise(req)
             if (!files || !fields) {
@@ -79,4 +77,94 @@ export class UserController {
         }
 
     }
+    login= async (req: express.Request, res: express.Response)=>{
+        try {
+            let { userEmail, password } = req.body
+            let foundUser = await this.userService.getUserByEmail(userEmail)
+            if (!foundUser) {
+                res.json({
+                    message: "email not register"
+                })
+                return
+            }
+            let dataPassword = foundUser.password
+            let isPasswordValid = await checkPassword(password, dataPassword)
+            if (!isPasswordValid) {
+                res.json({
+                    message: 'Invalid password'
+                })
+                return
+            }
+            delete foundUser.password
+            req.session.user = foundUser
+            res.json({
+                message: "correct"
+            })
+    
+        } catch (error) {
+            console.log(error);
+            res.end('not ok')
+        }
+    }
+    loginGoogle= async (req: express.Request, res: express.Response)=>{
+        const accessToken = req.session?.['grant'].response.access_token;
+        const fetchRes = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
+            method: "get",
+            headers: {
+                "Authorization": `Bearer ${accessToken}`
+            }
+        });
+    
+        let result = await fetchRes.json();
+        let userEmail = result.email
+        let userUsername = result.name
+        let fileName = result.picture
+        const foundUser = await this.userService.getUserByEmail(userEmail)
+        req.session.user = foundUser
+        if (!foundUser) {
+            let hashedPassword = await hashPassword(crypto.randomUUID())
+            // Create the user when the user does not exist
+            let user = await this.userService.insertUser(userEmail,hashedPassword,fileName,userUsername)
+            delete user.password
+            req.session.user = user
+        }
+        res.redirect('/')
+    }
+    logout = async (req: express.Request, res: express.Response)=>{
+    if (!req.session.user) {
+        res.status(403).json({
+            message: 'Not authorized'
+        })
+        return
+    }
+    delete req.session.user
+    res.json({
+        message: 'logout'
+    })
+}
+changePassword =async (req: express.Request, res: express.Response)=>{
+    let { existPassword, newPasswordValue } = req.body
+    let hashedPassword = await hashPassword(newPasswordValue)
+    if (!req.session.user) {
+        res.status(403).json({
+            message: 'Not authorized'
+        })
+        return
+    }
+    let session = req.session.user
+    let userEmail = session.email
+    let foundUser = await this.userService.getUserByEmail(userEmail)
+
+    let isPasswordValid = await checkPassword(existPassword, foundUser.password)
+    if (!isPasswordValid) {
+        res.status(404).json({
+            message: 'Invalid password'
+        })
+        return
+    }
+    await this.userService.changePassword(userEmail,hashedPassword)
+    res.json({
+        message: "Updated Password"
+    })
+}
 }
