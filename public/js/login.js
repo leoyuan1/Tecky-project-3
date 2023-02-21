@@ -21,7 +21,7 @@ async function login() {
         html: `<input type="text" id="email" class="swal2-input" placeholder="Email address" value="123@gmail.com">
             <input type="password" id="password" class="swal2-input" placeholder="Password" value="123">
             `,
-        footer: `<div href="/connect/google" class="btn btn-success">Sign in With Google</div>
+        footer: `<a href="/connect/google" class="btn btn-success">Sign in With Google</a>
                 <div type="button" class="btn signup-btn" onclick='signup()'>Sign Up Here</div>
             `,
         confirmButtonText: 'Sign in',
