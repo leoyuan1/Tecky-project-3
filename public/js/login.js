@@ -17,12 +17,12 @@ if (carouselLoginElm) {
 async function login() {
     let result;
     await Swal.fire({
-        title: 'login Form',
-        html: `<input type="text" id="email" class="swal2-input" placeholder="Email address">
-            <input type="password" id="password" class="swal2-input" placeholder="Password">
+        title: 'Login Form',
+        html: `<input type="text" id="email" class="swal2-input" placeholder="Email address" value="123@gmail.com">
+            <input type="password" id="password" class="swal2-input" placeholder="Password" value="123">
             `,
         footer: `<a href="/connect/google" class="btn btn-success">Sign in With Google</a>
-                <a type="button" class="signup-btn" onclick='signup()'>Sign Up Here</a>
+                <div type="button" class="btn signup-btn" onclick='signup()'>Sign Up Here</div>
             `,
         confirmButtonText: 'Sign in',
         focusConfirm: false,
@@ -34,7 +34,7 @@ async function login() {
                 Swal.showValidationMessage(`Please enter email and password`)
                 return
             }
-            result = { email: email, password: password }
+            result = { userEmail: email, password: password }
             let res = await fetch('/login', {
                 method: 'post',
                 body: JSON.stringify(result),
@@ -56,38 +56,38 @@ async function login() {
                 await Swal.fire(`
                     登入成功
                     `.trim())
-                showUserNav()
+                // showUserNav()
             }
         }
     })
 }
 
-async function showUserNav() {
-    let res = await fetch('/session')
-    let result = await res.json()
-    if (result.message === 'isUser') {
-        document.getElementById("login-btn").style.display = "none";
-        document.getElementById("welcome-btn").style.display = "block";
-        document.getElementById("postPets").style.display = "block";
-        if (carouselLoginElm) {
-            carouselLoginElm.style.display = "none";
-        }
-        document.getElementById('navbarDropdownMenuLink').innerHTML = `歡迎 ${result.user.username}！`;
-    } else if (result.message === 'no session data') {
-        return
-    }
-}
+// async function showUserNav() {
+//     let res = await fetch('/session')
+//     let result = await res.json()
+//     if (result.message === 'isUser') {
+//         document.getElementById("login-btn").style.display = "none";
+//         document.getElementById("welcome-btn").style.display = "block";
+//         document.getElementById("postPets").style.display = "block";
+//         if (carouselLoginElm) {
+//             carouselLoginElm.style.display = "none";
+//         }
+//         document.getElementById('navbarDropdownMenuLink').innerHTML = `歡迎 ${result.user.username}！`;
+//     } else if (result.message === 'no session data') {
+//         return
+//     }
+// }
 
-function init() {
-    showUserNav()
-}
-init()
+// function init() {
+//     showUserNav()
+// }
+// init()
 
-document.querySelector('#logout-btn').addEventListener('click', async () => {
-    let res = await fetch('/logout')
-    let data = await res.json()
-    if (data.message == 'logout') {
-        // location.reload('/')
-        window.location.href = '/';
-    }
-})
+// document.querySelector('#logout-btn').addEventListener('click', async () => {
+//     let res = await fetch('/logout')
+//     let data = await res.json()
+//     if (data.message == 'logout') {
+//         // location.reload('/')
+//         window.location.href = '/';
+//     }
+// })
