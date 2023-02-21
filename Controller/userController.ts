@@ -113,8 +113,6 @@ export class UserController {
     }
     loginGoogle = async (req: express.Request, res: express.Response) => {
         const accessToken = req.session?.['grant'].response.access_token;
-        console.log(accessToken);
-
         const fetchRes = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
             method: "get",
             headers: {
@@ -124,7 +122,6 @@ export class UserController {
         let result = await fetchRes.json();
 
         let userEmail = result.email
-        console.log(userEmail);
         let userUsername = result.name
         let fileName = result.picture
         const foundUser = await this.userService.getUserByEmail(userEmail)
