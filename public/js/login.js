@@ -17,12 +17,12 @@ if (carouselLoginElm) {
 async function login() {
     let result;
     await Swal.fire({
-        title: 'login Form',
+        title: 'Login Form',
         html: `<input type="text" id="email" class="swal2-input" placeholder="Email address" value="123@gmail.com">
             <input type="password" id="password" class="swal2-input" placeholder="Password" value="123">
             `,
-        footer: `<a href="/connect/google" class="btn btn-success">Sign in With Google</a>
-                <a type="button" class="signup-btn" onclick='signup()'>Sign Up Here</a>
+        footer: `<div href="/connect/google" class="btn btn-success">Sign in With Google</div>
+                <div type="button" class="btn signup-btn" onclick='signup()'>Sign Up Here</div>
             `,
         confirmButtonText: 'Sign in',
         focusConfirm: false,
