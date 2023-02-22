@@ -2,11 +2,12 @@ import { Knex } from "knex";
 
 
 export async function up(knex: Knex): Promise<void> {
-    await knex.schema.createTable('media', (table)=>{
+    await knex.schema.createTable('media', (table) => {
         table.increments();
         table.string('song_name').unique;
         table.string('image');
         table.string('video');
+        table.jsonb('pose_data');
         table.timestamps(false, true)
     })
 }

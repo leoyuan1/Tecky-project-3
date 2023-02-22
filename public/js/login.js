@@ -13,7 +13,17 @@ if (carouselLoginElm) {
         login()
     })
 }
-
+async function showUserNav() {
+    let res = await fetch('/session')
+    let result = await res.json()
+    if (result.message === 'isUser') {
+        document.getElementById("user-panel").style.display = "none";
+        document.getElementById("dropdown").style.display = "inline-block";
+        document.getElementById('dropdown-toggle').innerHTML = `歡迎 ${result.user.username}！`;
+    } else if (result.message === 'no session data') {
+        return
+    }
+}
 async function login() {
     let result;
     await Swal.fire({
@@ -45,7 +55,7 @@ async function login() {
             let data = await res.json()
             if (data.message === "email not register") {
                 await Swal.fire(`
-                    email: ${result.email}
+                    email: ${result.userEmail}
                     未註冊
                     `.trim())
             } else if (data.message === "Invalid password") {
@@ -56,38 +66,22 @@ async function login() {
                 await Swal.fire(`
                     登入成功
                     `.trim())
-                // showUserNav()
+                showUserNav()
             }
         }
     })
 }
 
-// async function showUserNav() {
-//     let res = await fetch('/session')
-//     let result = await res.json()
-//     if (result.message === 'isUser') {
-//         document.getElementById("login-btn").style.display = "none";
-//         document.getElementById("welcome-btn").style.display = "block";
-//         document.getElementById("postPets").style.display = "block";
-//         if (carouselLoginElm) {
-//             carouselLoginElm.style.display = "none";
-//         }
-//         document.getElementById('navbarDropdownMenuLink').innerHTML = `歡迎 ${result.user.username}！`;
-//     } else if (result.message === 'no session data') {
-//         return
-//     }
-// }
+function init() {
+    showUserNav()
+}
+init()
 
-// function init() {
-//     showUserNav()
-// }
-// init()
-
-// document.querySelector('#logout-btn').addEventListener('click', async () => {
-//     let res = await fetch('/logout')
-//     let data = await res.json()
-//     if (data.message == 'logout') {
-//         // location.reload('/')
-//         window.location.href = '/';
-//     }
-// })
+document.querySelector('.logout').addEventListener('click', async () => {
+    let res = await fetch('/logout')
+    let data = await res.json()
+    if (data.message == 'logout') {
+        // location.reload('/')
+        window.location.href = '/';
+    }
+})

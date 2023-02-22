@@ -254,9 +254,10 @@ ol {
 .header-section {
 	background: #131313;
 	clear: both;
-	overflow: hidden;
+	overflow: visible;
 	padding: 18px 0;
 	border-bottom: 1px solid #ffb320;
+	height: 90px;
 }
 
 .site-logo {
@@ -271,6 +272,7 @@ ol {
 	background: #ffb320;
 	padding: 8px 28px;
 	border-radius: 30px;
+	display: inline-block;
 }
 
 .user-panel a {
@@ -864,7 +866,7 @@ ol {
 ====================*/
 
 .page-info-section {
-	height: 499px;
+	height: 265px;
 	position: relative;
 }
 
@@ -1578,4 +1580,64 @@ ol {
 	display: flex;
 	align-items: center;
 	flex-direction: column;
+}
+
+.dropdown {
+	position: relative;
+	display: none;
+	float: right;
+	font-weight: 500;
+	background: #ffb320;
+	padding: 8px 28px;
+	border-radius: 30px;
+}
+
+.dropdown-toggle {
+	display: inline-block;
+	padding: 10px;
+	color: #fff;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.dropdown-menu {
+	background-color: #fff;
+	padding: 10px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	background: #ffb320;
+	padding: 8px 28px;
+	border-radius: 30px;
+}
+
+.dropdown-menu li {
+	margin: 5px 0;
+}
+
+.dropdown-menu a {
+	display: block;
+	padding: 5px;
+	color: #333;
+	text-decoration: none;
+	cursor: pointer;
+	position: relative;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-menu {
+	display: block;
+}
+
+#song-list {
+	display: flex;
+	justify-content: center;
+	text-align: center;
+}
+
+#myVideo {
+	width: 100vw;
+	height: 100vh;
+	object-fit: cover;
+	position: fixed;
+	z-index: -1;
+	opacity: 0.75;
 }
