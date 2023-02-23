@@ -16,6 +16,11 @@
   },
   "homepage": "https://github.com/leoyuan1/Tecky-project-3#readme",
   "dependencies": {
+    "@mediapipe/camera_utils": "^0.3.1675466862",
+    "@mediapipe/control_utils": "^0.6.1675466023",
+    "@mediapipe/drawing_utils": "^0.3.1675466124",
+    "@mediapipe/pose": "^0.5.1675469404",
+    "@mediapipe/tasks-vision": "^0.1.0-alpha-4",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "cross-fetch": "^3.1.5",

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Play Demo</title>
+
+    <!-- Favicon -->
+    <link href="/img/favicon.ico" rel="shortcut icon" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/css/owl.carousel.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/animate.css" />
+    <link rel="stylesheet" href="/css/mediapipe.css" />
+
+    <!-- Mediapipe -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils_3d/control_utils_3d.js"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose/pose.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.1/drawing_utils.js"
+        crossorigin="anonymous"></script>
+
+    <!-- login style -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.0/sweetalert2.css"
+        integrity="sha512-JzSVRb7c802/njMbV97pjo1wuJAE/6v9CvthGTDxiaZij/TFpPQmQPTcdXyUVucsvLtJBT6YwRb5LhVxX3pQHQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header section -->
+    <header class="header-section">
+        <div class="container">
+            <!-- logo -->
+            <a class="site-logo" href="index.html">
+                <img src="img/logo.png" alt="">
+            </a>
+            <div class="user-panel">
+                <a type="button" class="login-btn nav-link" id="login-btn">Login / Register</a>
+            </div>
+            <!-- responsive -->
+            <div class="nav-switch">
+                <i class="fa fa-bars"></i>
+            </div>
+            <!-- site menu -->
+            <nav class="main-menu">
+                <ul>
+                    <li><a href="/index.html">Home</a></li>
+                    <li><a href="/gameplay.html">Song List</a></li>
+                    <li><a href="/categories.html">Ranking</a></li>
+                    <li><a href="/community.html"></a></li>
+                    <li><a href="/contact.html"></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <!-- Header section end -->
+
+    <!-- Mediapipe Section -->
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <video id="demo_video" width="640px" height="360px" autoplay loop>
+                    <source src="/video/benchmark_dance.mp4" type="video/mp4">
+                </video>
+                <canvas id="demo_output"></canvas>
+            </div>
+            <div class="col-6">
+                <video class="input_video"></video>
+                <canvas class="output_canvas" width="640px" height="360px"></canvas>
+            </div>
+        </div>
+        <!-- Not working for now -->
+        <div class="landmark-grid-container"></div>
+    </div>
+    <!-- Mediapipe Section End -->
+
+    <!--====== Javascripts & Jquery ======-->
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.marquee.min.js"></script>
+    <script src="/js/main.js"></script>
+    <!-- Mediapipe JS -->
+    <script type="module" src="/js/mediapipe.js"></script>
+    <!-- <script type="module" src="/js/test.js"></script> -->
+
+</body>
+
+</html>
