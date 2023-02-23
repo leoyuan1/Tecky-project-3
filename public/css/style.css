@@ -1421,7 +1421,8 @@ ol {
 	}
 
 	.user-panel {
-		display: none;
+		display: block;
+		padding: 0%;
 	}
 
 	.hero-slider .hs-item {
@@ -1622,7 +1623,6 @@ ol {
 	position: relative;
 }
 
-/* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-menu {
 	display: block;
 }
@@ -1640,4 +1640,59 @@ ol {
 	position: fixed;
 	z-index: -1;
 	opacity: 0.75;
+}
+
+.icon {
+	position: relative;
+	display: inline-block;
+	background-color: #008CBA;
+	color: white;
+	padding: 10px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 16px;
+}
+
+#form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="username"],
+input[type="file"] {
+	width: 60%;
+	margin-bottom: 10px;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	font-size: 20px;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="username"]:focus,
+input[type="file"]:focus {
+	outline: none;
+	border-color: #008CBA;
+}
+
+input[type="file"] {
+	margin-top: 20px;
+}
+
+input[type="submit"] {
+	background-color: #008CBA;
+	color: white;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 16px;
+}
+
+input[type="submit"]:hover {
+	background-color: #0077A3;
 }
