@@ -5,7 +5,7 @@ async function signup() {
         html: `<form id="form"><input type="text" id="email" class="swal2-input" name="email" placeholder="Email address" value="123@gmail.com">
         <input type="password" id="password" class="swal2-input" name="password" placeholder="Password" value="123">
         <input type="username" id="username" class="swal2-input" name="username" placeholder="Username" value="123">
-        <button class="icon">Icon upload<input type="file" name="image" id="image" /></button>
+        <input type="file" name="image" value="hi" id="image"/>
         </form>
         `,
         confirmButtonText: 'Sign up',

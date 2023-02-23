@@ -14,12 +14,12 @@ export class UserService {
         return foundUsername
     }
 
-    async insertUser(userEmail: string, userUsername: string, fileName: string, hashedPassword: string) {
-        let user = (await this.knex.raw('INSERT INTO users (email,password,icon,username,created_at,updated_at) values (?,?,?,?,now(),now()) returning *',
+    async insertUser(userEmail: string, hashedPassword: string, userName: string, fileName: string) {
+        let user = (await this.knex.raw('INSERT INTO users (email,password,username,icon,created_at,updated_at) values (?,?,?,?,now(),now()) returning *',
             [userEmail,
                 hashedPassword,
-                fileName,
-                userUsername
+                userName,
+                fileName
             ]
         )).rows[0]
         return user
