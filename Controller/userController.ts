@@ -17,7 +17,7 @@ export class UserController {
     isUser = async (req: express.Request, res: express.Response) => {
         if (!req.session.user) {
             res.json({
-                message: 'no session data',
+                message: 'no session data'
             })
             return
         }
