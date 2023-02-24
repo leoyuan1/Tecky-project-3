@@ -1,6 +1,5 @@
 import { Knex } from "knex";
-import { userFormidablePromise } from "../util/formidable";
-import express from "express"
+
 
 export class UserService {
     constructor(private knex: Knex) { }

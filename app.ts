@@ -46,10 +46,6 @@ export const userController = new UserController(userService)
 
 app.use('/', userRoutes)
 
-
-
-
-
 server.listen(PORT, () => {
     console.log(`Listening at http://localhost:${PORT}`);
 })
