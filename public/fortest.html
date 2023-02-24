@@ -2,104 +2,53 @@
 <html>
 
 <head>
-    <title>Pagination with Scroll</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
+    <div class="content-container">
+        <h1>Heading</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod ipsum eu felis suscipit ultrices.
+            Quisque vel tortor non lorem elementum elementum vitae eget elit.</p>
+        <a href="#">Read more</a>
+    </div>
 
-        .container {
+
+    <style>
+        /* CSS styling for the ranking table */
+        .content-container {
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
-            box-sizing: border-box;
+            background-color: #f9f9f9;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        .item {
-            margin: 20px 0;
-            padding: 20px;
-            background-color: #f2f2f2;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            box-sizing: border-box;
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
         }
 
-        .pagination {
-            margin-top: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        p {
+            font-size: 18px;
+            line-height: 1.5;
+            margin-bottom: 20px;
         }
 
-        .pagination button {
-            margin: 0 5px;
+        a {
+            display: inline-block;
             padding: 10px 20px;
-            border: none;
-            background-color: #ddd;
-            color: #666;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .pagination button.active {
-            background-color: #666;
+            background-color: #007bff;
             color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.2s ease;
         }
 
-        .loading {
-            text-align: center;
-            font-size: 20px;
-            color: #666;
-            margin-top: 20px;
-            display: none;
-        }
-
-        .loading.active {
-            display: block;
+        a:hover {
+            background-color: #0062cc;
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <div class="items">
-            <div class="item">Item 1</div>
-            <div class="item">Item 2</div>
-            <div class="item">Item 3</div>
-            <div class="item">Item 4</div>
-            <div class="item">Item 5</div>
-            <div class="item">Item 6</div>
-            <div class="item">Item 7</div>
-            <div class="item">Item 8</div>
-            <div class="item">Item 9</div>
-            <div class="item">Item 10</div>
-            <div class="item">Item 11</div>
-            <div class="item">Item 12</div>
-            <div class="item">Item 13</div>
-            <div class="item">Item 14</div>
-            <div class="item">Item 15</div>
-            <div class="item">Item 16</div>
-            <div class="item">Item 17</div>
-            <div class="item">Item 18</div>
-            <div class="item">Item 19</div>
-            <div class="item">Item 20</div>
-        </div>
 
-        <div class="pagination">
-            <button class="prev" disabled>Prev</button>
-            <button class="next active">Next</button>
-        </div>
-
-        <div class="loading">Loading...</div>
-    </div>
-
-    <script>
-		// Add your JavaScript code here
-    </script>
 </body>
 
 </html>

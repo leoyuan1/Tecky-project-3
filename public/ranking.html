@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Let's dance</title>
+	<meta charset="UTF-8" />
+	<meta name="description" content="Game Warrior Template" />
+	<meta name="keywords" content="warrior, game, creative, html" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<!-- Favicon -->
+	<link href="/img/favicon.ico" rel="shortcut icon" />
+
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i" rel="stylesheet" />
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="/css/owl.carousel.css" />
+	<link rel="stylesheet" href="/css/style.css" />
+	<link rel="stylesheet" href="/css/animate.css" />
+	<link rel="stylesheet" href="/css/ranking.css">
+	<!-- login style -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.0/sweetalert2.css"
+		integrity="sha512-JzSVRb7c802/njMbV97pjo1wuJAE/6v9CvthGTDxiaZij/TFpPQmQPTcdXyUVucsvLtJBT6YwRb5LhVxX3pQHQ=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+	<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+
+	<!-- Header section -->
+	<header class="header-section">
+		<div class="container">
+			<!-- logo -->
+			<a class="site-logo" href="index.html">
+				<img src="img/logo.png" alt="" />
+			</a>
+			<div class="user-panel" id="user-panel">
+				<a type="button" class="btn login-btn nav-link" id="login-btn">Login / Register</a>
+			</div>
+			<div class="dropdown" id="dropdown">
+				<a href="#" class="dropdown-toggle" id="dropdown-toggle">Dropdown Toggle</a>
+				<ul class="dropdown-menu">
+					<li><a href="#">Profile</a></li>
+					<li><a href="#">Ranking Record</a></li>
+					<li><a class="logout">Logout</a></li>
+				</ul>
+			</div>
+
+			<!-- responsive -->
+			<div class="nav-switch">
+				<i class="fa-sharp fa-solid fa-bars"></i>
+			</div>
+			<!-- site menu -->
+			<nav class="main-menu">
+				<ul>
+					<li><a href="/index.html">Home</a></li>
+					<li><a href="/song-list.html">Song List</a></li>
+					<li><a href="/ranking.html">Ranking</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+	<!-- Header section end -->
+
+	<!-- Hero section -->
+
+
+	<div class="row">
+		<div class="col-4">
+			<div class="list-group" id="list-tab" role="tablist">
+				<a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list"
+					href="#list-home" role="tab" aria-controls="home">Home</a>
+				<a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list"
+					href="#list-profile" role="tab" aria-controls="profile">Profile</a>
+				<a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list"
+					href="#list-messages" role="tab" aria-controls="messages">Messages</a>
+				<a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list"
+					href="#list-settings" role="tab" aria-controls="settings">Settings</a>
+			</div>
+		</div>
+		<div class="col-8">
+			<div class="tab-content" id="nav-tabContent">
+				<div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+					...</div>
+				<div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">...
+				</div>
+				<div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">...
+				</div>
+				<div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">...
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-3">
+				<form action="/search" method="GET">
+					<div class="search-box">
+						<input type="text" name="q" placeholder="Search Song Name...">
+						<button type="submit">Go</button>
+						<div class="select-ranking"></div>
+					</div>
+				</form>
+			</div>
+			<div class="col-md-9">
+				<h1>Ranking</h1>
+				<h2>Song Name</h2>
+				<main>
+					<table>
+						<thead>
+							<tr>
+								<th>Rank</th>
+								<th>Name</th>
+								<th>Score</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>1</td>
+								<td>John Doe</td>
+								<td>100</td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td>Jane Smith</td>
+								<td>95</td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td>Bob Johnson</td>
+								<td>90</td>
+							</tr>
+							<tr>
+								<td>4</td>
+								<td>Sara Lee</td>
+								<td>85</td>
+							</tr>
+							<tr>
+								<td>5</td>
+								<td>Tom Jones</td>
+								<td>80</td>
+							</tr>
+						</tbody>
+					</table>
+				</main>
+			</div>
+		</div>
+	</div>
+
+	<!--====== Javascripts & Jquery ======-->
+	<script src="/js/jquery-3.2.1.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/owl.carousel.min.js"></script>
+	<script src="/js/jquery.marquee.min.js"></script>
+	<script src="/js/main.js"></script>
+	<script src="/js/ranking.js"></script>
+
+	<!-- Login alart -->
+	<script src="https://kit.fontawesome.com/5d672d0386.js" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.0/sweetalert2.min.js"
+		integrity="sha512-IYzd4A07K9kxY3b8YIXi8L0BmUPVvPlI+YpLOzKrIKA3sQ4gt43dYp+y6ip7C7LRLXYfMHikpxeprZh7dYQn+g=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="/js/login.js"></script>
+	<script src="/js/signup.js"></script>
+</body>
+
+</html>

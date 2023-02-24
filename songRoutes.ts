@@ -12,5 +12,6 @@ export const songRoutes = express.Router()
 
 // export function makeUserRoutes() {
 // userRoutes.get('/admin', keepLogin)
-songRoutes.get('/get-song', songController.songList)
+songRoutes.post('/get-song', songController.getSongList)
+songRoutes.get('/get-song-list', songController.allSongList)
 // }

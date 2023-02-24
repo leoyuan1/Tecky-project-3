@@ -5,9 +5,7 @@ export async function seed(knex: Knex): Promise<void> {
     await knex("scores").del();
 
     let userId = await knex.select('id').from('users').first()
-    console.log(userId);
     let userId2 = (await knex.select('id').from('users'))[1]
-    console.log(userId2);
     let mediaId = await knex.select('id').from('media').first()
     let mediaId2 = (await knex.select('id').from('media'))[1]
     let mediaId3 = (await knex.select('id').from('media'))[2]

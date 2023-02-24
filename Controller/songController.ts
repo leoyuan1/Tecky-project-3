@@ -11,12 +11,26 @@ declare module "express-session" {
 export class SongController {
     constructor(private songService: SongService) { }
 
-    songList = async (req: express.Request, res: express.Response) => {
+    getSongList = async (req: express.Request, res: express.Response) => {
         try {
-            console.log('123');
-            let songList = await this.songService.getSongList()
+            let offset = await req.body.offset
+            let songList = await this.songService.getSongList(offset)
             res.json({
                 songList: songList
+            })
+        } catch (error) {
+            logger.error(error)
+            res.status(500).json({
+                message: '[USR001] - Server error'
+            })
+        }
+    }
+
+    allSongList = async (req: express.Request, res: express.Response) => {
+        try {
+            let allSongList = await this.songService.getAllSongList()
+            res.json({
+                songList: allSongList
             })
         } catch (error) {
             logger.error(error)
