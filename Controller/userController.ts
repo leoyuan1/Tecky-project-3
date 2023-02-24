@@ -1,12 +1,16 @@
-
 import express from "express"
 import { UserService } from "../Service/userService"
 import { checkPassword, hashPassword } from "../util/bcrypt"
 import { userFormidablePromise } from "../util/formidable"
 import { logger } from "../util/logger"
 import crypto from "crypto"
+import { User } from "../util/session"
 
-
+declare module "express-session" {
+    interface SessionData {
+        user?: User;
+    }
+}
 export class UserController {
     constructor(private userService: UserService) { }
 
@@ -42,16 +46,15 @@ export class UserController {
                 })
                 return
             }
-            let userEmail: string = files.email
-            let userUsername: string = files.username
-            let foundUser = await this.userService.getUserByEmail(userEmail)
+            let userEmail: string = fields.email
+            let userUsername: string = fields.username
+            let foundUser = (await this.userService.getUserByEmail(userEmail))
             if (foundUser) {
                 res.json({
                     message: "email registered"
                 })
                 return
             }
-
             let foundUsername = await this.userService.getUserByUserName(userUsername)
             if (foundUsername) {
                 res.json({
@@ -63,7 +66,7 @@ export class UserController {
             let fileName = files.image ? files.image['newFilename'] : ''
 
             let hashedPassword = await hashPassword(fields.password)
-            let user = await this.userService.insertUser(userEmail, userUsername, fileName, hashedPassword)
+            let user = await this.userService.insertUser(userEmail, hashedPassword, userUsername, fileName)
             delete user.password
             req.session.user = user
             res.json({
@@ -77,7 +80,7 @@ export class UserController {
         }
 
     }
-    login= async (req: express.Request, res: express.Response)=>{
+    login = async (req: express.Request, res: express.Response) => {
         try {
             let { userEmail, password } = req.body
             let foundUser = await this.userService.getUserByEmail(userEmail)
@@ -100,13 +103,15 @@ export class UserController {
             res.json({
                 message: "correct"
             })
-    
+
         } catch (error) {
-            console.log(error);
-            res.end('not ok')
+            logger.error(error)
+            res.status(500).json({
+                message: '[USR001] - Server error'
+            })
         }
     }
-    loginGoogle= async (req: express.Request, res: express.Response)=>{
+    loginGoogle = async (req: express.Request, res: express.Response) => {
         const accessToken = req.session?.['grant'].response.access_token;
         const fetchRes = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
             method: "get",
@@ -114,57 +119,57 @@ export class UserController {
                 "Authorization": `Bearer ${accessToken}`
             }
         });
-    
         let result = await fetchRes.json();
+        console.log(result);
         let userEmail = result.email
-        let userUsername = result.name
+        let hashedPassword = await hashPassword(crypto.randomUUID())
+        let userName = result.name
         let fileName = result.picture
         const foundUser = await this.userService.getUserByEmail(userEmail)
         req.session.user = foundUser
         if (!foundUser) {
-            let hashedPassword = await hashPassword(crypto.randomUUID())
             // Create the user when the user does not exist
-            let user = await this.userService.insertUser(userEmail,hashedPassword,fileName,userUsername)
+            let user = await this.userService.insertUser(userEmail, hashedPassword, userName, fileName)
             delete user.password
             req.session.user = user
         }
         res.redirect('/')
     }
-    logout = async (req: express.Request, res: express.Response)=>{
-    if (!req.session.user) {
-        res.status(403).json({
-            message: 'Not authorized'
+    logout = async (req: express.Request, res: express.Response) => {
+        if (!req.session.user) {
+            res.status(403).json({
+                message: 'Not authorized'
+            })
+            return
+        }
+        delete req.session.user
+        res.json({
+            message: 'logout'
         })
-        return
     }
-    delete req.session.user
-    res.json({
-        message: 'logout'
-    })
-}
-changePassword =async (req: express.Request, res: express.Response)=>{
-    let { existPassword, newPasswordValue } = req.body
-    let hashedPassword = await hashPassword(newPasswordValue)
-    if (!req.session.user) {
-        res.status(403).json({
-            message: 'Not authorized'
-        })
-        return
-    }
-    let session = req.session.user
-    let userEmail = session.email
-    let foundUser = await this.userService.getUserByEmail(userEmail)
+    changePassword = async (req: express.Request, res: express.Response) => {
+        let { existPassword, newPasswordValue } = req.body
+        let hashedPassword = await hashPassword(newPasswordValue)
+        if (!req.session.user) {
+            res.status(403).json({
+                message: 'Not authorized'
+            })
+            return
+        }
+        let session = req.session.user
+        let userEmail = session.email
+        let foundUser = await this.userService.getUserByEmail(userEmail)
 
-    let isPasswordValid = await checkPassword(existPassword, foundUser.password)
-    if (!isPasswordValid) {
-        res.status(404).json({
-            message: 'Invalid password'
+        let isPasswordValid = await checkPassword(existPassword, foundUser.password)
+        if (!isPasswordValid) {
+            res.status(404).json({
+                message: 'Invalid password'
+            })
+            return
+        }
+        await this.userService.changePassword(userEmail, hashedPassword)
+        res.json({
+            message: "Updated Password"
         })
-        return
     }
-    await this.userService.changePassword(userEmail,hashedPassword)
-    res.json({
-        message: "Updated Password"
-    })
-}
 }
