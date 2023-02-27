@@ -3,19 +3,18 @@
 
 <head>
 	<title>Let's dance</title>
-	<meta charset="UTF-8">
-	<meta name="description" content="Game Warrior Template">
-	<meta name="keywords" content="warrior, game, creative, html">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8" />
+	<meta name="description" content="Game Warrior Template" />
+	<meta name="keywords" content="warrior, game, creative, html" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<!-- Favicon -->
 	<link href="/img/favicon.ico" rel="shortcut icon" />
 
 	<!-- Google Fonts -->
-	<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i" rel="stylesheet" />
 
 	<!-- Stylesheets -->
 	<link rel="stylesheet" href="/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="/css/font-awesome.min.css" />
 	<link rel="stylesheet" href="/css/owl.carousel.css" />
 	<link rel="stylesheet" href="/css/style.css" />
 	<link rel="stylesheet" href="/css/animate.css" />
@@ -24,12 +23,10 @@
 		integrity="sha512-JzSVRb7c802/njMbV97pjo1wuJAE/6v9CvthGTDxiaZij/TFpPQmQPTcdXyUVucsvLtJBT6YwRb5LhVxX3pQHQ=="
 		crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-
 	<!--[if lt IE 9]>
-	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
-
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
 
 <body>
@@ -43,29 +40,35 @@
 		<div class="container">
 			<!-- logo -->
 			<a class="site-logo" href="index.html">
-				<img src="img/logo.png" alt="">
+				<img src="img/logo.png" alt="" />
 			</a>
-			<div class="user-panel">
-				<a type="button" class="login-btn nav-link" id="login-btn">Login / Register</a>
+			<div class="user-panel" id="user-panel">
+				<a type="button" class="btn login-btn nav-link" id="login-btn">Login / Register</a>
 			</div>
+			<div class="dropdown" id="dropdown">
+				<a href="#" class="dropdown-toggle" id="dropdown-toggle">Dropdown Toggle</a>
+				<ul class="dropdown-menu">
+					<li><a href="#">Profile</a></li>
+					<li><a href="#">Ranking Record</a></li>
+					<li><a class="logout">Logout</a></li>
+				</ul>
+			</div>
+
 			<!-- responsive -->
 			<div class="nav-switch">
-				<i class="fa fa-bars"></i>
+				<i class="fa-sharp fa-solid fa-bars"></i>
 			</div>
 			<!-- site menu -->
 			<nav class="main-menu">
 				<ul>
 					<li><a href="/index.html">Home</a></li>
-					<li><a href="/gameplay.html">Song List</a></li>
-					<li><a href="/categories.html">Ranking</a></li>
-					<li><a href="/community.html"></a></li>
-					<li><a href="/contact.html"></a></li>
+					<li><a href="/song-list.html">Song List</a></li>
+					<li><a href="/ranking.html">Ranking</a></li>
 				</ul>
 			</nav>
 		</div>
 	</header>
 	<!-- Header section end -->
-
 
 	<!-- Hero section -->
 	<section class="hero-section">
@@ -74,9 +77,12 @@
 				<div class="hs-text">
 					<div class="container">
 						<h2>The Best <span>Games</span> Out There</h2>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada <br> lorem maximus
-							mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. <br>Suspendisse cursus
-							faucibus finibus.</p>
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+							malesuada <br />
+							lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac
+							ligula sapien. <br />Suspendisse cursus faucibus finibus.
+						</p>
 						<a href="#" class="site-btn">Read More</a>
 					</div>
 				</div>
@@ -85,9 +91,12 @@
 				<div class="hs-text">
 					<div class="container">
 						<h2>The Best <span>Games</span> Out There</h2>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada <br> lorem maximus
-							mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. <br>Suspendisse cursus
-							faucibus finibus.</p>
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+							malesuada <br />
+							lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac
+							ligula sapien. <br />Suspendisse cursus faucibus finibus.
+						</p>
 						<a href="#" class="site-btn">Read More</a>
 					</div>
 				</div>
@@ -96,23 +105,24 @@
 	</section>
 	<!-- Hero section end -->
 
-
 	<!-- Latest news section -->
 	<div class="latest-news-section">
-		<div class="ln-title">Latest News</div>
+		<div class="ln-title">Ranking</div>
 		<div class="news-ticker">
 			<div class="news-ticker-contant">
-				<div class="nt-item"><span class="new">new</span>Lorem ipsum dolor sit amet, consectetur adipiscing
-					elit. </div>
-				<div class="nt-item"><span class="strategy">strategy</span>Isum dolor sit amet, consectetur adipiscing
-					elit. </div>
-				<div class="nt-item"><span class="racing">racing</span>Isum dolor sit amet, consectetur adipiscing elit.
+				<div class="nt-item">
+					<span class="new">Song</span>1.
+				</div>
+				<div class="nt-item">
+					<span class="strategy">Song2</span>1.
+				</div>
+				<div class="nt-item">
+					<span class="racing">Song3</span>1.
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- Latest news section end -->
-
 
 	<!-- Feature section -->
 	<!-- <section class="feature-section spad">
@@ -162,7 +172,6 @@
 		</div>
 	</section> -->
 	<!-- Feature section end -->
-
 
 	<!-- Recent game section  -->
 	<!-- <section class="recent-game-section spad set-bg" data-setbg="img/recent-game-bg.png">
@@ -228,7 +237,6 @@
 	</section> -->
 	<!-- Recent game section end -->
 
-
 	<!-- Tournaments section -->
 	<!-- <section class="tournaments-section spad">
 		<div class="container">
@@ -274,7 +282,6 @@
 		</div>
 	</section> -->
 	<!-- Tournaments section bg -->
-
 
 	<!-- Review section -->
 	<!-- <section class="review-section spad set-bg" data-setbg="img/review-bg.png">
@@ -332,7 +339,6 @@
 		</div>
 	</section> -->
 	<!-- Review section end -->
-
 
 	<!-- Footer top section -->
 	<!-- <section class="footer-top-section">
@@ -418,7 +424,6 @@
 	</section> -->
 	<!-- Footer top section end -->
 
-
 	<!-- Footer section -->
 	<!-- <footer class="footer-section">
 		<div class="container">
@@ -440,7 +445,6 @@
 	</footer> -->
 	<!-- Footer section end -->
 
-
 	<!--====== Javascripts & Jquery ======-->
 	<script src="/js/jquery-3.2.1.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
@@ -449,6 +453,7 @@
 	<script src="/js/main.js"></script>
 
 	<!-- Login alart -->
+	<script src="https://kit.fontawesome.com/5d672d0386.js" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.0/sweetalert2.min.js"
 		integrity="sha512-IYzd4A07K9kxY3b8YIXi8L0BmUPVvPlI+YpLOzKrIKA3sQ4gt43dYp+y6ip7C7LRLXYfMHikpxeprZh7dYQn+g=="
 		crossorigin="anonymous" referrerpolicy="no-referrer"></script>

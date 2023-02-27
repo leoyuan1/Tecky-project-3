@@ -66,7 +66,7 @@ export class UserController {
             let fileName = files.image ? files.image['newFilename'] : ''
 
             let hashedPassword = await hashPassword(fields.password)
-            let user = await this.userService.insertUser(userEmail, userUsername, fileName, hashedPassword)
+            let user = await this.userService.insertUser(userEmail, hashedPassword, userUsername, fileName)
             delete user.password
             req.session.user = user
             res.json({
@@ -120,16 +120,16 @@ export class UserController {
             }
         });
         let result = await fetchRes.json();
-
+        console.log(result);
         let userEmail = result.email
-        let userUsername = result.name
+        let hashedPassword = await hashPassword(crypto.randomUUID())
+        let userName = result.name
         let fileName = result.picture
         const foundUser = await this.userService.getUserByEmail(userEmail)
         req.session.user = foundUser
         if (!foundUser) {
-            let hashedPassword = await hashPassword(crypto.randomUUID())
             // Create the user when the user does not exist
-            let user = await this.userService.insertUser(userEmail, hashedPassword, fileName, userUsername)
+            let user = await this.userService.insertUser(userEmail, hashedPassword, userName, fileName)
             delete user.password
             req.session.user = user
         }

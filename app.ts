@@ -4,6 +4,7 @@ import grant from 'grant';
 import { app, PORT, server } from './util/connection-config';
 import { User } from './util/session';
 import { userRoutes } from './userRoutes';
+import { songRoutes } from './songRoutes';
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -42,10 +43,7 @@ app.use(express.static('public'))
 
 
 app.use('/', userRoutes)
-
-
-
-
+app.use('/', songRoutes)
 
 server.listen(PORT, () => {
     console.log(`Listening at http://localhost:${PORT}`);
