@@ -26,14 +26,16 @@ async function signup() {
 
             const formData = Swal.getPopup().querySelector('#form')
             if (email && password && username) {
+                console.log(formData);
                 result = new FormData(formData)
+                console.log(result);
                 let res = await fetch('/signup', {
                     method: 'POST',
                     body: result
                 })
                 let data = await res.json()
                 if (data.message === 'OK') {
-                    // showUserNav()
+                    showUserNav()
                     Swal.fire(`
                             email: ${email}
                             註冊成功
@@ -60,16 +62,3 @@ function validateEmail(email) {
     }
     return false
 }
-
-// async function showUserNav() {
-//     let res = await fetch('/session')
-//     let result = await res.json()
-//     if (result.message === 'isUser') {
-//         document.getElementById("login-btn").style.display = "none";
-//         document.getElementById("welcome-btn").style.display = "block";
-//         document.getElementById("postPets").style.display = "block";
-//         document.getElementById('navbarDropdownMenuLink').innerHTML = `Welcome ${result.user.username}`;
-//     } else if (result.message === 'no session data') {
-//         return
-//     }
-// }
