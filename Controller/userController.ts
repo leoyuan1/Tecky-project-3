@@ -62,17 +62,19 @@ export class UserController {
                 })
                 return
             }
-
             let fileName = files.image ? files.image['newFilename'] : ''
 
             let hashedPassword = await hashPassword(fields.password)
             let user = await this.userService.insertUser(userEmail, hashedPassword, userUsername, fileName)
+            console.log(user);
             delete user.password
             req.session.user = user
             res.json({
                 message: "OK"
             })
         } catch (error) {
+            console.log(error);
+
             logger.error(error)
             res.status(500).json({
                 message: '[USR001] - Server error'

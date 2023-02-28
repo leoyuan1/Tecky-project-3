@@ -1,116 +1,106 @@
 const songListElm = document.querySelector('#list-tab')
 const songListPage = document.querySelector('#nav-tabContent')
 
-async function getSongList() {
+async function getSongListAndRanking() {
     let res = await fetch('/get-song-list')
     let songLists = await res.json()
-    let songList = songLists.songList
-    let songFirstActive = songList[0]
-    songListElm.innerHTML += `
-    <a class="list-group-item list-group-item-action active" id="list-${songFirstActive.song_name}-list" data-toggle="list"
-	href="#${songFirstActive.song_name}" role="tab" aria-controls="${songFirstActive.song_name}">${songFirstActive.song_name}
-    </a>
+    let songList = songLists.songList.splice(1)
+    let songFirst = songLists.songList[0]
+    let songFirstName = songFirst.song_name
+    songListElm.innerHTML = `
+    <a class="list-group-item list-group-item-action active" id="list-${songFirstName}-list" data-toggle="list"
+    href="#${songFirstName}" role="tab" aria-controls="${songFirstName}">${songFirstName}
+    </a>`
+    songListPage.innerHTML = `
+        <div class="tab-pane fade show active" id = "${songFirstName}" role = "tabpanel" aria - labelledby="list-${songFirstName}-list" >
+            <div class="col-md-9">
+                <h2>${songFirstName}</h2>
+                <main>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Name</th>
+                                <th>Score</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ranking${songFirstName}">
+                            <tr>
+                            </tr>
+                        </tbody>
+                    </table>
+                </main>
+            </div >
+        </div>`
+    let resFirst = await fetch('/get-first-ranking', {
+        method: "post",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ songFirstName })
+    })
+    let firstRanking = await resFirst.json()
+    let songRankingEln = document.querySelector(`#ranking${songFirstName}`)
+    let i = 1
+    for (let ranking of firstRanking.getRankingInfo) {
+        songRankingEln.innerHTML += `
+        <td> ${i}</td>
+        <td>${ranking.username}</td>
+        <td>${ranking.scores}</td>
     `
-    songListPage.innerHTML += `		
-    <div class="tab-pane fade show active" id="${songFirstActive.song_name}" role="tabpanel" aria-labelledby="list-${songFirstActive.song_name}-list">
-    	<div class="col-md-9">
-						<h2>Song Name</h2>
-						<main>
-							<table>
-								<thead>
-									<tr>
-										<th>Rank</th>
-										<th>Name</th>
-										<th>Score</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>1</td>
-										<td>John Doe</td>
-										<td>100</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>Jane Smith</td>
-										<td>95</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>Bob Johnson</td>
-										<td>90</td>
-									</tr>
-									<tr>
-										<td>4</td>
-										<td>Sara Lee</td>
-										<td>85</td>
-									</tr>
-									<tr>
-										<td>5</td>
-										<td>Tom Jones</td>
-										<td>80</td>
-									</tr>
-								</tbody>
-							</table>
-						</main>
-					</div>
-				</div>`
+        i++
+    }
 
     for (let song of songList) {
         songListElm.innerHTML += `
         <a class="list-group-item list-group-item-action" id="list-${song.song_name}-list" data-toggle="list"
         href="#${song.song_name}" role="tab" aria-controls="${song.song_name}">${song.song_name}
-        </a>
-        `
-        songListPage.innerHTML += `		
-        <div class="tab-pane fade" id="${song.song_name}" role="tabpanel" aria-labelledby="list-${song.song_name}-list">
+        </a>`
+        songListPage.innerHTML += `
+        <div class="tab-pane fade" id = "${song.song_name}" role = "tabpanel" aria - labelledby="list-${song.song_name}-list" >
             <div class="col-md-9">
-                            <h2>Song Name</h2>
-                            <main>
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Rank</th>
-                                            <th>Name</th>
-                                            <th>Score</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>John Doe</td>
-                                            <td>100</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Jane Smith</td>
-                                            <td>95</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Bob Johnson</td>
-                                            <td>90</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>Sara Lee</td>
-                                            <td>85</td>
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td>Tom Jones</td>
-                                            <td>80</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </main>
-                        </div>
-                    </div>`
+                <h2>${song.song_name}</h2>
+                <main>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Name</th>
+                                <th>Score</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ranking${song.song_name}">
+                            <tr>
+                            </tr>
+                        </tbody>
+                    </table>
+                </main>
+            </div >
+        </div>`
+        let songFirstName = song.song_name
+        let resFirst = await fetch('/get-first-ranking', {
+            method: "post",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ songFirstName })
+        })
+        let firstRanking = await resFirst.json()
+        for (let ranking of firstRanking.getRankingInfo) {
+            let songRankingEln = document.querySelector(`#ranking${song.song_name}`)
+            let i = 1
+            songRankingEln.innerHTML += `
+                <td> ${i}</td>
+                <td>${ranking.username}</td>
+                <td>${ranking.scores}</td>
+            `
+            i++
+        }
     }
 }
 
 function init() {
-    getSongList()
+    getSongListAndRanking()
 }
 init()
 

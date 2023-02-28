@@ -13,7 +13,7 @@ export class SongController {
 
     getSongList = async (req: express.Request, res: express.Response) => {
         try {
-            let offset = await req.body.offset
+            let offset = req.body.offset
             let songList = await this.songService.getSongList(offset)
             res.json({
                 songList: songList
@@ -31,6 +31,21 @@ export class SongController {
             let allSongList = await this.songService.getAllSongList()
             res.json({
                 songList: allSongList
+            })
+        } catch (error) {
+            logger.error(error)
+            res.status(500).json({
+                message: '[USR001] - Server error'
+            })
+        }
+    }
+
+    getFirstList = async (req: express.Request, res: express.Response) => {
+        try {
+            let { songFirstName } = req.body
+            let allSongList = await this.songService.getRankingInfo(songFirstName)
+            res.json({
+                getRankingInfo: allSongList
             })
         } catch (error) {
             logger.error(error)
