@@ -80,7 +80,6 @@ export class UserController {
                 message: '[USR001] - Server error'
             })
         }
-
     }
     login = async (req: express.Request, res: express.Response) => {
         try {

@@ -16,6 +16,19 @@ export async function seed(knex: Knex): Promise<void> {
         { scores: 2000, user_id: userId.id, media_id: mediaId2.id },
         { scores: 3000, user_id: userId.id, media_id: mediaId3.id },
         { scores: 4000, user_id: userId2.id, media_id: mediaId.id },
-        { scores: 5000, user_id: userId2.id, media_id: mediaId4.id }
+        { scores: 5000, user_id: userId2.id, media_id: mediaId4.id },
+        { scores: 1000, user_id: userId.id, media_id: mediaId.id },
+        { scores: 1000, user_id: userId.id, media_id: mediaId.id },
+        { scores: 1000, user_id: userId.id, media_id: mediaId.id },
+        { scores: 1000, user_id: userId.id, media_id: mediaId.id },
+        { scores: 1000, user_id: userId.id, media_id: mediaId.id },
+        { scores: 1000, user_id: userId.id, media_id: mediaId.id },
+        { scores: 1000, user_id: userId.id, media_id: mediaId.id },
+        { scores: 1000, user_id: userId.id, media_id: mediaId.id },
+        { scores: 1000, user_id: userId.id, media_id: mediaId.id },
+        { scores: 1000, user_id: userId.id, media_id: mediaId.id },
+        { scores: 1000, user_id: userId.id, media_id: mediaId.id },
+        { scores: 1000, user_id: userId.id, media_id: mediaId.id },
+        { scores: 1000, user_id: userId.id, media_id: mediaId.id }
     ]);
 };

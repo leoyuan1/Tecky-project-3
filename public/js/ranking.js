@@ -41,14 +41,38 @@ async function getSongListAndRanking() {
     })
     let firstRanking = await resFirst.json()
     let songRankingEln = document.querySelector(`#ranking${songFirstName}`)
-    let i = 1
+    let i = 0
     for (let ranking of firstRanking.getRankingInfo) {
+        i++
+        if (i > 10) {
+            continue
+        }
         songRankingEln.innerHTML += `
-        <td> ${i}</td>
+        <td>${i}</td>
         <td>${ranking.username}</td>
         <td>${ranking.scores}</td>
-    `
-        i++
+        `
+        if (i == 10) {
+            let res = await fetch('/session')
+            let isUser = await res.json()
+            if (isUser) {
+                let rankingTopTen = firstRanking.getRankingInfo.splice(0, 10)
+                let rankingOutOfTopTen = firstRanking.getRankingInfo.splice(5)
+                if (isUser.username != rankingTopTen.username) {
+                    songRankingEln.innerHTML += `<td></td><td><div>.</div><div>.</div><div>.</div></td><td></td>`
+                    for (let userRanking of rankingOutOfTopTen) {
+                        let countRanking = 11
+                        if (userRanking.username == isUser.username) {
+                            songRankingEln.innerHTML += `<td>${countRanking}</td>
+                        <td>${ranking.username}</td>
+                        <td>${ranking.scores}</td>`
+                            return
+                        }
+                        countRanking++
+                    }
+                }
+            }
+        }
     }
 
     for (let song of songList) {
@@ -75,7 +99,7 @@ async function getSongListAndRanking() {
                         </tbody>
                     </table>
                 </main>
-            </div >
+            </div>
         </div>`
         let songFirstName = song.song_name
         let resFirst = await fetch('/get-first-ranking', {
