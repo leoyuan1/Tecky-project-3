@@ -42,8 +42,8 @@ export class SongController {
 
     getFirstList = async (req: express.Request, res: express.Response) => {
         try {
-            let { songFirstName } = req.body
-            let allSongList = await this.songService.getRankingInfo(songFirstName)
+            let { songName } = req.body
+            let allSongList = await this.songService.getRankingInfo(songName)
             res.json({
                 getRankingInfo: allSongList
             })
