@@ -11,4 +11,4 @@ export const songRoutes = express.Router()
 
 songRoutes.post('/get-song', songController.getSongList)
 songRoutes.get('/get-song-list', songController.allSongList)
-songRoutes.post('/get-first-ranking', songController.getFirstList)
+songRoutes.post('/get-ranking', songController.getFirstList)

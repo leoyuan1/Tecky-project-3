@@ -12,13 +12,13 @@ export class SongService {
         return allSongList
     }
 
-    async getRankingInfo(songFirstName: string) {
+    async getRankingInfo(songName: string) {
         let getRankingInfo = (await this.knex.raw(` SELECT users.username, media.song_name, scores.scores 
         FROM scores
         JOIN users ON users.id = scores.user_id
         JOIN media ON scores.media_id = media.id
         WHERE media.song_name = ?
-        ORDER BY scores DESC`, [songFirstName])).rows
+        ORDER BY scores DESC`, [songName])).rows
         console.log(getRankingInfo);
 
         return getRankingInfo
