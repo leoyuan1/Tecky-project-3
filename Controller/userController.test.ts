@@ -46,7 +46,7 @@ describe('userController', () => {
     beforeEach(() => {
         userService = new UserService({} as Knex)
         userService.getUserByEmail = jest.fn(async (userEmail: string) => {
-            return [{
+            [{
                 email: "123@gmail.com",
                 password: "123",
                 username: "icon",
@@ -54,7 +54,7 @@ describe('userController', () => {
             }]
         })
         userService.getUserByUserName = jest.fn(async (userUsername: string) => {
-            return [{
+            [{
                 email: "123@gmail.com",
                 password: "123",
                 username: "icon",
