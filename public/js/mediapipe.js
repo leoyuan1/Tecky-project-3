@@ -2,13 +2,15 @@ const videoElement = document.getElementsByClassName('input_video')[0];
 const canvasElement = document.getElementsByClassName('output_canvas')[0];
 const canvasCtx = canvasElement.getContext('2d');
 const landmarkContainer = document.getElementsByClassName('landmark-grid-container')[0];
-const grid = new LandmarkGrid(landmarkContainer);
+// Landmark Grid - 3D Coordinations
+// const grid = new LandmarkGrid(landmarkContainer);
 
 export function onResults(results) {
-    if (!results.poseLandmarks) {
-        grid.updateLandmarks([]);
-        return;
-    }
+    // Landmark Grid - 3D Coordinations
+    // if (!results.poseLandmarks) {
+    //     grid.updateLandmarks([]);
+    //     return;
+    // }
 
     canvasCtx.save();
     canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
@@ -39,7 +41,8 @@ export function onResults(results) {
         { color: '#FF0000', lineWidth: 1 });
     canvasCtx.restore();
 
-    grid.updateLandmarks(results.poseWorldLandmarks);
+    // Landmark Grid - 3D Coordinations
+    // grid.updateLandmarks(results.poseWorldLandmarks);
 }
 
 export const pose = new Pose({

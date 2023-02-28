@@ -40,7 +40,6 @@ homeBtn.addEventListener('click', home)
 function startGame() {
     console.log("Run Game Lor")
     // Delay the display none
-    startMenu.style.display = 'none'
     // Start the video in upcoming seconds
     // run the mediapipe calculation
 }
@@ -50,26 +49,24 @@ async function playerReady() {
     playBtn.style.display = "none"
     await fadeOut(fadeElm)
     startGame()
-    // startMenu.style.display = 'none'
 }
 
 async function fadeOut(element) {
     // Amend the fade-out effect
     await setTimeout(function () {
-        element.classList.toggle('fade')
         element.style.display = "none";
-        // element.classList.add("fade-out");
+        startMenu.style.display = 'none'
     }, 3000)
 }
 
 function home() {
     console.log("Home");
+    // Redirect back to songlist
 }
 
 
 // Pause Function
 let isPaused = false;
-
 
 function pauseGame() {
     isPaused = true;
