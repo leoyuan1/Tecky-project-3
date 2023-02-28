@@ -76,10 +76,38 @@
 #pause-menu{
     background-color: rgba(235, 235, 235, .5);;
     margin: 5px 10px 5px 10px;
+    border-radius: 5%;
+    height: 200px;
 }
 .title{
     font-size: 2rem;
     color: white;
     background-color: #7a7c7c;
-    padding: 5px 10px 0 10px;
+    padding: 5px 50px 5px 50px;
+    border-top-left-radius: 5%;
+    border-top-right-radius: 5%;
+    text-align: center;
+}
+
+.menu-btn-container{
+    text-align: center;
+}
+
+.menu-btn{
+    display: flex;
+    /* justify-content: space-around; */
+    align-items: center;
+    font-size: 18px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.menu-btn > span {
+    padding-left: 10px;
+    text-align: center;
+}
+
+.menu-btn > i {
+    padding-left: 10px;
+    padding-right: 10px
 }
