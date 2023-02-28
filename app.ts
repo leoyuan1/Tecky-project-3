@@ -45,10 +45,6 @@ app.use(express.static('public'))
 app.use('/', userRoutes)
 app.use('/', songRoutes)
 
-
-
-
-
 server.listen(PORT, () => {
     console.log(`Listening at http://localhost:${PORT}`);
 })
