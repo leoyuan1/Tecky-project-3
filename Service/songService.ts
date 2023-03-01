@@ -31,4 +31,16 @@ export class SongService {
         ORDER BY scores DESC`, [sessionUserId])).rows
         return userTotalSong
     }
+
+    async getSongById(mediaId: number) {
+        console.log("mediaId: ", mediaId);
+        let id = mediaId
+        let result = (
+            await this.knex
+                .select('video')
+                .from('media')
+                .where({ id })
+        )
+        return result
+    }
 }

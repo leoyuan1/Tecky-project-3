@@ -1,0 +1,125 @@
+@import "main.css";
+*{
+    background-color: var(--dark-blue);
+}
+.input_video{
+    display: none;
+}
+
+#start-menu{
+    position: fixed;
+    /* Temporarily Display None */
+    display: flex;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 999998;
+    background: rgba(27,27,27,0.7);
+    align-items: center;
+    justify-content: center;
+}
+
+/* Can merge with above menu */
+/* Temporarily Use */
+#pause-menu-container{
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 999998;
+    background: rgba(27, 27, 27, 0.7);
+    align-items: center;
+    justify-content: center;
+}
+
+.play-btn{
+    background-color: white;
+    opacity: 1;
+    /* Change Color */
+    color: red;
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 15px 5px 15px;
+    border-radius: 5%;
+    border: transparent;
+}
+
+.home-btn{
+    position: absolute;
+    top: 90px;
+    /* Change Color */
+    color: Red;
+    left: 10px;
+    font-size: 20px;
+    background-color: transparent;
+    border: transparent;
+}
+
+/* Animation For Get Ready Function*/
+@keyframes fade-inout{
+    0%{opacity: 1;}
+    100%{opacity: 0;}
+} 
+
+.fade-text{
+    animation: fade-inout 3s infinite;
+    opacity: 1;
+    font-size: 100px;
+    text-align: center;
+    display: none;
+    /* Change font color */
+    color: white;
+}
+
+#pause-menu{
+    background-color: rgba(235, 235, 235, .7);;
+    margin: 5px 10px 5px 10px;
+    border-radius: 5%;
+    padding-bottom: 15px;
+    /* height: 200px; */
+}
+.title{
+    font-size: 2rem;
+    /* Change Color */
+    color: white;
+    background-color: rgba(100, 100, 100, .5);
+    padding: 5px 79px 5px 70px;
+    border-top-left-radius: 5%;
+    border-top-right-radius: 5%;
+    text-align: center;
+    font-weight: bold;
+}
+
+.menu-btn-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.menu-btn{
+    min-width: 200px;
+    max-width: 200px;
+    font-size: 14px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: rgba(100, 100, 100, .5);
+    margin: 10px 10px 10px 10px;
+    font-weight: bold;
+    color: white;
+    user-select: none;
+}
+
+.menu-btn > span {
+    padding-left: 20%;
+}
+
+.menu-btn > i {
+    padding-left: 10px;
+    padding-right: 10px
+}

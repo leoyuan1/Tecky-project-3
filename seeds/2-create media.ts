@@ -26,5 +26,7 @@ export async function seed(knex: Knex): Promise<void> {
         { song_name: "song18", image: "slider-2.jpg", video: "123.mp4" },
         { song_name: "song19", image: "slider-2.jpg", video: "123.mp4" },
         { song_name: "song20", image: "slider-2.jpg", video: "123.mp4" },
-        { song_name: "song21", image: "slider-2.jpg", video: "123.mp4" }]);
+        { song_name: "song21", image: "slider-2.jpg", video: "123.mp4" },
+        { song_name: "Baby Shark Easy", image: "baby-shark-1.gif", video: "/test_video/baby_shark_easy.mp4" },
+        { song_name: "Baby Shark Difficult", image: "baby-shark-2.gif", video: "/test_video/baby_shark_difficult.mp4" }]);
 };
