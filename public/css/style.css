@@ -269,6 +269,7 @@ Header section
 }
 
 .user-panel {
+	font-family: 'Triakis';
 	float: right;
 	font-weight: 500;
 	background: var(--light-tone);
@@ -297,11 +298,12 @@ Header section
 
 .main-menu ul li a {
 	display: inline-block;
-	font-size: 16px;
+	font-size: 20px;
 	color: var(--light-blue);
 	margin-left: 35px;
 	font-weight: 500;
-	padding: 10px 5px;
+	padding: 5px 5px;
+	font-family: 'Triakis'
 }
 
 .main-menu ul li a:hover {
@@ -1604,8 +1606,9 @@ Header section
 }
 
 .dropdown-toggle {
+	font-family: 'Triakis';
 	display: inline-block;
-	padding: 10px;
+	padding: 5px;
 	color: var(--dark-blue);
 	text-decoration: none;
 	cursor: pointer;
