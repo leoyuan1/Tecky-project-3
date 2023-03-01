@@ -1,6 +1,6 @@
 .content-container {
     position: absolute;
-    width: 80vw;
+    width: 35vw;
     text-align: center;
     top: 50%;
     left: 50%;
@@ -12,4 +12,16 @@
 .table {
     height: 500px;
     overflow: auto;
+}
+
+.user-email {
+    font-size: 20px;
+}
+
+.user-username {
+    font-size: 20px;
+}
+
+.total-song {
+    font-size: 20px;
 }

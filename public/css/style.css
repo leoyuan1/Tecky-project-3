@@ -8,7 +8,6 @@
 /*---------------------------*/
 /* Template default CSS
 /*---------------------------*/
-
 html,
 body {
 	/* height: 100%; */
@@ -439,10 +438,15 @@ ol {
 }
 
 .news-ticker {
-	width: 71%;
-	float: right;
+	width: 100%;
+	/* float: right; */
 	overflow: hidden;
 	display: inline-block;
+}
+
+.none {
+	/* display: none !important; */
+	color: #141414 !important;
 }
 
 .news-ticker-contant .nt-item {
