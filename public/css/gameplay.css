@@ -1,6 +1,6 @@
 @import "main.css";
-*{
-    background-color: var(--dark-blue);
+body{
+    height: 100vh;
 }
 .input_video{
     display: none;
@@ -20,6 +20,10 @@
     justify-content: center;
 }
 
+#start-menu button {
+    font-family: 'pdark';
+}
+
 /* Can merge with above menu */
 /* Temporarily Use */
 #pause-menu-container{
@@ -36,6 +40,7 @@
 }
 
 .play-btn{
+    font-family: pdark;
     background-color: white;
     opacity: 1;
     /* Change Color */
@@ -122,4 +127,14 @@
 .menu-btn > i {
     padding-left: 10px;
     padding-right: 10px
+}
+
+.container{
+    width: 100vw !important;
+    display: flex;
+    position: absolute;
+}
+
+canvas {
+    position:absolute;
 }

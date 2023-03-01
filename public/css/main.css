@@ -5,3 +5,18 @@
     --dark-blue: #005678;
     --dark-tone: #01012b;
 }
+
+@font-face{
+    font-family: 'pdark';
+    src: url('/fonts/pdark.ttf');
+}
+
+@font-face{
+    font-family: 'Triakis';
+    src: url('/fonts/Triakis.otf') format('opentype');
+}
+
+@font-face{
+    font-family: 'Teroxia';
+    src: url('/fonts/Teroxia.otf') format('opentype')
+}
