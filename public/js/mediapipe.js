@@ -43,6 +43,7 @@ export function onResults(results) {
 
     // Landmark Grid - 3D Coordinations
     // grid.updateLandmarks(results.poseWorldLandmarks);
+    // console.log("results: ", results.poseLandmarks);
 }
 
 export const pose = new Pose({

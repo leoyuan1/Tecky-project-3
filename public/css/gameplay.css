@@ -1,3 +1,7 @@
+@import "main.css";
+*{
+    background-color: var(--dark-blue);
+}
 .input_video{
     display: none;
 }

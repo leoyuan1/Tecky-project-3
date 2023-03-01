@@ -72,4 +72,20 @@ export class SongController {
             })
         }
     }
+
+    getSongById = async (req: express.Request, res: express.Response) => {
+        try {
+            let { mediaId } = req.body
+
+            let selectedSongPath = await this.songService.getSongById(mediaId)
+            res.json({
+                data: selectedSongPath
+            })
+        } catch (error) {
+            logger.error(error)
+            res.status(500).json({
+                message: '[USR005] - Server Error'
+            })
+        }
+    }
 }

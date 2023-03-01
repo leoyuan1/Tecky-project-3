@@ -38,13 +38,26 @@ function init() {
 }
 init()
 
-let songElems = document.querySelectorAll('.col-md-6')
-songElems.forEach((songElem) => {
-    songElem.addEventListener("click", () => {
-        console.log("Clicked");
-        console.log(songElem.lastElementChild.innerText);
-    })
-})
-async function getSelectedSong() {
+let songListElem = document.querySelector('.song-list')
 
-}
+songListElem.addEventListener('click', async (e) => {
+    let songId
+    console.log("e.target: ", e.target);
+    // 1. Clicked Photo -  http://localhost:8080/img/baby-shark-2.gif
+    if (e.target.src !== undefined) {
+        songId = e.target.parentElement.parentElement.parentElement.id.split("song-post-")[1]
+        console.log("songID: ", songId);
+        window.location.replace(`/gameplay.html?${songId}`)
+        // 2. Clicked Text - e.target.innerText - Baby Shark Difficult
+    } else if (e.target.id !== "") {
+        songId = e.target.id.split("song-post-")[1]
+        console.log("songID: ", songId);
+        window.location.replace(`/gameplay.html?${songId}`)
+
+        // 3. Clicked 邊 - e.target.id - song-post-23
+    } else if (e.target.innerText !== "") {
+        songId = e.target.innerText.split("song-post-")[1]
+        console.log("songID: ", songId);
+        window.location.replace(`/gameplay.html?${songId}`)
+    }
+})

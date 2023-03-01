@@ -7,6 +7,7 @@ $(window).on('load', async function () {
     // animate()
     $(".loader").fadeOut();
     $("#preloder").delay(400).fadeOut("slow");
+    loadVideo()
 });
 
 // Detect FPS
@@ -122,4 +123,21 @@ function togglePauseMenu() {
         pauseMenu.style.display = "none";
         playVideo()
     }
+}
+
+// load video
+async function loadVideo() {
+    let mediaId = window.location.search.split('?')[1]
+    console.log("videoId: ", mediaId);
+    let res = await fetch(`/get-video`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ mediaId })
+    })
+    let videoPath = (await res.json()).data[0].video
+    video.innerHTML = `
+    <source src = "${videoPath}" type = "video/mp4">
+    `
 }
