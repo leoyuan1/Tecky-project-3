@@ -1,7 +1,7 @@
 const videoElement = document.getElementsByClassName('input_video')[0];
 const canvasElement = document.getElementsByClassName('output_canvas')[0];
 const canvasCtx = canvasElement.getContext('2d');
-const landmarkContainer = document.getElementsByClassName('landmark-grid-container')[0];
+// const landmarkContainer = document.getElementsByClassName('landmark-grid-container')[0];
 // Landmark Grid - 3D Coordinations
 // const grid = new LandmarkGrid(landmarkContainer);
 

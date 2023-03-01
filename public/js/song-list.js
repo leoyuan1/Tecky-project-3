@@ -38,3 +38,13 @@ function init() {
 }
 init()
 
+let songElems = document.querySelectorAll('.col-md-6')
+songElems.forEach((songElem) => {
+    songElem.addEventListener("click", () => {
+        console.log("Clicked");
+        console.log(songElem.lastElementChild.innerText);
+    })
+})
+async function getSelectedSong() {
+
+}

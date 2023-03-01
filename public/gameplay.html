@@ -24,18 +24,6 @@
     <link rel="stylesheet" href="/css/animate.css" />
     <link rel="stylesheet" href="/css/gameplay.css" />
 
-    <!-- Mediapipe -->
-    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils_3d/control_utils_3d.js"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose/pose.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.1/drawing_utils.js"
-        crossorigin="anonymous"></script>
-
     <!-- login style -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.0/sweetalert2.css"
         integrity="sha512-JzSVRb7c802/njMbV97pjo1wuJAE/6v9CvthGTDxiaZij/TFpPQmQPTcdXyUVucsvLtJBT6YwRb5LhVxX3pQHQ=="
@@ -71,13 +59,13 @@
             <div class="title">Pause Menu</div>
             <div class="pause-menu-btn-container">
                 <div class="menu-btn-container">
-                    <div class="menu-btn">
+                    <div id='restart-btn' class="menu-btn">
                         <i class="bi bi-arrow-clockwise"></i>
                         <span>Restart</span>
                     </div>
                 </div>
                 <div class="menu-btn-container">
-                    <div class="menu-btn">
+                    <div id='exit-btn' class="menu-btn">
                         <i class="bi bi-box-arrow-right"></i>
                         <span>Exit Game</span>
                     </div>
@@ -91,23 +79,31 @@
         <div class="container">
             <!-- logo -->
             <a class="site-logo" href="index.html">
-                <img src="img/logo.png" alt="">
+                <img src="img/logo.png" alt="" />
             </a>
-            <div class="user-panel">
-                <a type="button" class="login-btn nav-link" id="login-btn">Login / Register</a>
+            <div class="user-panel" id="user-panel">
+                <a type="button" class="btn login-btn nav-link" id="login-btn">Login / Register</a>
             </div>
+            <div class="dropdown" id="dropdown">
+                <a href="#" class="dropdown-toggle" id="dropdown-toggle">Dropdown Toggle</a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Profile</a></li>
+                    <li><a href="#">Ranking Record</a></li>
+                    <li><a class="logout">Logout</a></li>
+                </ul>
+            </div>
+
             <!-- responsive -->
             <div class="nav-switch">
-                <i class="fa fa-bars"></i>
+                <i class="fa-sharp fa-solid fa-bars"></i>
             </div>
             <!-- site menu -->
             <nav class="main-menu">
                 <ul>
                     <li><a href="/index.html">Home</a></li>
-                    <li><a href="/gameplay.html">Song List</a></li>
-                    <li><a href="/categories.html">Ranking</a></li>
-                    <li><a href="/community.html"></a></li>
-                    <li><a href="/contact.html"></a></li>
+                    <li><a href="/song-list.html">Song List</a></li>
+                    <li><a href="/gameplay.html">Gameplay</a></li>
+                    <li><a href="/ranking.html">Ranking</a></li>
                 </ul>
             </nav>
         </div>
@@ -118,7 +114,7 @@
     <div class="container">
         <div class="row">
             <div class="col-6">
-                <video id="demo_video" width="100%" height="auto" autoplay loop>
+                <video id="demo_video" width="100%" height="auto">
                     <source src="/test_video/test1.mp4" type="video/mp4">
                 </video>
                 <!-- Connect DB -->
@@ -136,15 +132,38 @@
     </div>
     <!-- Mediapipe Section End -->
 
+    <!-- Login alart -->
+    <script src="https://kit.fontawesome.com/5d672d0386.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.0/sweetalert2.min.js"
+        integrity="sha512-IYzd4A07K9kxY3b8YIXi8L0BmUPVvPlI+YpLOzKrIKA3sQ4gt43dYp+y6ip7C7LRLXYfMHikpxeprZh7dYQn+g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Mediapipe -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils_3d/control_utils_3d.js"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose/pose.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.1/drawing_utils.js"
+        crossorigin="anonymous"></script>
+
+
     <!--====== Javascripts & Jquery ======-->
     <script src="/js/jquery-3.2.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/jquery.marquee.min.js"></script>
     <script type="module" src="/js/gameplay.js"></script>
+
     <!-- Mediapipe JS -->
     <script type="module" src="/js/mediapipe.js"></script>
     <!-- <script type="module" src="/js/test.js"></script> -->
 
+    <!-- Login JS -->
+    <script src="/js/login.js"></script>
+    <script src="/js/signup.js"></script>
 </body>
 
 </html>
