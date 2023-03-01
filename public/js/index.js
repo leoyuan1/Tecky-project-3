@@ -36,7 +36,6 @@ async function getRanking() {
         let rankingTopOne = ranking.getRankingInfo[0]
         if (rankingTopOne) {
             if (counter % 3 == 0) {
-                console.log(counter);
                 html += `
                 <div class="nt-item">
                 <span class="new">${rankingTopOne.song_name}</span> User: ${rankingTopOne.username}
