@@ -1,0 +1,15 @@
+.content-container {
+    position: absolute;
+    width: 80vw;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: wheat;
+}
+
+.table {
+    height: 500px;
+    overflow: auto;
+}

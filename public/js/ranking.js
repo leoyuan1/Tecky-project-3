@@ -5,7 +5,7 @@ async function getSongListAndRanking() {
     let res = await fetch('/get-song-list')
     let songLists = await res.json()
     let songList = songLists.songList
-
+    let songListActiveElm = songList[0]
     for (let song of songList) {
         songListElm.innerHTML += `
         <a class="list-group-item list-group-item-action" id="list-${song.song_name}-list" data-toggle="list"
@@ -49,17 +49,15 @@ async function getSongListAndRanking() {
                 continue
             }
             songRankingEln.innerHTML += `
-        <td>${i}</td>
-        <td>${ranking.username}</td>
-        <td>${ranking.scores}</td>
-        `
+            <td>${i}</td>
+            <td>${ranking.username}</td>
+            <td>${ranking.scores}</td>
+            `
             if (i == 10) {
                 let res = await fetch('/session')
                 let isUser = await res.json()
-                console.log(isUser);
                 if (isUser.user) {
                     let rankingTopTens = rankings.getRankingInfo.splice(0, 10)
-                    console.log(rankingTopTens);
                     let rankingOutOfTopTen = rankings.getRankingInfo
                     let rankingInTopTen = true
                     for (let rankingTopTen of rankingTopTens) {
@@ -73,8 +71,8 @@ async function getSongListAndRanking() {
                         for (let userRanking of rankingOutOfTopTen) {
                             if (userRanking.username == isUser.user.username) {
                                 songRankingEln.innerHTML += `<td>${countRanking}</td>
-                            <td>${userRanking.username}</td>
-                            <td>${userRanking.scores}</td>`
+                                <td>${userRanking.username}</td>
+                                <td>${userRanking.scores}</td>`
                             }
                             countRanking++
                         }
@@ -83,6 +81,10 @@ async function getSongListAndRanking() {
             }
         }
     }
+    const listFirstSongEln = document.querySelector(`#list-${songListActiveElm.song_name}-list`)
+    listFirstSongEln.setAttribute("class", "list-group-item list-group-item-action active show")
+    listFirstSongEln.setAttribute("aria-selected", "true")
+    document.querySelector(`#${songListActiveElm.song_name}`).setAttribute('class', 'tab-pane fade active show')
 }
 
 function init() {
