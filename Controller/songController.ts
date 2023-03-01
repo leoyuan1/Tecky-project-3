@@ -40,13 +40,31 @@ export class SongController {
         }
     }
 
-    getFirstList = async (req: express.Request, res: express.Response) => {
+    getSongListBySongName = async (req: express.Request, res: express.Response) => {
         try {
             let { songName } = req.body
             let allSongList = await this.songService.getRankingInfo(songName)
             res.json({
                 getRankingInfo: allSongList
             })
+        } catch (error) {
+            logger.error(error)
+            res.status(500).json({
+                message: '[USR001] - Server error'
+            })
+        }
+    }
+
+    getUserTotalSong = async (req: express.Request, res: express.Response) => {
+        try {
+            let sessionUserId = req.session.user?.id
+            console.log(sessionUserId);
+            if (sessionUserId) {
+                let userTotalSong = await this.songService.getUserTotalSong(sessionUserId)
+                res.json({
+                    userTotalSong: userTotalSong
+                })
+            }
         } catch (error) {
             logger.error(error)
             res.status(500).json({

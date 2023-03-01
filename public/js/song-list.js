@@ -12,7 +12,7 @@ async function getSong() {
     let songList = songLists.songList
     for (let song of songList) {
         songPost.innerHTML +=
-            `<div class="col-md-6" id="song-post">
+            `<div class="col-md-6" id="song-post-${song.id}">
         <div class="review-item">
         <button class="image-button">
             <img src="/img/${song.image}" alt="Button Image">
