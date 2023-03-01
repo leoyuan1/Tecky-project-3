@@ -5,8 +5,8 @@ const SongListElm = document.querySelector('.song-list')
 async function getUserInfo() {
     let res = await fetch('/session')
     let user = await res.json()
-    userEmailElm.innerHTML = `${user.user.email}`
-    userNameElm.innerHTML = `${user.user.username}`
+    userEmailElm.innerHTML = `Email: ${user.user.email}`
+    userNameElm.innerHTML = `User Name: ${user.user.username}`
 }
 
 async function getUserTotalSong() {

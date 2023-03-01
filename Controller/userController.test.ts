@@ -4,7 +4,7 @@ import { UserController } from "./userController"
 import { Request, Response } from "express";
 import { userFormidablePromise } from "../util/formidable";
 import { hashPassword } from "../util/bcrypt";
-import session from "express-session";
+
 jest.mock('../util/formidable')
 jest.mock('../util/bcrypt')
 

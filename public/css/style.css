@@ -9,12 +9,14 @@
 /* Template default CSS
 /*---------------------------*/
 
+@import "main.css";
+
 html,
 body {
 	/* height: 100%; */
 	font-family: 'Roboto', sans-serif;
 	-webkit-font-smoothing: antialiased;
-	font-smoothing: antialiased;
+	/* font-smoothing: antialiased; */
 }
 
 h1,
@@ -142,7 +144,7 @@ ol {
 	border-radius: 50px;
 	font-weight: 500;
 	border: none;
-	background: #ffb320;
+	background: var(--light-blue);
 	cursor: pointer;
 }
 
@@ -248,15 +250,15 @@ ol {
 }
 
 /*------------------
-  Header section
+Header section
 ---------------------*/
 
 .header-section {
-	background: #131313;
+	background: var(--dark-tone);
 	clear: both;
 	overflow: visible;
-	padding: 18px 0;
-	border-bottom: 1px solid #ffb320;
+	padding: 25px 0;
+	border-bottom: 1px solid var(--light-blue);
 	height: 90px;
 }
 
@@ -269,8 +271,8 @@ ol {
 .user-panel {
 	float: right;
 	font-weight: 500;
-	background: #ffb320;
-	padding: 8px 28px;
+	background: var(--light-tone);
+	padding: 0px 13px;
 	border-radius: 30px;
 	display: inline-block;
 }
@@ -296,14 +298,14 @@ ol {
 .main-menu ul li a {
 	display: inline-block;
 	font-size: 16px;
-	color: #fff;
+	color: var(--light-blue);
 	margin-left: 35px;
 	font-weight: 500;
 	padding: 10px 5px;
 }
 
 .main-menu ul li a:hover {
-	color: #ffb320;
+	color: var(--first-red);
 }
 
 .header-btn {
@@ -341,7 +343,7 @@ ol {
 }
 
 .hero-slider .hs-text h2 span {
-	color: #ffb320;
+	color: var(--light-blue);
 }
 
 .hero-slider .hs-text p {
@@ -406,7 +408,7 @@ ol {
 }
 
 .hero-slider .owl-dots .owl-dot.active {
-	background: #ffb320;
+	background: var(--light-blue);
 }
 
 /*---------------------
@@ -434,15 +436,20 @@ ol {
 	font-size: 18px;
 	font-weight: 500;
 	color: #fff;
-	background: #ffb320;
+	background: var(--light-blue);
 	z-index: 1;
 }
 
 .news-ticker {
-	width: 71%;
-	float: right;
+	width: 100%;
+	/* float: right; */
 	overflow: hidden;
 	display: inline-block;
+}
+
+.none {
+	/* display: none !important; */
+	color: #141414 !important;
 }
 
 .news-ticker-contant .nt-item {
@@ -568,7 +575,7 @@ ol {
 }
 
 .recent-game-item .rgi-extra .rgi-star {
-	background: #ffb320;
+	background: var(--light-blue);
 }
 
 .recent-game-item .rgi-extra .rgi-heart {
@@ -605,7 +612,7 @@ ol {
 	font-weight: 700;
 	color: #131313;
 	text-transform: uppercase;
-	background: #ffb320;
+	background: var(--light-blue);
 }
 
 .tournament-item .ti-content {
@@ -624,7 +631,7 @@ ol {
 }
 
 .tournament-item .ti-text h4 {
-	color: #ffb320;
+	color: var(--light-blue);
 	margin-bottom: 20px;
 }
 
@@ -650,7 +657,7 @@ ol {
 
 .tournament-item .ti-text p span {
 	font-weight: 500;
-	color: #ffb320;
+	color: var(--light-blue);
 }
 
 /*----------------------
@@ -683,7 +690,7 @@ ol {
 }
 
 .review-item .review-cover .score.yellow {
-	background: #ffb320;
+	background: var(--light-blue);
 }
 
 .review-item .review-cover .score.purple {
@@ -771,7 +778,7 @@ ol {
 
 .latest-blog .lb-item .lb-content .lb-date {
 	font-size: 12px;
-	color: #ffb320;
+	color: var(--light-blue);
 	margin-bottom: 8px;
 }
 
@@ -823,7 +830,7 @@ ol {
 
 .top-comment .tc-item .tc-content .tc-date {
 	font-size: 12px;
-	color: #ffb320;
+	color: var(--light-blue);
 }
 
 /*----------------------
@@ -903,7 +910,7 @@ ol {
 }
 
 .site-pagination .active {
-	background: #ffb320;
+	background: var(--light-blue);
 }
 
 .site-pagination.sp-style-2 a,
@@ -912,7 +919,7 @@ ol {
 }
 
 .site-pagination.sp-style-2 .active {
-	background: #ffb320;
+	background: var(--light-blue);
 }
 
 .widget-item {
@@ -1010,7 +1017,7 @@ ol {
 }
 
 .single-blog-page .blog-thumb .rgi-extra .rgi-star {
-	background: #ffb320;
+	background: var(--light-blue);
 }
 
 .single-blog-page .blog-thumb .rgi-extra .rgi-heart {
@@ -1068,7 +1075,7 @@ ol {
 }
 
 .comment-list .comment .comment-content h5 span {
-	color: #ffb320;
+	color: var(--light-blue);
 	padding-left: 18px;
 }
 
@@ -1181,7 +1188,7 @@ ol {
 
 .community-post-list .community-post .post-content .post-date {
 	font-size: 12px;
-	color: #ffb320;
+	color: var(--light-blue);
 	margin-bottom: 18px;
 }
 
@@ -1239,7 +1246,7 @@ ol {
 	float: left;
 	font-size: 16px;
 	font-weight: 700;
-	color: #ffb320;
+	color: var(--light-blue);
 }
 
 .contact-info-list .cf-right {
@@ -1588,15 +1595,15 @@ ol {
 	display: none;
 	float: right;
 	font-weight: 500;
-	background: #ffb320;
-	padding: 8px 28px;
+	background: var(--light-tone);
+	padding: 0px 13px;
 	border-radius: 30px;
 }
 
 .dropdown-toggle {
 	display: inline-block;
 	padding: 10px;
-	color: #fff;
+	color: var(--dark-blue);
 	text-decoration: none;
 	cursor: pointer;
 }
@@ -1605,7 +1612,7 @@ ol {
 	background-color: #fff;
 	padding: 10px;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-	background: #ffb320;
+	background: var(--light-tone);
 	padding: 8px 28px;
 	border-radius: 30px;
 }
@@ -1617,7 +1624,7 @@ ol {
 .dropdown-menu a {
 	display: block;
 	padding: 5px;
-	color: #333;
+	color: var(--dark-blue);
 	text-decoration: none;
 	cursor: pointer;
 	position: relative;
@@ -1732,4 +1739,14 @@ th {
 
 tr:hover {
 	background-color: #f5f5f5;
+}
+
+.swal2-popup {
+	background: var(--dark-blue);
+	color: var(--light-tone);
+	font-family: monospace;
+}
+
+.logout {
+	color: var(--dark-blue) !important;
 }

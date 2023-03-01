@@ -19,7 +19,7 @@ async function showUserNav() {
     if (result.message === 'isUser') {
         document.getElementById("user-panel").style.display = "none";
         document.getElementById("dropdown").style.display = "inline-block";
-        document.getElementById('dropdown-toggle').innerHTML = `歡迎 ${result.user.username}！`;
+        document.getElementById('dropdown-toggle').innerHTML = `Welcome ${result.user.username}！`;
     } else if (result.message === 'no session data') {
         return
     }
