@@ -127,7 +127,7 @@ function togglePauseMenu() {
 // load video
 async function loadVideo() {
     let mediaId = window.location.search.split('?')[1]
-    console.log("videoId: ", mediaId);
+    // console.log("videoId: ", mediaId);
     let res = await fetch(`/get-video`, {
         method: 'POST',
         headers: {
@@ -143,6 +143,8 @@ async function loadVideo() {
 
 // Leaderboard Section
 // Get history score from DB
+let rankingElems = document.querySelectorAll('.cyberpunk-ranking')
+
 async function loadHistoryScore() {
     let mediaId = window.location.search.split('?')[1]
     let res = await fetch(`/get-history-scores`, {
@@ -153,5 +155,15 @@ async function loadHistoryScore() {
         body: JSON.stringify({ mediaId })
     })
     let historyScores = (await res.json()).data
-    console.log("historyScores: ", historyScores);
+    // Arrange Ranking
+    let firstName = historyScores[0].username
+    let firstScore = historyScores[0].scores
+    let secondName = historyScores[1].username
+    let secondScore = historyScores[1].scores
+    let thirdName = historyScores[2].username
+    let thirdScore = historyScores[2].scores
+    rankingElems[0].innerText = `No.1 ${firstName} ${firstScore}`
+    rankingElems[1].innerText = `No.2 ${secondName} ${secondScore}`
+    rankingElems[2].innerText = `No.3 ${thirdName} ${thirdScore}`
 }
+

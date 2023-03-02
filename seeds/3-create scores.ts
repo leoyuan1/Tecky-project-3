@@ -11,6 +11,8 @@ export async function seed(knex: Knex): Promise<void> {
     let mediaId2 = (await knex.select('id').from('media'))[1]
     let mediaId3 = (await knex.select('id').from('media'))[2]
     let mediaId4 = (await knex.select('id').from('media'))[3]
+    let babySharkEasy = (await knex.select('id').from('media'))[8]
+    let babySharkDiff = (await knex.select('id').from('media'))[9]
     // Inserts seed entries
     await knex("scores").insert([
         { scores: 1000, user_id: userId.id, media_id: mediaId.id },
@@ -43,8 +45,11 @@ export async function seed(knex: Knex): Promise<void> {
         { scores: 1000, user_id: userId.id, media_id: mediaId2.id },
         { scores: 1000, user_id: userId.id, media_id: mediaId2.id },
         { scores: 1000, user_id: userId.id, media_id: mediaId2.id },
-        { scores: 1000, user_id: userId.id, media_id: mediaId2.id },
-        { scores: 1000, user_id: userId.id, media_id: mediaId2.id },
-        { scores: 1000, user_id: userId.id, media_id: mediaId2.id }
+        { scores: 1000, user_id: userId.id, media_id: babySharkDiff.id },
+        { scores: 900, user_id: userId2.id, media_id: babySharkDiff.id },
+        { scores: 800, user_id: userId3.id, media_id: babySharkDiff.id },
+        { scores: 1000, user_id: userId.id, media_id: babySharkEasy.id },
+        { scores: 900, user_id: userId2.id, media_id: babySharkEasy.id },
+        { scores: 800, user_id: userId3.id, media_id: babySharkEasy.id },
     ]);
 };

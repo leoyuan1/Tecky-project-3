@@ -16,15 +16,26 @@ export class GameplayService {
 
     async getHistoryScoresById(mediaId: number) {
         let media_id = mediaId
-        console.log("media_id: ", media_id);
 
         let results = (
-            await this.knex
-                .select('scores')
-                .from('scores')
-                .where({ media_id })
-        )
-        console.log("results: ", results);
+            await this.knex.raw(`
+            select scores, username from scores
+            join users on users.id = scores.user_id
+            where media_id = ?
+            ORDER BY scores DESC`,
+                [media_id])
+        ).rows
         return results
+    }
+
+    async getVideoJsonById(mediaId: number) {
+        let id = mediaId
+
+        let result = (await this.knex
+            .select('pose_data')
+            .from('media')
+            .where({ id })
+        )
+        return result
     }
 }
