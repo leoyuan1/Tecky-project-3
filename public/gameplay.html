@@ -109,25 +109,49 @@
     <!-- Header section end -->
 
     <!-- Mediapipe Section -->
-    <div class="container">
-        <!-- <div class="row">
-            <div class="col-6"> -->
-        <video id="demo_video" width="100%" height="auto">
-        </video>
-        <!-- Connect DB -->
-        <!-- Adjust size -->
-        <!-- Not autoplay -->
-        <!-- <canvas id="demo_output"></canvas> -->
-        <!-- </div> -->
-        <!-- <div class="col-6"> -->
-        <video class="input_video"></video>
-        <canvas class="output_canvas" width="640px" height="360px"></canvas>
-        <!-- </div> -->
-    </div>
-    <!-- Not working for now -->
-    <!-- <div class="landmark-grid-container"></div> -->
+    <div class="mediapipe-container container-fluid">
+        <div class="row">
+            <div class="col-10">
+                <div class="video-container">
+                    <video id="demo_video" width="100%" height="auto">
+                    </video>
+                    <!-- Adjust size -->
+                    <video class="input_video"></video>
+                    <canvas class="output_canvas" width="360px" height="202.5px"></canvas>
+                </div>
+            </div>
+            <div class="col-2">
+                <!-- Leaderboard -->
+                <div class="leaderboard-container">
+                    <div class="leaderboard-title">
+                        Leaderboard
+                    </div>
+                    <div class="cyberpunk-ranking">
+                        No.1 Gary 137000
+                    </div>
+                    <div class="cyberpunk-ranking">
+                        No.2 Name Score
+                    </div>
+                    <div class="cyberpunk-ranking">
+                        No.3 Name Score
+                    </div>
+
+                    <div class="score-container">
+                        <div class="accuracy-container cyberpunk inverse">
+                            <span class="score-container-title">Accuracy: </span>
+                            <span>50.00%</span>
+                        </div>
+                        <div class="score cyberpunk">
+                            <span class="score-container-title">Score: </span>
+                            <span>123400</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- Mediapipe Section End -->
+
 
     <!-- Login alart -->
     <script src="https://kit.fontawesome.com/5d672d0386.js" crossorigin="anonymous"></script>

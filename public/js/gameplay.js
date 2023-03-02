@@ -8,6 +8,7 @@ $(window).on('load', async function () {
     $(".loader").fadeOut();
     $("#preloder").delay(400).fadeOut("slow");
     loadVideo()
+    loadHistoryScore()
 });
 
 // Detect FPS
@@ -40,10 +41,13 @@ playBtn.addEventListener("click", playerReady)
 homeBtn.addEventListener('click', home)
 
 function playVideo() {
+    console.log("video.currentime - play: ", video.currentTime);
+    console.log("video.duration: ", video.duration);
     video.play()
 }
 
 function pauseVideo() {
+    console.log("video.currentime - pause: ", video.currentTime);
     video.pause()
 }
 
@@ -73,6 +77,7 @@ async function fadeOut(element) {
 function home() {
     console.log("Home");
     // Redirect back to songlist
+    window.location.href = "http://localhost:8080/song-list.html"
 }
 
 
@@ -80,7 +85,6 @@ function home() {
 let pauseMenu = document.querySelector('#pause-menu-container')
 let restartBtn = document.querySelector('#restart-btn')
 let exitBtn = document.querySelector('#exit-btn')
-let isPaused = false;
 
 restartBtn.addEventListener('click', restartGame)
 exitBtn.addEventListener('click', exitGame)
@@ -97,11 +101,6 @@ function exitGame() {
     console.log("Exit");
     // Redirect back to songlist page
     window.location.href = "http://localhost:8080/song-list.html"
-}
-
-function pauseGame() {
-    isPaused = true;
-
 }
 
 function restartGame() {
@@ -140,4 +139,19 @@ async function loadVideo() {
     video.innerHTML = `
     <source src = "${videoPath}" type = "video/mp4">
     `
+}
+
+// Leaderboard Section
+// Get history score from DB
+async function loadHistoryScore() {
+    let mediaId = window.location.search.split('?')[1]
+    let res = await fetch(`/get-history-scores`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ mediaId })
+    })
+    let historyScores = (await res.json()).data
+    console.log("historyScores: ", historyScores);
 }
