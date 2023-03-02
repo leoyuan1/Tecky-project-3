@@ -3,12 +3,12 @@ const nj = require('numjs');
 const videoElement = document.getElementsByClassName('input_video')[0];
 const canvasElement = document.getElementsByClassName('output_canvas')[0];
 const canvasCtx = canvasElement.getContext('2d');
-// const landmarkContainer = document.getElementsByClassName('landmark-grid-container')[0];
+const landmarkContainer = document.getElementsByClassName('landmark-grid-container')[0];
 // Landmark Grid - 3D Coordinations
 // const grid = new LandmarkGrid(landmarkContainer);
 
 let camera_data = []
-
+const bodyPartList = ["rightArm", "rightForeArm", "rightHand", "leftArm", "leftForeArm", "leftHand", "rightLeg", "rightCalf", "rightFoot", "leftLeg", "leftCalf", "leftFoot", "rightShoulderToHead", "leftShoulderToHead", "rightHipToHead", "leftHipToHead"]
 let benchmark_wb;
 async function mediapipeInIt() {
     benchmark_wb = await loadData("test1_wb_data.json")
@@ -57,7 +57,6 @@ export function onResults(results) {
 
     // Landmark Grid - 3D Coordinations
     // grid.updateLandmarks(results.poseWorldLandmarks);
-    // console.log("results: ", results.poseLandmarks);
 }
 
 export const pose = new Pose({
@@ -88,8 +87,6 @@ async function loadData(filename) {
     data = await res.json()
     return data
 }
-
-const bodyPartList = ["rightArm", "rightForeArm", "rightHand", "leftArm", "leftForeArm", "leftHand", "rightLeg", "rightCalf", "rightFoot", "leftLeg", "leftCalf", "leftFoot", "rightShoulderToHead", "leftShoulderToHead", "rightHipToHead", "leftHipToHead"]
 
 function compareData(benchmark, input) {
     let benchmarkLmList = benchmark[benchmarkFrameCounter]
