@@ -31,6 +31,9 @@
 </head>
 
 <body>
+	<video autoplay muted loop id="myVideo">
+		<source src="/video/ranking-background.mp4" type="video/mp4">
+	</video>
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -71,12 +74,12 @@
 	<!-- Header section end -->
 
 	<!-- Hero section -->
-
-
-	<h1>Ranking</h1>
+	<div class="ranking-title">
+		<div class="glitch" data-trick="Ranking">Ranking</div>
+	</div>
 	<div class="row">
 		<div class="col-3 song-list-container">
-			<div class="song-list-elm">Song List</div>
+			<div class="song-list-elm" data-trick="Song List">Song List</div>
 			<div class="list-group" id="list-tab" role="tablist">
 			</div>
 		</div>
