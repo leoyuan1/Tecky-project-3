@@ -1,4 +1,3 @@
-const nj = require('numjs');
 
 const videoElement = document.getElementsByClassName('input_video')[0];
 const canvasElement = document.getElementsByClassName('output_canvas')[0];
@@ -22,8 +21,18 @@ export function onResults(results) {
     //     grid.updateLandmarks([]);
     //     return;
     // }
+    if (!benchmark_wb) return;
+    // console.log(benchmark_wb)
+    let inputLmList = []
+    if (!results.poseLandmarks) {
+        return;
+    }
+    for (let landmark of results.poseLandmarks) {
+        inputLmList.push([landmark.visibility, landmark.x, landmark.y])
+    }
 
-    let result = compareData(benchmark_wb, results.poseLandmarks)
+    let result = compareData(benchmark_wb, inputLmList)
+    console.log(result)
     // camera_data.push(results.poseLandmarks)
     // console.log(camera_data)
     canvasCtx.save();
@@ -57,6 +66,7 @@ export function onResults(results) {
 
     // Landmark Grid - 3D Coordinations
     // grid.updateLandmarks(results.poseWorldLandmarks);
+    benchmarkFrameCounter += 1
 }
 
 export const pose = new Pose({
@@ -84,12 +94,16 @@ export const camera = new Camera(videoElement, {
 
 async function loadData(filename) {
     const res = await fetch(`../test_video_json/${filename}`)
-    data = await res.json()
+    let data = await res.json()
     return data
 }
-
+let benchmarkFrameCounter = 0
 function compareData(benchmark, input) {
+    console.log(benchmarkFrameCounter)
     let benchmarkLmList = benchmark[benchmarkFrameCounter]
+    if (benchmarkLmList.length == 0) {
+        return
+    }
     let inputLmList = input
     let cosineSimDict = {}
     for (let bodyPart of bodyPartList) {
@@ -101,6 +115,8 @@ function compareData(benchmark, input) {
     let csLeftLowerLimb = 0.45 * cosineSimDict["leftLeg"] + 0.45 * cosineSimDict["leftCalf"] + 0.1 * cosineSimDict["leftFoot"]
     let csCore = 0.25 * cosineSimDict["rightShoulderToHead"] + 0.25 * cosineSimDict["leftShoulderToHead"] + 0.25 * cosineSimDict["rightHipToHead"] + 0.25 * cosineSimDict["leftHipToHead"]
     let csWholePosture = 0.2 * csRightUpperLimb + 0.2 * csLeftUpperLimb + 0.2 * csRightLowerLimb + 0.2 * csLeftLowerLimb + 0.2 * csCore
+
+    benchmarkFrameCounter += 1
     return csWholePosture
 }
 
@@ -162,15 +178,20 @@ function findCosineSimilarityByPart(benchmarkLmList, inputLmList, bodyPart) {
 }
 
 function cosineSim(benchmarkPoint, benchmarkAnchor, inputPoint, inputAnchor) {
+    // console.log("benchmarkPoint" + benchmarkPoint)
     let njBenchmarkPart = nj.array(benchmarkPoint).slice(1).subtract(nj.array(benchmarkAnchor).slice(1))
+    // console.log(njBenchmarkPart.tolist())
+    // console.log(inputPoint)
+    // console.log(inputAnchor)
     let njInputPart = nj.array(inputPoint).slice(1).subtract(nj.array(inputAnchor).slice(1))
+    // console.log(njInputPart.tolist())
     let dotProduct = nj.dot(njBenchmarkPart, njInputPart);
     let normBenchMarkPart = Math.sqrt(njBenchmarkPart.get(0) * njBenchmarkPart.get(0) + njBenchmarkPart.get(1) * njBenchmarkPart.get(1))
     let normInputPart = Math.sqrt(njInputPart.get(0) * njInputPart.get(0) + njInputPart.get(1) * njInputPart.get(1))
     if (normBenchMarkPart == 0 || normInputPart == 0) {
         return 0;
     } else {
-        return dotProduct.list()[0] / (normBenchMarkPart * normInputPart);
+        return dotProduct.tolist()[0] / (normBenchMarkPart * normInputPart);
     }
 }
 
