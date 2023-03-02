@@ -19,11 +19,13 @@ export class GameplayService {
         console.log("media_id: ", media_id);
 
         let results = (
-            await this.knex
-                .select('scores')
-                .from('scores')
-                .where({ media_id })
-        )
+            await this.knex.raw(`
+            select scores, username from scores
+            join users on users.id = scores.user_id
+            where media_id = ?
+            ORDER BY scores DESC`,
+                [media_id])
+        ).rows
         console.log("results: ", results);
         return results
     }

@@ -43,7 +43,7 @@ export function onResults(results) {
 
     // Landmark Grid - 3D Coordinations
     // grid.updateLandmarks(results.poseWorldLandmarks);
-    // console.log("results: ", results.poseLandmarks);
+    console.log("left-wrist: ", results.poseLandmarks[15]);
 }
 
 export const pose = new Pose({
@@ -53,6 +53,7 @@ export const pose = new Pose({
 });
 pose.setOptions({
     modelComplexity: 1,
+    selfieMode: false,
     smoothLandmarks: true,
     enableSegmentation: true,
     smoothSegmentation: true,
