@@ -44,4 +44,20 @@ export class GameplayController {
             })
         }
     }
+
+    getVideoJsonById = async (req: express.Request, res: express.Response) => {
+        try {
+            let { mediaId } = req.body
+
+            let selectedJsonPath = await this.gameplayService.getVideoJsonById(mediaId)
+            res.json({
+                data: selectedJsonPath
+            })
+        } catch (error) {
+            logger.error(error)
+            res.status(500).json({
+                message: '[GPS003] - Server Error'
+            })
+        }
+    }
 }

@@ -16,7 +16,6 @@ export class GameplayService {
 
     async getHistoryScoresById(mediaId: number) {
         let media_id = mediaId
-        console.log("media_id: ", media_id);
 
         let results = (
             await this.knex.raw(`
@@ -26,7 +25,17 @@ export class GameplayService {
             ORDER BY scores DESC`,
                 [media_id])
         ).rows
-        console.log("results: ", results);
         return results
+    }
+
+    async getVideoJsonById(mediaId: number) {
+        let id = mediaId
+
+        let result = (await this.knex
+            .select('pose_data')
+            .from('media')
+            .where({ id })
+        )
+        return result
     }
 }

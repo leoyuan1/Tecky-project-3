@@ -10,3 +10,4 @@ export const gameplayRoutes = express.Router()
 
 gameplayRoutes.post('/get-video', gameplayController.getSongById)
 gameplayRoutes.post('/get-history-scores', gameplayController.getHistoryScoresById)
+gameplayRoutes.post('/get-video-json', gameplayController.getVideoJsonById)

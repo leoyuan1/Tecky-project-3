@@ -10,7 +10,17 @@ let camera_data = []
 const bodyPartList = ["rightArm", "rightForeArm", "rightHand", "leftArm", "leftForeArm", "leftHand", "rightLeg", "rightCalf", "rightFoot", "leftLeg", "leftCalf", "leftFoot", "rightShoulderToHead", "leftShoulderToHead", "rightHipToHead", "leftHipToHead"]
 let benchmark_wb;
 async function mediapipeInIt() {
-    benchmark_wb = await loadData("test1_wb_data.json")
+    let mediaId = window.location.search.split('?')[1]
+    const res = await fetch(`/get-video-json`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ mediaId })
+    })
+    let data = (await res.json()).data[0].pose_data
+    benchmark_wb = await loadData(data)
+    // console.log("benchmark_wb: ", benchmark_wb);
 }
 
 mediapipeInIt()
@@ -55,19 +65,20 @@ export function onResults(results) {
         results.image, 0, 0, canvasElement.width, canvasElement.height);
 
     // drawn on top of the existing image.
-    canvasCtx.globalCompositeOperation = 'source-over';
+    // canvasCtx.globalCompositeOperation = 'source-over';
     // Joint 線
-    drawConnectors(canvasCtx, results.poseLandmarks, POSE_CONNECTIONS,
-        { color: '#00FF00', lineWidth: 2 });
+    // drawConnectors(canvasCtx, results.poseLandmarks, POSE_CONNECTIONS,
+    //     { color: '#00FF00', lineWidth: 2 });
     // Pose landmarks 
-    drawLandmarks(canvasCtx, results.poseLandmarks,
-        { color: '#FF0000', lineWidth: 1 });
+    // drawLandmarks(canvasCtx, results.poseLandmarks,
+    //     { color: '#FF0000', lineWidth: 1 });
     canvasCtx.restore();
 
     // Landmark Grid - 3D Coordinations
     // grid.updateLandmarks(results.poseWorldLandmarks);
     benchmarkFrameCounter += 1
-    console.log("left-wrist: ", results.poseLandmarks[15]);
+    danceAccuracy(result)
+    // console.log("left-wrist: ", results.poseLandmarks[15]);
 }
 
 export const pose = new Pose({
@@ -103,6 +114,7 @@ let benchmarkFrameCounter = 0
 function compareData(benchmark, input) {
     console.log(benchmarkFrameCounter)
     let benchmarkLmList = benchmark[benchmarkFrameCounter]
+    // console.log("benchmarkLmList: ", benchmarkLmList);
     if (benchmarkLmList.length == 0) {
         return
     }
@@ -111,12 +123,25 @@ function compareData(benchmark, input) {
     for (let bodyPart of bodyPartList) {
         cosineSimDict[bodyPart] = findCosineSimilarityByPart(benchmarkLmList, inputLmList, bodyPart)
     }
+    // console.log("cosineSimDict: ", cosineSimDict);
+
     let csRightUpperLimb = 0.45 * cosineSimDict["rightArm"] + 0.45 * cosineSimDict["rightForeArm"] + 0.1 * cosineSimDict["rightHand"]
-    let csLeftUpperLimb = 0.45 * cosineSimDict["LeftArm"] + 0.45 * cosineSimDict["leftForeArm"] + 0.1 * cosineSimDict["leftHand"]
+    // console.log("csRightUpperLimb: ", csRightUpperLimb);
+
+    let csLeftUpperLimb = 0.45 * cosineSimDict["leftArm"] + 0.45 * cosineSimDict["leftForeArm"] + 0.1 * cosineSimDict["leftHand"]
+    // console.log("csLeftUpperLimb: ", csLeftUpperLimb);
+
     let csRightLowerLimb = 0.45 * cosineSimDict["rightLeg"] + 0.45 * cosineSimDict["rightCalf"] + 0.1 * cosineSimDict["rightFoot"]
+    // console.log("csRightLowerLimb: ", csRightLowerLimb);
+
     let csLeftLowerLimb = 0.45 * cosineSimDict["leftLeg"] + 0.45 * cosineSimDict["leftCalf"] + 0.1 * cosineSimDict["leftFoot"]
+    // console.log("csLeftLowerLimb: ", csLeftLowerLimb);
+
     let csCore = 0.25 * cosineSimDict["rightShoulderToHead"] + 0.25 * cosineSimDict["leftShoulderToHead"] + 0.25 * cosineSimDict["rightHipToHead"] + 0.25 * cosineSimDict["leftHipToHead"]
+    // console.log("csCore: ", csCore);
+
     let csWholePosture = 0.2 * csRightUpperLimb + 0.2 * csLeftUpperLimb + 0.2 * csRightLowerLimb + 0.2 * csLeftLowerLimb + 0.2 * csCore
+    // console.log("csWholePosture: ", csWholePosture);
 
     benchmarkFrameCounter += 1
     return csWholePosture
@@ -175,8 +200,9 @@ function findCosineSimilarityByPart(benchmarkLmList, inputLmList, bodyPart) {
             break;
         default:
             csValue = 0
-            return csValue
     }
+    return csValue
+
 }
 
 function cosineSim(benchmarkPoint, benchmarkAnchor, inputPoint, inputAnchor) {
@@ -197,3 +223,8 @@ function cosineSim(benchmarkPoint, benchmarkAnchor, inputPoint, inputAnchor) {
     }
 }
 
+function danceAccuracy(result) {
+    let accuracyCounter = document.querySelector('.accuracy-counter')
+    let accuracy = (result * 100).toFixed(2)
+    accuracyCounter.innerText = `${accuracy}%`
+}

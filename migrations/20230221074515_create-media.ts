@@ -7,7 +7,7 @@ export async function up(knex: Knex): Promise<void> {
         table.string('song_name').unique;
         table.string('image');
         table.string('video');
-        table.jsonb('pose_data');
+        table.string('pose_data');
         table.timestamps(false, true)
     })
 }

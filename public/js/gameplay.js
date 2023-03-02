@@ -127,7 +127,7 @@ function togglePauseMenu() {
 // load video
 async function loadVideo() {
     let mediaId = window.location.search.split('?')[1]
-    console.log("videoId: ", mediaId);
+    // console.log("videoId: ", mediaId);
     let res = await fetch(`/get-video`, {
         method: 'POST',
         headers: {
@@ -166,3 +166,4 @@ async function loadHistoryScore() {
     rankingElems[1].innerText = `No.2 ${secondName} ${secondScore}`
     rankingElems[2].innerText = `No.3 ${thirdName} ${thirdScore}`
 }
+
