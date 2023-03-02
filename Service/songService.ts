@@ -23,7 +23,7 @@ export class SongService {
     }
 
     async getUserTotalSong(sessionUserId: number) {
-        let userTotalSong = (await this.knex.raw(` SELECT users.username, media.song_name, scores.scores 
+        let userTotalSong = (await this.knex.raw(`SELECT media.id, users.username, media.song_name, scores.scores 
         FROM scores
         JOIN users ON users.id = scores.user_id
         JOIN media ON scores.media_id = media.id

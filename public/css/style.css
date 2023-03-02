@@ -37,6 +37,7 @@ h1 {
 h2 {
 	font-size: 60px;
 	font-family: 'Triakis';
+	margin-bottom: 11px;
 	color: var(--first-red);
 }
 
@@ -105,10 +106,6 @@ ol {
 	background-position: top center;
 }
 
-.spad {
-	padding-top: 97px;
-	padding-bottom: 97px;
-}
 
 .text-white h1,
 .text-white h2,
@@ -275,7 +272,7 @@ Header section
 	float: right;
 	font-weight: 500;
 	background: var(--light-tone);
-	padding: 0px 13px;
+	padding: 6px 13px;
 	border-radius: 30px;
 	display: inline-block;
 }
@@ -1606,7 +1603,7 @@ Header section
 	float: right;
 	font-weight: 500;
 	background: var(--light-tone);
-	padding: 0px 13px;
+	padding: 6px 13px;
 	border-radius: 30px;
 }
 
@@ -1626,6 +1623,7 @@ Header section
 	background: var(--light-tone);
 	padding: 8px 28px;
 	border-radius: 30px;
+	font-family: 'Triakis';
 }
 
 .dropdown-menu li {
@@ -1737,7 +1735,7 @@ table {
 
 th,
 td {
-	text-align: left;
+	text-align: center;
 	padding: 8px;
 	border-bottom: 1px solid #ddd;
 }

@@ -18,7 +18,7 @@ async function getSong() {
             <img src="/img/${song.image}" alt="Button Image">
         </button>
             <div class="review-text">
-                <h4>${song.song_name}</h4>
+                <h4 class="song-name-text">${song.song_name}</h4>
             </div>
         </div>
     </div>`

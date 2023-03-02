@@ -15,10 +15,11 @@ async function getUserTotalSong() {
     let userAllSongsList = userAllSongs.userTotalSong
     totalSongElm.innerText = `Total Songs: ${userAllSongsList.length + 1}`
     for (let userSong of userAllSongsList) {
+        console.log(userSong);
         SongListElm.innerHTML += `
         <td>${userSong.song_name}</td>
         <td>${userSong.scores}</td>
-        <td><button>Play</button></td>
+        <td><a href="/gameplay.html?${userSong.id}" class="play-btn">Play</a></td>
         `
     }
 }
