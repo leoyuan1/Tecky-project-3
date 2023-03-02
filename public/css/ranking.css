@@ -2,7 +2,7 @@
 
 h2 {
     text-align: center;
-    margin-top: 30px;
+    margin-top: 12px;
 }
 
 h1 {
@@ -17,8 +17,10 @@ h1 {
 }
 
 .song-list-container {
-    padding-left: 65px;
     FONT-FAMILY: 'Triakis';
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
 
 .song-list-elm {
@@ -35,14 +37,13 @@ h1 {
 .tab-content>.active {
     display: flex;
     width: 100%;
-    justify-content: center;
 }
 
 .glitch {
     z-index: 2;
     font-family: 'Triakis';
     color: var(--light-tone);
-    font-size: 6rem;
+    font-size: 8rem;
     position: relative;
 }
 
@@ -285,7 +286,7 @@ h1 {
     font-family: 'Triakis';
     color: var(--first-red);
     width: 600px;
-    font-size: 40px;
+    font-size: 33px;
 }
 
 .ranking-full-page {
@@ -297,6 +298,7 @@ h1 {
 }
 
 .col-md-9 {
+    align-content: flex-start;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -309,13 +311,15 @@ td {
 }
 
 .song-list-elm {
-    font-size: 60px;
+    width: 550px;
+    font-size: 55px;
     color: var(--first-red);
-    margin-top: 30px;
 }
 
 .list-group {
-    font-size: 40px;
+    background-color: rgba(0, 0, 0, 0.554);
+    font-size: 33px;
+    width: 550px;
 }
 
 .ranking-title {
