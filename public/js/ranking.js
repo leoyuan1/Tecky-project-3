@@ -13,9 +13,9 @@ async function getSongListAndRanking() {
         </a>`
         songListPage.innerHTML += `
         <div class="tab-pane fade" id = "${song.song_name}" role = "tabpanel" aria - labelledby="list-${song.song_name}-list" >
-            <div class="col-md-9">
+            <div class="col-md-9 ranking-full-page">
                 <h2>${song.song_name}</h2>
-                <main>
+                <main class='ranking-page'>
                     <table>
                         <thead>
                             <tr>
@@ -91,3 +91,4 @@ function init() {
     getSongListAndRanking()
 }
 init()
+
