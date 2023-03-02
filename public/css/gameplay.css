@@ -1,12 +1,8 @@
-@import "main.css";
-body{
-    height: 100vh;
-}
-.input_video{
+.input_video {
     display: none;
 }
 
-#start-menu{
+#start-menu {
     position: fixed;
     /* Temporarily Display None */
     display: none;
@@ -15,18 +11,14 @@ body{
     top: 0;
     left: 0;
     z-index: 999998;
-    background: rgba(27,27,27,0.7);
+    background: rgba(27, 27, 27, 0.7);
     align-items: center;
     justify-content: center;
 }
 
-#start-menu button {
-    font-family: 'pdark';
-}
-
 /* Can merge with above menu */
 /* Temporarily Use */
-#pause-menu-container{
+#pause-menu-container {
     position: fixed;
     display: none;
     width: 100%;
@@ -39,8 +31,7 @@ body{
     justify-content: center;
 }
 
-.play-btn{
-    font-family: pdark;
+.play-btn {
     background-color: white;
     opacity: 1;
     /* Change Color */
@@ -55,7 +46,7 @@ body{
     border: transparent;
 }
 
-.home-btn{
+.home-btn {
     position: absolute;
     top: 90px;
     /* Change Color */
@@ -67,13 +58,17 @@ body{
 }
 
 /* Animation For Get Ready Function*/
-@keyframes fade-inout{
-    0%{opacity: 1;}
-    100%{opacity: 0;}
-} 
+@keyframes fade-inout {
+    0% {
+        opacity: 1;
+    }
 
-.fade-text{
-    font-family: pdark;
+    100% {
+        opacity: 0;
+    }
+}
+
+.fade-text {
     animation: fade-inout 3s infinite;
     opacity: 1;
     font-size: 100px;
@@ -83,14 +78,15 @@ body{
     color: white;
 }
 
-#pause-menu{
-    font-family: Triakis;
-    background-color: rgba(235, 235, 235, .7);;
+#pause-menu {
+    background-color: rgba(235, 235, 235, .5);
+    ;
     margin: 5px 10px 5px 10px;
     border-radius: 5%;
     padding-bottom: 15px;
 }
-.title{
+
+.title {
     font-size: 2rem;
     /* Change Color */
     color: white;
@@ -102,13 +98,13 @@ body{
     font-weight: bold;
 }
 
-.menu-btn-container{
+.menu-btn-container {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.menu-btn{
+.menu-btn {
     min-width: 200px;
     max-width: 200px;
     font-size: 14px;
@@ -121,22 +117,22 @@ body{
     user-select: none;
 }
 
-.menu-btn > span {
+.menu-btn>span {
     padding-left: 20%;
 }
 
-.menu-btn > i {
+.menu-btn>i {
     padding-left: 10px;
     padding-right: 10px
 }
 
 canvas {
-    position:absolute;
+    position: absolute;
     right: 15px;
     bottom: 24px;
 }
 
-.leaderboard-container{
+.leaderboard-container {
     background: url(/img/leaderboard_bg5.gif) no-repeat center;
     position: absolute;
     height: calc(100vh - 95px);
@@ -148,7 +144,8 @@ canvas {
 }
 
 /* Cyberpunk Glitch Style for hover */
-.leaderboard-title, .leaderboard-title::after {
+.leaderboard-title,
+.leaderboard-title::after {
     font-family: pdark;
     height: 43px;
     font-size: 14px;
@@ -248,9 +245,9 @@ canvas {
 }
 
 /* cyberpunk glitch animation for text */
-.cyberpunk-ranking{
+.cyberpunk-ranking {
     font-family: Triakis;
-    color:var(--light-tone);
+    color: var(--light-tone);
     position: relative;
     top: 60px;
     font-size: 16px;
@@ -258,7 +255,7 @@ canvas {
     left: 5px;
     margin-top: 15px;
 }
-    
+
 .cyberpunk-ranking:before {
     content: "";
     display: block;
@@ -373,7 +370,7 @@ h1.cyberpunk.glitched:before {
     color: #000;
     background-color: var(--first-red);
     border-right: 2px solid var(--light-blue);
-    margin-bottom:10px;
+    margin-bottom: 10px;
 }
 
 /* .dotted,
@@ -408,27 +405,28 @@ h1.cyberpunk.glitched:before {
 .cyberpunk.inverse:before,
 .cyberpunk:before {
     background-color: #000;
-    color:var(--first-red);
+    color: var(--first-red);
 }
+
 /* End of Cyberpunk text box */
-.score-container{
+.score-container {
     font-family: 'Triakis';
     font-weight: bold;
     position: absolute;
     bottom: 10px;
     left: 5px;
-    margin-bottom:10px;
+    margin-bottom: 10px;
 }
 
-.score-container-title{
+.score-container-title {
     font-family: pdark;
 }
 
 .col-10 {
-    background-color:black;
+    background-color: black;
 }
 
-.video-container{
+.video-container {
     background-color: black;
     height: calc(100vh - 95px);
     display: flex;
