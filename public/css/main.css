@@ -15,8 +15,3 @@
     font-family: 'Triakis';
     src: url('/fonts/Triakis.otf') format('opentype');
 }
-
-@font-face{
-    font-family: 'Teroxia';
-    src: url('/fonts/Teroxia.otf') format('opentype')
-}

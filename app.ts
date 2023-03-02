@@ -5,6 +5,7 @@ import { app, PORT, server } from './util/connection-config';
 import { User } from './util/session';
 import { userRoutes } from './userRoutes';
 import { songRoutes } from './songRoutes';
+import { gameplayRoutes } from './gameplayRoutes';
 import { isLoggedIn } from './util/guard';
 
 app.use(express.urlencoded({ extended: true }));
@@ -44,6 +45,7 @@ app.use(express.static('public'))
 
 app.use('/', userRoutes)
 app.use('/', songRoutes)
+app.use('/', gameplayRoutes)
 app.use(isLoggedIn, express.static('protect'))
 
 server.listen(PORT, () => {
