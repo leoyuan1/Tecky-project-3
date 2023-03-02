@@ -19,7 +19,9 @@ async function mediapipeInIt() {
         body: JSON.stringify({ mediaId })
     })
     let data = (await res.json()).data[0].pose_data
+    console.log(data)
     benchmark_wb = await loadData(data)
+    console.log(benchmark_wb)
     // console.log("benchmark_wb: ", benchmark_wb);
 }
 
@@ -31,54 +33,57 @@ export function onResults(results) {
     //     grid.updateLandmarks([]);
     //     return;
     // }
-    if (!benchmark_wb) return;
-    // console.log(benchmark_wb)
-    let inputLmList = []
-    if (!results.poseLandmarks) {
-        return;
+    if (isStarted == true) {
+
+        if (!benchmark_wb) return;
+        // console.log(benchmark_wb)
+        let inputLmList = []
+        if (!results.poseLandmarks) {
+            return;
+        }
+        for (let landmark of results.poseLandmarks) {
+            inputLmList.push([landmark.visibility, landmark.x, landmark.y])
+        }
+
+        let result = compareData(benchmark_wb, inputLmList)
+        console.log(result)
+        // camera_data.push(results.poseLandmarks)
+        // console.log(camera_data)
+        canvasCtx.save();
+        canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+
+        // 綠點 - Segmentation Mask
+        // canvasCtx.drawImage(results.segmentationMask, 0, 0,
+        //     canvasElement.width, canvasElement.height);
+
+        // Only overwrite existing pixels.
+        // source-in = Only the parts of the new image that overlap with the existing image are drawn.
+        canvasCtx.globalCompositeOperation = 'source-in';
+        // Red
+        canvasCtx.fillStyle = '#FF0000';
+        canvasCtx.fillRect(0, 0, canvasElement.width, canvasElement.height);
+
+        // The existing image is drawn on top of the new image, but only where the two images overlap
+        canvasCtx.globalCompositeOperation = 'destination-atop';
+        canvasCtx.drawImage(
+            results.image, 0, 0, canvasElement.width, canvasElement.height);
+
+        // drawn on top of the existing image.
+        // canvasCtx.globalCompositeOperation = 'source-over';
+        // Joint 線
+        // drawConnectors(canvasCtx, results.poseLandmarks, POSE_CONNECTIONS,
+        //     { color: '#00FF00', lineWidth: 2 });
+        // Pose landmarks 
+        // drawLandmarks(canvasCtx, results.poseLandmarks,
+        //     { color: '#FF0000', lineWidth: 1 });
+        canvasCtx.restore();
+
+        // Landmark Grid - 3D Coordinations
+        // grid.updateLandmarks(results.poseWorldLandmarks);
+        benchmarkFrameCounter += 1
+        danceAccuracy(result)
+        // console.log("left-wrist: ", results.poseLandmarks[15]);
     }
-    for (let landmark of results.poseLandmarks) {
-        inputLmList.push([landmark.visibility, landmark.x, landmark.y])
-    }
-
-    let result = compareData(benchmark_wb, inputLmList)
-    console.log(result)
-    // camera_data.push(results.poseLandmarks)
-    // console.log(camera_data)
-    canvasCtx.save();
-    canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
-
-    // 綠點 - Segmentation Mask
-    // canvasCtx.drawImage(results.segmentationMask, 0, 0,
-    //     canvasElement.width, canvasElement.height);
-
-    // Only overwrite existing pixels.
-    // source-in = Only the parts of the new image that overlap with the existing image are drawn.
-    canvasCtx.globalCompositeOperation = 'source-in';
-    // Red
-    canvasCtx.fillStyle = '#FF0000';
-    canvasCtx.fillRect(0, 0, canvasElement.width, canvasElement.height);
-
-    // The existing image is drawn on top of the new image, but only where the two images overlap
-    canvasCtx.globalCompositeOperation = 'destination-atop';
-    canvasCtx.drawImage(
-        results.image, 0, 0, canvasElement.width, canvasElement.height);
-
-    // drawn on top of the existing image.
-    // canvasCtx.globalCompositeOperation = 'source-over';
-    // Joint 線
-    // drawConnectors(canvasCtx, results.poseLandmarks, POSE_CONNECTIONS,
-    //     { color: '#00FF00', lineWidth: 2 });
-    // Pose landmarks 
-    // drawLandmarks(canvasCtx, results.poseLandmarks,
-    //     { color: '#FF0000', lineWidth: 1 });
-    canvasCtx.restore();
-
-    // Landmark Grid - 3D Coordinations
-    // grid.updateLandmarks(results.poseWorldLandmarks);
-    benchmarkFrameCounter += 1
-    danceAccuracy(result)
-    // console.log("left-wrist: ", results.poseLandmarks[15]);
 }
 
 export const pose = new Pose({
@@ -108,6 +113,7 @@ export const camera = new Camera(videoElement, {
 async function loadData(filename) {
     const res = await fetch(`../test_video_json/${filename}`)
     let data = await res.json()
+    console.log(data)
     return data
 }
 let benchmarkFrameCounter = 0
@@ -227,4 +233,116 @@ function danceAccuracy(result) {
     let accuracyCounter = document.querySelector('.accuracy-counter')
     let accuracy = (result * 100).toFixed(2)
     accuracyCounter.innerText = `${accuracy}%`
+}
+
+// Start Menu
+const playBtn = document.querySelector(".play-btn");
+const startMenu = document.querySelector("#start-menu");
+const fadeElm = document.querySelector('.fade-text');
+const homeBtn = document.querySelector('.home-btn');
+const video = document.querySelector('#demo_video')
+
+playBtn.addEventListener("click", playerReady)
+homeBtn.addEventListener('click', home)
+
+function playVideo() {
+    console.log("video.currentime - play: ", video.currentTime);
+    console.log("video.duration: ", video.duration);
+    video.play()
+}
+
+function pauseVideo() {
+    console.log("video.currentime - pause: ", video.currentTime);
+    video.pause()
+}
+let isStarted = false
+function startGame() {
+    console.log("Run Game Lor")
+    isStarted = true
+    playVideo()
+    // Delay the display none
+    // Start the video in upcoming seconds
+    // run the mediapipe calculation
+}
+
+async function playerReady() {
+    fadeElm.style.display = "block"
+    playBtn.style.display = "none"
+    await fadeOut(fadeElm)
+}
+
+async function fadeOut(element) {
+    // Amend the fade-out effect
+    await setTimeout(function () {
+        element.style.display = "none";
+        startMenu.style.display = 'none'
+        startGame()
+    }, 3000)
+}
+
+function home() {
+    console.log("Home");
+    // Redirect back to songlist
+    window.location.href = "http://localhost:8080/song-list.html"
+}
+
+
+// Pause Function
+let pauseMenu = document.querySelector('#pause-menu-container')
+let restartBtn = document.querySelector('#restart-btn')
+let exitBtn = document.querySelector('#exit-btn')
+
+restartBtn.addEventListener('click', restartGame)
+exitBtn.addEventListener('click', exitGame)
+
+// set keypress to call pauseMenu
+$(document).keyup(function (e) {
+    if (e.key === "Escape" || e.keyCode == "32") {
+        togglePauseMenu()
+        // Pause Game(?)
+    }
+});
+
+function exitGame() {
+    console.log("Exit");
+    // Redirect back to songlist page
+    window.location.href = "http://localhost:8080/song-list.html"
+}
+
+function restartGame() {
+    console.log("Restart la.");
+    pauseMenu.style.display = 'none'
+    video.currentTime = '0'
+    startMenu.style.display = 'flex'
+    playerReady()
+    // reset score & calculation
+}
+
+// call pause menu
+function togglePauseMenu() {
+    console.log("Paused");
+    if (pauseMenu.style.display === "none") {
+        pauseMenu.style.display = "flex";
+        pauseVideo()
+    } else {
+        pauseMenu.style.display = "none";
+        playVideo()
+    }
+}
+
+// load video
+export async function loadVideo() {
+    let mediaId = window.location.search.split('?')[1]
+    // console.log("videoId: ", mediaId);
+    let res = await fetch(`/get-video`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ mediaId })
+    })
+    let videoPath = (await res.json()).data[0].video
+    video.innerHTML = `
+    <source src = "${videoPath}" type = "video/mp4">
+    `
 }
