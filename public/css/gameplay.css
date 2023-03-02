@@ -1,26 +1,11 @@
-.input_video{
+.input_video {
     display: none;
 }
 
-#start-menu{
+#start-menu {
     position: fixed;
     /* Temporarily Display None */
     display: none;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 999998;
-    background: rgba(27,27,27,0.7);
-    align-items: center;
-    justify-content: center;
-}
-
-/* Can merge with above menu */
-/* Temporarily Use */
-#pause-menu-container{
-    position: fixed;
-    display: flex;
     width: 100%;
     height: 100%;
     top: 0;
@@ -31,7 +16,22 @@
     justify-content: center;
 }
 
-.play-btn{
+/* Can merge with above menu */
+/* Temporarily Use */
+#pause-menu-container {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 999998;
+    background: rgba(27, 27, 27, 0.7);
+    align-items: center;
+    justify-content: center;
+}
+
+.play-btn {
     background-color: white;
     opacity: 1;
     /* Change Color */
@@ -46,7 +46,7 @@
     border: transparent;
 }
 
-.home-btn{
+.home-btn {
     position: absolute;
     top: 90px;
     /* Change Color */
@@ -58,12 +58,17 @@
 }
 
 /* Animation For Get Ready Function*/
-@keyframes fade-inout{
-    0%{opacity: 1;}
-    100%{opacity: 0;}
-} 
+@keyframes fade-inout {
+    0% {
+        opacity: 1;
+    }
 
-.fade-text{
+    100% {
+        opacity: 0;
+    }
+}
+
+.fade-text {
     animation: fade-inout 3s infinite;
     opacity: 1;
     font-size: 100px;
@@ -73,12 +78,14 @@
     color: white;
 }
 
-#pause-menu{
-    background-color: rgba(235, 235, 235, .5);;
+#pause-menu {
+    background-color: rgba(235, 235, 235, .5);
+    ;
     margin: 5px 10px 5px 10px;
     border-radius: 5%;
 }
-.title{
+
+.title {
     font-size: 2rem;
     color: white;
     background-color: #7a7c7c;
