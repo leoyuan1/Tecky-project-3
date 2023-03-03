@@ -8,11 +8,11 @@ async function getSongListAndRanking() {
     let songListActiveElm = songList[0]
     for (let song of songList) {
         songListElm.innerHTML += `
-        <a class="list-group-item list-group-item-action" id="list-${song.song_name}-list" data-toggle="list"
-        href="#${song.song_name}" role="tab" aria-controls="${song.song_name}">${song.song_name}
+        <a class="list-group-item list-group-item-action" id="list-${song.id}-list" data-toggle="list"
+        href="#song${song.id}" role="tab" aria-controls="${song.id}">${song.song_name}
         </a>`
         songListPage.innerHTML += `
-        <div class="tab-pane fade" id = "${song.song_name}" role = "tabpanel" aria - labelledby="list-${song.song_name}-list" >
+        <div class="tab-pane fade" id = "song${song.id}" role = "tabpanel" aria - labelledby="list-${song.id}-list" >
             <div class="col-md-9 ranking-full-page">
                 <h2>${song.song_name}</h2>
                 <main class='ranking-page'>
@@ -24,7 +24,7 @@ async function getSongListAndRanking() {
                                 <th>Score</th>
                             </tr>
                         </thead>
-                        <tbody id="ranking${song.song_name}">
+                        <tbody id="ranking${song.id}">
                             <tr>
                             </tr>
                         </tbody>
@@ -41,8 +41,8 @@ async function getSongListAndRanking() {
             body: JSON.stringify({ songName })
         })
         let rankings = await resFirst.json()
+        let songRankingEln = document.querySelector(`#ranking${song.id}`)
         let i = 0
-        let songRankingEln = document.querySelector(`#ranking${song.song_name}`)
         for (let ranking of rankings.getRankingInfo) {
             i++
             if (i > 10) {
@@ -81,7 +81,7 @@ async function getSongListAndRanking() {
             }
         }
     }
-    const listFirstSongEln = document.querySelector(`#list-${songListActiveElm.song_name}-list`)
+    const listFirstSongEln = document.querySelector(`#list-${songListActiveElm.id}-list`)
     listFirstSongEln.setAttribute("class", "list-group-item list-group-item-action active show")
     listFirstSongEln.setAttribute("aria-selected", "true")
     document.querySelector(`#${songListActiveElm.song_name}`).setAttribute('class', 'tab-pane fade active show')

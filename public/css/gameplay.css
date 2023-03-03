@@ -269,7 +269,7 @@ canvas {
 }
 
 /* glitch animation */
-/* h1.cyberpunk.glitched {
+.cyberpunk-ranking.glitched {
     animation-name: glitched;
     animation-duration: calc(.9s * 1.4);
     animation-iteration-count: infinite;
@@ -304,7 +304,7 @@ canvas {
     }
 }
 
-h1.cyberpunk.glitched:before {
+.cyberpunk-ranking.glitched:before {
     animation-name: beforeglitched;
     animation-duration: calc(.9s * 2);
     animation-iteration-count: infinite;
@@ -343,7 +343,7 @@ h1.cyberpunk.glitched:before {
         transform: skew(0deg);
         clip-path: polygon(0px 0px, 85px 0px, 90px 5px, 100% 5px, 100% 6px, 85px 6px, 80px 10px, 0px 10px);
     }
-} */
+}
 
 /* Cyberpunk text box */
 :root {
@@ -431,4 +431,17 @@ h1.cyberpunk.glitched:before {
     height: calc(100vh - 95px);
     display: flex;
     align-items: center;
+}
+
+/* Body part accuracy */
+.body-part-accuracy{
+    margin-top: 100px;
+}
+
+.csRightUpperLimb-number,
+.csLeftUpperLimb-number,
+.csRightLowerLimb-number,
+.csLeftLowerLimb-number,
+.csCore-number {
+    font-size:20px;
 }
