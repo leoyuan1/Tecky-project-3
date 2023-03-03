@@ -31,7 +31,6 @@ jobs:
           yarn knex migrate:latest
           yarn knex seed:run
           yarn jest
-        working-directory: ./Tecky-project-3
   # deploy:
   #   if: github.ref_name == 'production'
   #   runs-on: ubuntu-latest
