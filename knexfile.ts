@@ -21,12 +21,12 @@ const config: { [key: string]: Knex.Config } = {
     }
   },
 
-  staging: {
+  testing: {
     client: 'postgresql',
     connection: {
-      database: 'my_db',
-      user: 'username',
-      password: 'password'
+      database: 'teckyproject_testing',
+      user: 'postgres',
+      password: 'postgres'
     },
     pool: {
       min: 2,

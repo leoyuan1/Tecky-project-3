@@ -6,9 +6,9 @@ on:
   workflow_dispatch:
 
 env:
-  POSTGRES_DB: teckyproject
-  POSTGRES_USER: leoyuan
-  POSTGRES_PASSWORD: 95169891
+  POSTGRES_DB: teckyproject_testing
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: postgres
   POSTGRES_HOST: postgres
 
 jobs:
@@ -19,6 +19,7 @@ jobs:
       postgres:
         image: postgres
         env:
+          POSTGRES_HOST: ${{env.POSTGRES_HOST}}
           POSTGRES_DB: ${{env.POSTGRES_DB}}
           POSTGRES_USER: ${{env.POSTGRES_USER}}
           POSTGRES_PASSWORD: ${{env.POSTGRES_PASSWORD}}
@@ -29,7 +30,7 @@ jobs:
       - uses: actions/checkout@v3
       - run: |
           yarn install 
-          yarn knex migrate:latest
+          yarn knex migrate:latest -- testing
           yarn knex seed:run
           yarn jest
   # deploy:
