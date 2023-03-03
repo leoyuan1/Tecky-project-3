@@ -261,16 +261,19 @@ function bodyAccuracy(RUL, LUL, RLL, LLL, Core) {
     let csRightLowerLimbNumber = document.querySelector('.csRightLowerLimb-number')
     let csLeftLowerLimbNumber = document.querySelector('.csLeftLowerLimb-number')
     let csCoreNumber = document.querySelector('.csCore-number')
+    let csWholePostureNumber = document.querySelector('.csWholePosture-number')
     let csRightUpperLimbAccuracy = (RUL * 100).toFixed(2)
     let csLeftUpperLimbAccuracy = (LUL * 100).toFixed(2)
     let csRightLowerLimbAccuracy = (RLL * 100).toFixed(2)
     let csLeftLowerLimbAccuracy = (LLL * 100).toFixed(2)
     let csCoreAccuracy = (Core * 100).toFixed(2)
+    let csWholePostureAccuracy = (Core * 100).toFixed(2)
     csRightUpperLimbNumber.innerText = `${csRightUpperLimbAccuracy}%`
     csLeftUpperLimbNumber.innerText = `${csLeftUpperLimbAccuracy}%`
     csRightLowerLimbNumber.innerText = `${csRightLowerLimbAccuracy}%`
     csLeftLowerLimbNumber.innerText = `${csLeftLowerLimbAccuracy}%`
     csCoreNumber.innerText = `${csCoreAccuracy}%`
+    csWholePostureNumber.innerText = `${csWholePostureAccuracy}%`
 }
 
 // Start Menu

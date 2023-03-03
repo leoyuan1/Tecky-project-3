@@ -84,7 +84,7 @@ async function getSongListAndRanking() {
     const listFirstSongEln = document.querySelector(`#list-${songListActiveElm.id}-list`)
     listFirstSongEln.setAttribute("class", "list-group-item list-group-item-action active show")
     listFirstSongEln.setAttribute("aria-selected", "true")
-    document.querySelector(`#${songListActiveElm.song_name}`).setAttribute('class', 'tab-pane fade active show')
+    document.querySelector(`#song${songListActiveElm.id}`).setAttribute('class', 'tab-pane fade active show')
 }
 
 function init() {

@@ -434,14 +434,24 @@ canvas {
 }
 
 /* Body part accuracy */
-.body-part-accuracy{
-    margin-top: 100px;
+.body-part-accuracy-container{
+    position:absolute;
+    top: 20px;
+    left: 15px;
 }
 
+.csRightUpperLimb,
+.csLeftUpperLimb,
+.csRightLowerLimb,
+.csLeftLowerLimb,
+.csCore,
+.csWholePosture,
 .csRightUpperLimb-number,
 .csLeftUpperLimb-number,
 .csRightLowerLimb-number,
 .csLeftLowerLimb-number,
-.csCore-number {
-    font-size:20px;
+.csCore-number,
+.csWholePosture-number {
+    font-size:18px !important;
+    color:red;
 }
