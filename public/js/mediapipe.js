@@ -6,7 +6,6 @@ const landmarkContainer = document.getElementsByClassName('landmark-grid-contain
 // Landmark Grid - 3D Coordinations
 // const grid = new LandmarkGrid(landmarkContainer);
 
-let camera_data = []
 const bodyPartList = ["rightArm", "rightForeArm", "rightHand", "leftArm", "leftForeArm", "leftHand", "rightLeg", "rightCalf", "rightFoot", "leftLeg", "leftCalf", "leftFoot", "rightShoulderToHead", "leftShoulderToHead", "rightHipToHead", "leftHipToHead"]
 let benchmark_wb;
 async function mediapipeInIt() {
@@ -20,7 +19,7 @@ async function mediapipeInIt() {
     })
     let data = (await res.json()).data[0].pose_data
     benchmark_wb = await loadData(data)
-    console.log(benchmark_wb)
+    // console.log(benchmark_wb)
     // console.log("benchmark_wb: ", benchmark_wb);
 }
 
@@ -119,7 +118,7 @@ export const camera = new Camera(videoElement, {
 });
 
 async function loadData(filename) {
-    const res = await fetch(`../test_video_json/${filename}`)
+    const res = await fetch(`/test_video_json/${filename}`)
     let data = await res.json()
     console.log(data)
     return data
@@ -218,6 +217,11 @@ function findCosineSimilarityByPart(benchmarkLmList, inputLmList, bodyPart) {
 
 function cosineSim(benchmarkPoint, benchmarkAnchor, inputPoint, inputAnchor) {
     // console.log("benchmarkPoint" + benchmarkPoint)
+    if (nj.array(benchmarkPoint).get(0) < 0.7 || nj.array(benchmarkAnchor).get(0) < 0.7) {
+        return 1
+    } else if (nj.array(inputPoint).get(0) < 0.7 || nj.array(inputAnchor).get(0) < 0.7) {
+        return 0
+    }
     let njBenchmarkPart = nj.array(benchmarkPoint).slice(1).subtract(nj.array(benchmarkAnchor).slice(1))
     // console.log(njBenchmarkPart.tolist())
     // console.log(inputPoint)
@@ -242,10 +246,10 @@ let calTime = 1;
 function danceAccuracy(result) {
     let accuracyCounter = document.querySelector('.accuracy-counter')
     let accuracy = Math.round(result * 100) / 100
-    console.log("accuracy: " + accuracy)
+    // console.log("accuracy: " + accuracy)
     historyAccuracy += accuracy
-    console.log("historyAccuracy: " + historyAccuracy * 100)
-    console.log("calTime: " + calTime)
+    // console.log("historyAccuracy: " + historyAccuracy * 100)
+    // console.log("calTime: " + calTime)
     accuracyCounter.innerText = `${Math.round(historyAccuracy * 100 * 100 / calTime) / 100}%`
     calTime += 1
 }
