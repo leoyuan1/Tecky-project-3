@@ -1,4 +1,5 @@
-import { pose, onResults, camera, loadVideo } from "/js/mediapipe.js"
+import { pose, onResults, camera, loadVideo, video } from "/js/mediapipe.js"
+
 
 // Preloader -- 
 $(window).on('load', async function () {
@@ -102,6 +103,7 @@ function updateScore(score) {
 }
 
 video.onplay = function () {
+    console.log("Run Set Interval");
     setInterval(scoreGenerator, 2000)
 }
 

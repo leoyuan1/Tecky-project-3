@@ -8,6 +8,8 @@ export async function up(knex: Knex): Promise<void> {
         table.string('image');
         table.string('video');
         table.string('pose_data');
+        table.integer('start_time');
+        table.integer('end_time');
         table.timestamps(false, true)
     })
 }

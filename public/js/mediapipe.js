@@ -278,7 +278,7 @@ const playBtn = document.querySelector(".play-btn");
 const startMenu = document.querySelector("#start-menu");
 const fadeElm = document.querySelector('.fade-text');
 const homeBtn = document.querySelector('.home-btn');
-const video = document.querySelector('#demo_video')
+export const video = document.querySelector('#demo_video')
 
 playBtn.addEventListener("click", playerReady)
 homeBtn.addEventListener('click', home)
