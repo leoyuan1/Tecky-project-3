@@ -43,6 +43,7 @@ jobs:
             cd Tecky-project-3
             git pull
             yarn install
+            yarn knex migrate:rollback --env production
             yarn knex migrate:latest --env production
             yarn knex seed:run
             forever restart -c 'yarn dev' . 
