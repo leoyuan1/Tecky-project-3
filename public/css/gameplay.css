@@ -432,3 +432,7 @@ h1.cyberpunk.glitched:before {
     display: flex;
     align-items: center;
 }
+
+.body-part-accuracy{
+    margin-top: 100px;
+}
