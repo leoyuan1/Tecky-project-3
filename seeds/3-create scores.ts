@@ -11,8 +11,8 @@ export async function seed(knex: Knex): Promise<void> {
     let mediaId2 = (await knex.select('id').from('media'))[1]
     let mediaId3 = (await knex.select('id').from('media'))[2]
     let mediaId4 = (await knex.select('id').from('media'))[3]
-    let babySharkEasy = (await knex.select('id').from('media'))[8]
-    let babySharkDiff = (await knex.select('id').from('media'))[9]
+    let babySharkEasy = (await knex.select('id').from('media'))[3]
+    let babySharkDiff = (await knex.select('id').from('media'))[4]
     // Inserts seed entries
     await knex("scores").insert([
         { scores: 1000, user_id: userId.id, media_id: mediaId.id },
