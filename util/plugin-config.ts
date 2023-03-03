@@ -9,8 +9,8 @@ export const grantExpress = grant.express({
 		state: true
 	},
 	google: {
-		key: env.GOOGLE_CLIENT_ID,
-		secret: env.GOOGLE_SECRET,
+		key: process.env.GOOGLE_CLIENT_ID,
+		secret: process.env.GOOGLE_SECRET,
 		scope: ['profile', 'email'],
 		callback: '/login/google'
 	}
