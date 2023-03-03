@@ -49,8 +49,11 @@ export function onResults(results) {
         let result;
         if (Math.round(video.currentTime) == interval) {
             result = compareData(benchmarkLmList, inputLmList)
-            interval += 1
             console.log(result)
+            console.log(interval)
+            if (result) {
+                danceAccuracy(result)
+            }
         }
 
         // camera_data.push(results.poseLandmarks)
@@ -86,8 +89,8 @@ export function onResults(results) {
 
         // Landmark Grid - 3D Coordinations
         // grid.updateLandmarks(results.poseWorldLandmarks);
-        danceAccuracy(result)
         // console.log("left-wrist: ", results.poseLandmarks[15]);
+        interval = Math.round(video.currentTime) + 1
     }
 }
 
@@ -151,6 +154,7 @@ function compareData(benchmark, input) {
 
     let csWholePosture = 0.2 * csRightUpperLimb + 0.2 * csLeftUpperLimb + 0.2 * csRightLowerLimb + 0.2 * csLeftLowerLimb + 0.2 * csCore
     // console.log("csWholePosture: ", csWholePosture);
+    bodyAccuracy(csRightUpperLimb, csLeftUpperLimb, csRightLowerLimb, csLeftLowerLimb, csCore)
     return csWholePosture
 }
 
@@ -226,15 +230,24 @@ function cosineSim(benchmarkPoint, benchmarkAnchor, inputPoint, inputAnchor) {
     if (normBenchMarkPart == 0 || normInputPart == 0) {
         return 0;
     } else {
-        return dotProduct.tolist()[0] / (normBenchMarkPart * normInputPart);
+        let calculation = dotProduct.tolist()[0] / (normBenchMarkPart * normInputPart)
+        calculation = (calculation + 1) / 2
+        return calculation;
     }
 }
 
 // Accuracy
+let historyAccuracy = 0;
+let calTime = 1;
 function danceAccuracy(result) {
     let accuracyCounter = document.querySelector('.accuracy-counter')
-    let accuracy = (result * 100).toFixed(2)
-    accuracyCounter.innerText = `${accuracy}%`
+    let accuracy = Math.round(result * 100) / 100
+    console.log("accuracy: " + accuracy)
+    historyAccuracy += accuracy
+    console.log("historyAccuracy: " + historyAccuracy * 100)
+    console.log("calTime: " + calTime)
+    accuracyCounter.innerText = `${Math.round(historyAccuracy * 100 * 100 / calTime) / 100}%`
+    calTime += 1
 }
 
 // Body part accuracy
