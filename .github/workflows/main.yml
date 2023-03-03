@@ -1,4 +1,4 @@
-name: teckyproject3
+name: Tecky-project-3
 on:
   push:
     branches:
@@ -31,8 +31,8 @@ jobs:
   #         yarn jest
   #       working_directory: ./Tecky-project-3
     deploy:
+    if: github.ref_name == 'production'
     runs-on: ubuntu-latest
-    # needs: testing
     steps:
       - name: ssh to pull latest version
         uses: fifsky/ssh-action@production
