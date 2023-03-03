@@ -106,7 +106,7 @@ export const camera = new Camera(videoElement, {
 });
 
 async function loadData(filename) {
-    const res = await fetch(`../test_video_json/${filename}`)
+    const res = await fetch(`/test_video_json/${filename}`)
     let data = await res.json()
     return data
 }

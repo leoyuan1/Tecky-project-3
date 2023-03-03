@@ -41,8 +41,8 @@ async function getSongListAndRanking() {
             body: JSON.stringify({ songName })
         })
         let rankings = await resFirst.json()
-        let songRankingEln = document.querySelector(`#ranking${song.song_name}`)
         let i = 0
+        let songRankingEln = document.querySelector(`#ranking${song.song_name}`)
         for (let ranking of rankings.getRankingInfo) {
             i++
             if (i > 10) {
