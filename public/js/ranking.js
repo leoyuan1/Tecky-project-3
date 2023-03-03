@@ -9,7 +9,7 @@ async function getSongListAndRanking() {
     for (let song of songList) {
         songListElm.innerHTML += `
         <a class="list-group-item list-group-item-action" id="list-${song.id}-list" data-toggle="list"
-        href="#${song.song_name}" role="tab" aria-controls="${song.id}">${song.song_name}
+        href="#song${song.id}" role="tab" aria-controls="${song.id}">${song.song_name}
         </a>`
         songListPage.innerHTML += `
         <div class="tab-pane fade" id = "song${song.id}" role = "tabpanel" aria - labelledby="list-${song.id}-list" >
@@ -24,7 +24,7 @@ async function getSongListAndRanking() {
                                 <th>Score</th>
                             </tr>
                         </thead>
-                        <tbody id="ranking${song.song_name}">
+                        <tbody id="ranking${song.id}">
                             <tr>
                             </tr>
                         </tbody>
@@ -81,7 +81,7 @@ async function getSongListAndRanking() {
             }
         }
     }
-    const listFirstSongEln = document.querySelector(`#list-${songListActiveElm.song_name}-list`)
+    const listFirstSongEln = document.querySelector(`#list-${songListActiveElm.id}-list`)
     listFirstSongEln.setAttribute("class", "list-group-item list-group-item-action active show")
     listFirstSongEln.setAttribute("aria-selected", "true")
     document.querySelector(`#${songListActiveElm.song_name}`).setAttribute('class', 'tab-pane fade active show')
