@@ -24,6 +24,7 @@ const config: { [key: string]: Knex.Config } = {
   testing: {
     client: 'postgresql',
     connection: {
+      host: 'postgres',
       database: 'teckyproject_testing',
       user: 'postgres',
       password: 'postgres'

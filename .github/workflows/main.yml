@@ -19,7 +19,6 @@ jobs:
       postgres:
         image: postgres
         env:
-          POSTGRES_HOST: ${{env.POSTGRES_HOST}}
           POSTGRES_DB: ${{env.POSTGRES_DB}}
           POSTGRES_USER: ${{env.POSTGRES_USER}}
           POSTGRES_PASSWORD: ${{env.POSTGRES_PASSWORD}}
@@ -31,8 +30,7 @@ jobs:
       - run: |
           yarn install 
           yarn knex migrate:latest -- testing
-          yarn knex seed:run
-          yarn jest
+          yarn test
   # deploy:
   #   if: github.ref_name == 'production'
   #   runs-on: ubuntu-latest
