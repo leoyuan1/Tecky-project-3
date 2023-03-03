@@ -19,7 +19,6 @@ async function mediapipeInIt() {
         body: JSON.stringify({ mediaId })
     })
     let data = (await res.json()).data[0].pose_data
-    console.log(data)
     benchmark_wb = await loadData(data)
     console.log(benchmark_wb)
     // console.log("benchmark_wb: ", benchmark_wb);
@@ -27,6 +26,7 @@ async function mediapipeInIt() {
 
 mediapipeInIt()
 
+let interval = 0
 export function onResults(results) {
     // Landmark Grid - 3D Coordinations
     // if (!results.poseLandmarks) {
@@ -44,9 +44,15 @@ export function onResults(results) {
         for (let landmark of results.poseLandmarks) {
             inputLmList.push([landmark.visibility, landmark.x, landmark.y])
         }
+        let frame = Math.round(interval / video.duration * benchmark_wb.length)
+        let benchmarkLmList = benchmark_wb[frame]
+        let result;
+        if (Math.round(video.currentTime) == interval) {
+            result = compareData(benchmarkLmList, inputLmList)
+            interval += 1
+            console.log(result)
+        }
 
-        let result = compareData(benchmark_wb, inputLmList)
-        console.log(result)
         // camera_data.push(results.poseLandmarks)
         // console.log(camera_data)
         canvasCtx.save();
@@ -80,7 +86,6 @@ export function onResults(results) {
 
         // Landmark Grid - 3D Coordinations
         // grid.updateLandmarks(results.poseWorldLandmarks);
-        benchmarkFrameCounter += 1
         danceAccuracy(result)
         // console.log("left-wrist: ", results.poseLandmarks[15]);
     }
@@ -116,11 +121,9 @@ async function loadData(filename) {
     console.log(data)
     return data
 }
-let benchmarkFrameCounter = 0
 function compareData(benchmark, input) {
-    console.log(benchmarkFrameCounter)
-    let benchmarkLmList = benchmark[benchmarkFrameCounter]
     // console.log("benchmarkLmList: ", benchmarkLmList);
+    let benchmarkLmList = benchmark
     if (benchmarkLmList.length == 0) {
         return
     }
@@ -149,7 +152,6 @@ function compareData(benchmark, input) {
     let csWholePosture = 0.2 * csRightUpperLimb + 0.2 * csLeftUpperLimb + 0.2 * csRightLowerLimb + 0.2 * csLeftLowerLimb + 0.2 * csCore
     // console.log("csWholePosture: ", csWholePosture);
 
-    benchmarkFrameCounter += 1
     return csWholePosture
 }
 
