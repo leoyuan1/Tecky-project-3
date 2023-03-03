@@ -45,7 +45,7 @@ jobs:
             yarn install
             yarn knex migrate:latest --env production
             yarn knex seed:run
-            forever restart -c 'yarn dev' .
+            forever restart -c 'yarn dev' . 
           host: 44.213.200.188
           username: ubuntu
           key: ${{secrets.SSH_PRIVATE_KEY}}
