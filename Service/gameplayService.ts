@@ -32,7 +32,7 @@ export class GameplayService {
         let id = mediaId
 
         let result = (await this.knex
-            .select('pose_data')
+            .select('pose_data', 'start_time', 'end_time')
             .from('media')
             .where({ id })
         )
