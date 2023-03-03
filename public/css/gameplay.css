@@ -432,3 +432,16 @@ h1.cyberpunk.glitched:before {
     display: flex;
     align-items: center;
 }
+
+/* Body part accuracy */
+.body-part-accuracy{
+    margin-top: 100px;
+}
+
+.csRightUpperLimb-number,
+.csLeftUpperLimb-number,
+.csRightLowerLimb-number,
+.csLeftLowerLimb-number,
+.csCore-number {
+    font-size:20px;
+}

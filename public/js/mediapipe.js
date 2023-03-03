@@ -75,13 +75,13 @@ export function onResults(results) {
             results.image, 0, 0, canvasElement.width, canvasElement.height);
 
         // drawn on top of the existing image.
-        // canvasCtx.globalCompositeOperation = 'source-over';
+        canvasCtx.globalCompositeOperation = 'source-over';
         // Joint 線
-        // drawConnectors(canvasCtx, results.poseLandmarks, POSE_CONNECTIONS,
-        //     { color: '#00FF00', lineWidth: 2 });
+        drawConnectors(canvasCtx, results.poseLandmarks, POSE_CONNECTIONS,
+            { color: '#00FF00', lineWidth: 2 });
         // Pose landmarks 
-        // drawLandmarks(canvasCtx, results.poseLandmarks,
-        //     { color: '#FF0000', lineWidth: 1 });
+        drawLandmarks(canvasCtx, results.poseLandmarks,
+            { color: '#FF0000', lineWidth: 1 });
         canvasCtx.restore();
 
         // Landmark Grid - 3D Coordinations
@@ -151,7 +151,6 @@ function compareData(benchmark, input) {
 
     let csWholePosture = 0.2 * csRightUpperLimb + 0.2 * csLeftUpperLimb + 0.2 * csRightLowerLimb + 0.2 * csLeftLowerLimb + 0.2 * csCore
     // console.log("csWholePosture: ", csWholePosture);
-
     return csWholePosture
 }
 
@@ -231,10 +230,30 @@ function cosineSim(benchmarkPoint, benchmarkAnchor, inputPoint, inputAnchor) {
     }
 }
 
+// Accuracy
 function danceAccuracy(result) {
     let accuracyCounter = document.querySelector('.accuracy-counter')
     let accuracy = (result * 100).toFixed(2)
     accuracyCounter.innerText = `${accuracy}%`
+}
+
+// Body part accuracy
+function bodyAccuracy(RUL, LUL, RLL, LLL, Core) {
+    let csRightUpperLimbNumber = document.querySelector('.csRightUpperLimb-number')
+    let csLeftUpperLimbNumber = document.querySelector('.csLeftUpperLimb-number')
+    let csRightLowerLimbNumber = document.querySelector('.csRightLowerLimb-number')
+    let csLeftLowerLimbNumber = document.querySelector('.csLeftLowerLimb-number')
+    let csCoreNumber = document.querySelector('.csCore-number')
+    let csRightUpperLimbAccuracy = (RUL * 100).toFixed(2)
+    let csLeftUpperLimbAccuracy = (LUL * 100).toFixed(2)
+    let csRightLowerLimbAccuracy = (RLL * 100).toFixed(2)
+    let csLeftLowerLimbAccuracy = (LLL * 100).toFixed(2)
+    let csCoreAccuracy = (Core * 100).toFixed(2)
+    csRightUpperLimbNumber.innerText = `${csRightUpperLimbAccuracy}%`
+    csLeftUpperLimbNumber.innerText = `${csLeftUpperLimbAccuracy}%`
+    csRightLowerLimbNumber.innerText = `${csRightLowerLimbAccuracy}%`
+    csLeftLowerLimbNumber.innerText = `${csLeftLowerLimbAccuracy}%`
+    csCoreNumber.innerText = `${csCoreAccuracy}%`
 }
 
 // Start Menu
