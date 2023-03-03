@@ -8,6 +8,8 @@ const landmarkContainer = document.getElementsByClassName('landmark-grid-contain
 
 const bodyPartList = ["rightArm", "rightForeArm", "rightHand", "leftArm", "leftForeArm", "leftHand", "rightLeg", "rightCalf", "rightFoot", "leftLeg", "leftCalf", "leftFoot", "rightShoulderToHead", "leftShoulderToHead", "rightHipToHead", "leftHipToHead"]
 let benchmark_wb;
+let startTime;
+let endTime;
 async function mediapipeInIt() {
     let mediaId = window.location.search.split('?')[1]
     const res = await fetch(`/get-video-json`, {
@@ -17,8 +19,12 @@ async function mediapipeInIt() {
         },
         body: JSON.stringify({ mediaId })
     })
-    let data = (await res.json()).data[0].pose_data
-    benchmark_wb = await loadData(data)
+    let data = (await res.json()).data[0]
+    let poseData = data.pose_data
+    startTime = data.start_time
+    endTime = data.end_time
+
+    benchmark_wb = await loadData(poseData)
     // console.log(benchmark_wb)
     // console.log("benchmark_wb: ", benchmark_wb);
 }
@@ -32,7 +38,7 @@ export function onResults(results) {
     //     grid.updateLandmarks([]);
     //     return;
     // }
-    if (isStarted == true) {
+    if (isStarted == true && video.currentTime > startTime && video.currentTime < endTime) {
 
         if (!benchmark_wb) return;
         // console.log(benchmark_wb)
