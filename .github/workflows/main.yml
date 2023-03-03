@@ -35,9 +35,9 @@ jobs:
     # needs: testing
     steps:
       - name: ssh to pull latest version
-        uses: fifsky/ssh-action@master
-      with:
-        command: |
+        uses: fifsky/ssh-action@production
+        with:
+          command: |
             cd Tecky-project-3
             git pull
             yarn install
