@@ -43,6 +43,9 @@ let thirdScoreElm = document.querySelector('.score3')
 let firstScore
 let secondScore
 let thirdScore
+let firstName
+let secondName
+let thirdName
 
 async function loadHistoryScore() {
     let mediaId = window.location.search.split('?')[1]
@@ -56,11 +59,11 @@ async function loadHistoryScore() {
     let historyScores = (await res.json()).data
     console.log('historyScores: ', historyScores);
     // Arrange Ranking
-    let firstName = historyScores[0].username
+    firstName = historyScores[0].username
     firstScore = historyScores[0].scores
-    let secondName = historyScores[1].username
+    secondName = historyScores[1].username
     secondScore = historyScores[1].scores
-    let thirdName = historyScores[2].username
+    thirdName = historyScores[2].username
     thirdScore = historyScores[2].scores
     firstNameElm.innerText = firstName
     firstScoreElm.innerText = firstScore
@@ -112,16 +115,22 @@ function updateLeaderboard(score) {
         thirdScoreElm.innerText = secondScore
         secondScoreElm.innerText = firstScore
         firstScoreElm.innerText = score
+        thirdNameElm.innerText = secondName
+        secondNameElm.innerText = firstName
+        firstNameElm.innerText = "DB"
         firstScoreElm.parentElement.classList.add('glitched')
         secondScoreElm.parentElement.classList.remove('glitched')
         thirdScoreElm.parentElement.classList.remove('glitched')
     } else if (score > secondScore) {
         secondScoreElm.innerText = score
         thirdScoreElm.innerText = secondScore
+        secondNameElm.innerText = "DB"
+        thirdNameElm.innerText = secondName
         secondScoreElm.parentElement.classList.add('glitched')
         thirdScoreElm.parentElement.classList.remove('glitched')
     } else if (score > thirdScore) {
         thirdScoreElm.innerText = score
+        thirdNameElm.innerText = "DB"
         thirdScoreElm.parentElement.classList.add('glitched')
     }
 }

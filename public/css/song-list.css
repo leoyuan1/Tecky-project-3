@@ -14,19 +14,21 @@ body {
     z-index: 2;
     font-family: 'Triakis';
     color: var(--light-tone);
-    font-size: 8rem;
+    font-size: 5rem !important;
     position: relative;
 }
 
 .glitch::after {
     content: attr(data-trick);
     position: absolute;
-    left: 0rem;
+    left: 2rem;
     color: var(--light-blue);
     overflow: hidden;
     text-shadow: -0.5rem 0 var(--first-red);
     clip: rect(0, 90rem, 0, 0);
     animation: noise 2s infinite linear alternate-reverse;
+    font-size: 5rem !important;
+
 }
 
 .glitch::before {
@@ -37,6 +39,8 @@ body {
     text-shadow: 0.3rem 0 var(--light-blue);
     clip: rect(0, 90rem, 0, 0);
     animation: noise 4s infinite linear alternate-reverse;
+    font-size: 5rem !important;
+
 }
 
 @-webkit-keyframes noise {

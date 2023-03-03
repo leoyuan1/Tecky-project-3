@@ -245,7 +245,8 @@ canvas {
 }
 
 /* cyberpunk glitch animation for text */
-.cyberpunk-ranking {
+.cyberpunk-ranking,
+.posture {
     font-family: Triakis;
     color: var(--light-tone);
     position: relative;
@@ -256,7 +257,8 @@ canvas {
     margin-top: 15px;
 }
 
-.cyberpunk-ranking:before {
+.cyberpunk-ranking:before,
+.posture:before {
     content: "";
     display: block;
     position: absolute;
@@ -434,14 +436,35 @@ canvas {
 }
 
 /* Body part accuracy */
-.body-part-accuracy{
-    margin-top: 100px;
+.body-part-accuracy-container{
+    position:absolute;
+    top: 20px !important;
+    left: 15px !important;
+    background-color: rgba(27,27,27,0.6);
 }
 
+.csRightLowerLimb,
+.csLeftLowerLimb,
+.csRightUpperLimb,
+.csLeftUpperLimb,
+.csCore,
+.csWholePosture{
+    top:0px !important;
+    left:5px !important;
+}
+
+.csRightUpperLimb > span,
+.csLeftUpperLimb > span,
+.csRightLowerLimb > span,
+.csLeftLowerLimb > span,
+.csCore > span,
+.csWholePosture > span,
 .csRightUpperLimb-number,
 .csLeftUpperLimb-number,
 .csRightLowerLimb-number,
 .csLeftLowerLimb-number,
-.csCore-number {
-    font-size:20px;
+.csCore-number,
+.csWholePosture-number {
+    font-size:16px !important;
+    color: var(--light-tone);
 }

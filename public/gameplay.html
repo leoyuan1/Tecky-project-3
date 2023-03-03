@@ -113,6 +113,34 @@
         <div class="row">
             <div class="col-10">
                 <div class="video-container">
+                    <div class="body-part-accuracy-container">
+                        <div class="body-part-accuracy">
+                            <div class="csRightUpperLimb posture">
+                                <span>csRightUpperLimb: </span>
+                                <span class="csRightUpperLimb-number"></span>
+                            </div>
+                            <div class="csLeftUpperLimb posture">
+                                <span>csLeftUpperLimb: </span>
+                                <span class="csLeftUpperLimb-number"></span>
+                            </div>
+                            <div class="csRightLowerLimb posture">
+                                <span>csRightLowerLimb: </span>
+                                <span class="csRightLowerLimb-number"></span>
+                            </div>
+                            <div class="csLeftLowerLimb posture">
+                                <span>csLeftLowerLimb: </span>
+                                <span class="csLeftLowerLimb-number"></span>
+                            </div>
+                            <div class="csCore posture">
+                                <span>csCore: </span>
+                                <span class="csCore-number"></span>
+                            </div>
+                            <div class="csWholePosture posture">
+                                <span>csWholePosture: </span>
+                                <span class="csWholePosture-number"></span>
+                            </div>
+                        </div>
+                    </div>
                     <video id="demo_video" width="100%" height="auto">
                     </video>
                     <!-- Adjust size -->
@@ -140,28 +168,6 @@
                         <span>No.3</span>
                         <span class="name3"></span>
                         <span class="score3"></span>
-                    </div>
-                    <div class="body-part-accuracy">
-                        <div class="csRightUpperLimb">
-                            <span>csRightUpperLimb: </span>
-                            <span class="csRightUpperLimb-number"></span>
-                        </div>
-                        <div class="csLeftUpperLimb">
-                            <span>csLeftUpperLimb: </span>
-                            <span class="csLeftUpperLimb-number"></span>
-                        </div>
-                        <div class="csRightLowerLimb">
-                            <span>csRightLowerLimb: </span>
-                            <span class="csRightLowerLimb-number"></span>
-                        </div>
-                        <div class="csLeftLowerLimb">
-                            <span>csLeftLowerLimb: </span>
-                            <span class="csLeftLowerLimb-number"></span>
-                        </div>
-                        <div class="csCore">
-                            <span>csCore: </span>
-                            <span class="csCore-number"></span>
-                        </div>
                     </div>
 
                     <div class="score-container">
@@ -210,7 +216,6 @@
     <!-- Mediapipe JS -->
     <script src="https://cdn.jsdelivr.net/gh/nicolaspanel/numjs@0.15.1/dist/numjs.min.js"></script>
     <script type="module" src="/js/mediapipe.js"></script>
-    <!-- <script type="module" src="/js/test.js"></script> -->
 
     <!-- Login JS -->
     <script src="/js/login.js"></script>
