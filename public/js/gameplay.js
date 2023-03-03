@@ -167,3 +167,7 @@ async function loadHistoryScore() {
     rankingElems[2].innerText = `No.3 ${thirdName} ${thirdScore}`
 }
 
+// Score Section
+let scoreElm = document.querySelector('.score-counter')
+
+// Random function for testing

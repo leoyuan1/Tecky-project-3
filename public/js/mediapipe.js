@@ -42,7 +42,7 @@ export function onResults(results) {
     }
 
     let result = compareData(benchmark_wb, inputLmList)
-    console.log(result)
+    // console.log(result)
     // camera_data.push(results.poseLandmarks)
     // console.log(camera_data)
     canvasCtx.save();
@@ -112,7 +112,7 @@ async function loadData(filename) {
 }
 let benchmarkFrameCounter = 0
 function compareData(benchmark, input) {
-    console.log(benchmarkFrameCounter)
+    // console.log(benchmarkFrameCounter)
     let benchmarkLmList = benchmark[benchmarkFrameCounter]
     // console.log("benchmarkLmList: ", benchmarkLmList);
     if (benchmarkLmList.length == 0) {
