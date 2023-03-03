@@ -31,21 +31,22 @@ jobs:
           yarn knex migrate:latest
           yarn knex seed:run
           yarn jest
-  deploy:
-    if: github.ref_name == 'production'
-    runs-on: ubuntu-latest
-    needs: testing
-    steps:
-      - name: ssh to pull latest version
-        uses: fifsky/ssh-action@master
-        with:
-          command: |
-            cd Tecky-project-3
-            git pull
-            yarn install
-            yarn knex migrate:latest
-            yarn knex seed:run
-            forever restart -c 'yarn dev' .
-          host: dancewarrior.me
-          username: ubuntu
-          key: ${{secrets.SSH_PRIVATE_KEY}}
+        working-directory: ./Tecky-project-3
+  # deploy:
+  #   if: github.ref_name == 'production'
+  #   runs-on: ubuntu-latest
+  #   needs: testing
+  #   steps:
+  #     - name: ssh to pull latest version
+  #       uses: fifsky/ssh-action@master
+  #       with:
+  #         command: |
+  #           cd Tecky-project-3
+  #           git pull
+  #           yarn install
+  #           yarn knex migrate:latest
+  #           yarn knex seed:run
+  #           forever restart -c 'yarn dev' .
+  #         host: dancewarrior.me
+  #         username: ubuntu
+  #         key: ${{secrets.SSH_PRIVATE_KEY}}
