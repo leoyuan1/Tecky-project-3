@@ -7,13 +7,15 @@ import { userRoutes } from './userRoutes';
 import { songRoutes } from './songRoutes';
 import { gameplayRoutes } from './gameplayRoutes';
 import { isLoggedIn } from './util/guard';
+import dotenv from 'dotenv'
 
+dotenv.config()
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 const grantExpress = grant.express({
     defaults: {
-        origin: `http://localhost:${PORT}`,
+        origin: `https//dancewarrior.me`,
         transport: "session",
         state: true,
     },
