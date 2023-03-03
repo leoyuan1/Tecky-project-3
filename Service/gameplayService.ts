@@ -36,6 +36,8 @@ export class GameplayService {
             .from('media')
             .where({ id })
         )
+        console.log(result);
+
         return result
     }
 }
