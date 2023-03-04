@@ -1,4 +1,4 @@
-import { pose, onResults, camera, loadVideo, video } from "/js/mediapipe.js"
+import { pose, onResults, camera, loadVideo, video, togglePauseMenu } from "/js/mediapipe.js"
 
 
 // Preloader -- 
@@ -10,6 +10,7 @@ $(window).on('load', async function () {
     $("#preloder").delay(400).fadeOut("slow");
     loadVideo()
     loadHistoryScore()
+    togglePauseMenu()
 });
 
 // Detect FPS

@@ -366,7 +366,7 @@ function restartGame() {
 }
 
 // call pause menu
-function togglePauseMenu() {
+export function togglePauseMenu() {
     console.log("Paused");
     if (pauseMenu.style.display === "none") {
         pauseMenu.style.display = "flex";
