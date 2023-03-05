@@ -1,10 +1,9 @@
 import grant from 'grant'
-import { env } from './env'
 import expressSession from 'express-session'
 
 export const grantExpress = grant.express({
 	defaults: {
-		origin: 'http://localhost:8080',
+		origin: 'https://dancewarrior.me',
 		transport: 'session',
 		state: true
 	},
