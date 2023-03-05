@@ -446,7 +446,9 @@ function gradeCounter(accuracy) {
 }
 
 function updateScore(score) {
-    updateLeaderboard(score)
+    if (isLoggedIn) {
+        updateLeaderboard(score)
+    }
     scoreElm.innerText = `${score}`
 }
 
@@ -509,4 +511,61 @@ export async function loadHistoryScore() {
     secondScoreElm.innerText = secondScore
     thirdNameElm.innerText = thirdName
     thirdScoreElm.innerText = thirdScore
+}
+
+export let user
+export let isLoggedIn = false
+
+// Get session user failed
+// Didn't log in still res.ok = true
+export async function getUserInfo() {
+    let res = await fetch('/session')
+    console.log("res.ok: ", res.ok);
+    console.log("res: ", res);
+    if (res.ok) {
+        user = (await res.json()).user
+        isLoggedIn = true
+        console.log("user: ", user);
+        console.log("isLoggedIn: ", isLoggedIn);
+    }
+}
+
+// update Score if Breaks new record
+async function getUserScore() {
+    let userId = user.id
+    let res = await fetch('/get-user-score', {
+        method: "post",
+        headers: {
+            'Content-type': 'application/json',
+        },
+        body: JSON.stringify({ userId })
+    })
+    let personalScore = (await res.json()).personalScore.scores
+    console.log("personalScore: ", personalScore);
+    if (score > personalScore) {
+        updateUserScore(personalScore)
+    }
+}
+async function updateUserScore(newScore) {
+    let updatedScore = {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            userId: user.id,
+            newScore
+        })
+    }
+
+    let res = await fetch('/update-user-record', updatedScore)
+    let data = res.json()
+    if (res.ok) {
+        console.log(data);
+    }
+}
+
+video.onended = function () {
+    console.log("onended Run");
+    getUserScore()
 }

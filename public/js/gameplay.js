@@ -1,14 +1,8 @@
-import { pose, onResults, camera, loadVideo, video, resetBoard, loadHistoryScore } from "/js/mediapipe.js"
-
-async function getUserInfo() {
-    let res = await fetch('/session')
-    let user = (await res.json()).user
-    console.log("user: ", user);
-}
+import { pose, onResults, camera, loadVideo, resetBoard, loadHistoryScore, getUserInfo } from "/js/mediapipe.js"
 
 // Preloader -- 
 $(window).on('load', async function () {
-    getUserInfo()
+    await getUserInfo()
     await pose.onResults(onResults);
     await camera.start();
     $(".loader").fadeOut();

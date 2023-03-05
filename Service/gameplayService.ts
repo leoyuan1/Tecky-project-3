@@ -3,7 +3,7 @@ import { Knex } from "knex";
 export class GameplayService {
     constructor(private knex: Knex) { }
 
-    async getSongById(mediaId: number) {
+    async getSongById(mediaId: Number) {
         let id = mediaId
         let result = (
             await this.knex
@@ -14,7 +14,7 @@ export class GameplayService {
         return result
     }
 
-    async getHistoryScoresById(mediaId: number) {
+    async getHistoryScoresById(mediaId: Number) {
         let media_id = mediaId
 
         let results = (
@@ -28,7 +28,7 @@ export class GameplayService {
         return results
     }
 
-    async getVideoJsonById(mediaId: number) {
+    async getVideoJsonById(mediaId: Number) {
         let id = mediaId
 
         let result = (await this.knex
@@ -39,5 +39,22 @@ export class GameplayService {
         console.log(result);
 
         return result
+    }
+
+    async getUserScoreById(userId: Number) {
+        let result = (await this.knex
+            .first()
+            .select('scores')
+            .from('scores')
+            .where('user_id', userId))
+        return result
+    }
+
+    async updateUserRecord(userId: string, newScore: Number) {
+        await this.knex('scores')
+            .update({
+                scores: newScore
+            })
+            .where('user_id', userId)
     }
 }
