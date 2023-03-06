@@ -392,7 +392,6 @@ Header section
 .hero-slider .owl-dots {
 	display: flex;
 	justify-content: center;
-	left: 100px;
 	position: relative;
 	max-width: 1146px;
 	margin: -33px auto 0;
@@ -1439,10 +1438,6 @@ Header section
 	.user-panel {
 		display: block;
 		padding: 0%;
-	}
-
-	.hero-slider .hs-item {
-		height: 700px;
 	}
 
 	.hero-slider .hs-text h2 {

@@ -7,7 +7,7 @@ body {
 	position: absolute;
 	width: 35vw;
 	text-align: center;
-	top: 50%;
+	top: 55%;
 	left: 50%;
 	transform: translate(-50%, -40%);
 	background-color: rgba(0, 0, 0, 0.554);
