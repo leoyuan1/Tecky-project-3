@@ -1,4 +1,5 @@
 @import 'main.css';
+
 :root {
 	--yellow-color: #f9f002;
 	--border-color: #8ae66e;
@@ -11,6 +12,10 @@
 
 .input_video {
 	display: none;
+}
+
+#demo_video {
+	object-fit: cover;
 }
 
 /* Start Menu */
@@ -102,6 +107,7 @@
 	display: none;
 	color: var(--light-tone);
 }
+
 /* End of Start Menu */
 
 /* Pause Menu */
@@ -219,6 +225,7 @@
 	transition: color 0.4s linear;
 	transition: border-color 0.4s linear;
 }
+
 /* End of Pause Menu */
 
 canvas {
@@ -667,9 +674,20 @@ canvas {
 	justify-content: center;
 }
 
+#end-menu {
+	width: 100%;
+}
+
+#end-menu > .row > .col-12 {
+	justify-content: center;
+	flex-wrap: wrap;
+	display: flex;
+}
+
 #end-menu li {
 	list-style-type: none;
 }
+
 /* End of End Menu */
 
 /* Grade Effect */
@@ -690,4 +708,22 @@ canvas {
 	animation: fade-inout 1s infinite;
 	width: 200px;
 	justify-content: center;
+}
+.end-container {
+	background: white;
+}
+
+.grade-container {
+	background: white;
+}
+
+.end-menu-icon {
+	background: url(/img/leaderboard_bg5.gif) no-repeat center;
+	position: absolute;
+	height: calc(100vh - 95px);
+	width: inherit;
+	right: 0;
+	color: red;
+	background-color: black;
+	background-position-y: center;
 }

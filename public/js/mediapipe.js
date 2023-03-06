@@ -287,8 +287,16 @@ function bodyAccuracy(RUL, LUL, RLL, LLL, Core) {
 // Start Menu
 const playBtn = document.querySelector(".play-btn");
 const startMenu = document.querySelector("#start-menu");
+const endMenu = document.querySelector("#end-menu-container");
 const fadeElm = document.querySelector('.fade-text');
 export const video = document.querySelector('#demo_video')
+const homeBtn = document.querySelector('.home-btn');
+const endScore = document.querySelector('.end-score');
+const endAccuracy = document.querySelector('.end-accuracy');
+const endPerfectCount = document.querySelector('#perfect-count');
+const endGreatCount = document.querySelector('#great-count');
+const endCoolCount = document.querySelector('#cool-count');
+const endBadCount = document.querySelector('#bad-count');
 
 playBtn.addEventListener("click", playerReady)
 
@@ -305,8 +313,8 @@ function pauseVideo() {
 let isStarted = false
 function startGame() {
     console.log("Run Game Lor")
-    isStarted = true
-    playVideo()
+    isStarted = false
+    // playVideo()
     // Delay the display none
     // Start the video in upcoming seconds
     // run the mediapipe calculation
@@ -315,6 +323,9 @@ function startGame() {
 async function playerReady() {
     fadeElm.style.display = "block"
     playBtn.style.display = "none"
+    // endMenu.style.display = 'none'
+    // test
+    endMenu.style.display = 'flex'
     await fadeOut(fadeElm)
 }
 
@@ -609,4 +620,17 @@ video.onended = function () {
     if (isLoggedIn) {
         getUserScore()
     }
+    endgame()
+    // getUserScore()
+
+}
+
+function endgame() {
+    endMenu.style.display = 'flex'
+    endScore.innerHTML = scoreElm.innerHTML
+    endAccuracy.innerHTML = accuracyElm.innerHTML
+    endPerfectCount.innerHTML = perfectCounter
+    endGreatCount.innerHTML = greatCounter
+    endCoolCount.innerHTML = coolCounter
+    endBadCount.innerHTML = badCounter
 }

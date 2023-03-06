@@ -64,31 +64,43 @@
     <!-- End Game Menu -->
     <div id="end-menu-container">
         <div id="end-menu">
-            <div class="end-container">
-                <div class="end-score-title">Score</div>
-                <div class="end-score">123</div>
-                <div class="end-accuracy-title">Accuracy</div>
-                <div class="end-accuracy">50%</div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="col-2 icon">
+
+                    </div>
+                    <ul class="end-container col-5">
+                        <li>
+                            <span class="end-score-title">Score</span>
+                            <span class="end-score">123</span>
+                        </li>
+                        <li>
+                            <span class="end-accuracy-title">Accuracy</span>
+                            <span class="end-accuracy">50%</span>
+                        </li>
+                    </ul>
+                    <ul class="grade-container col-5">
+                        <li>
+                            <span class="grade-title">Perfect</span>
+                            <span class="grade-counter" id="perfect-count">123</span>
+                        </li>
+                        <li>
+                            <span class="grade-title">Great</span>
+                            <span class="grade-counter" id="great-count">123</span>
+                        </li>
+                        <li>
+                            <span class="grade-title">Cool</span>
+                            <span class="grade-counter" id="cool-count">123</span>
+                        </li>
+                        <li>
+                            <span class="grade-title">Bad</span>
+                            <span class="grade-counter" id="bad-count">123</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <ul class="grade-container">
-                <li>
-                    <span class="grade-title">Perfect</span>
-                    <span class="grade-counter">123</span>
-                </li>
-                <li>
-                    <span class="grade-title">Great</span>
-                    <span class="grade-counter">123</span>
-                </li>
-                <li>
-                    <span class="grade-title">Cool</span>
-                    <span class="grade-counter">123</span>
-                </li>
-                <li>
-                    <span class="grade-title">Bad</span>
-                    <span class="grade-counter">123</span>
-                </li>
-            </ul>
         </div>
+    </div>
     </div>
 
     <!-- Header section -->
@@ -160,7 +172,7 @@
                             </div>
                         </div>
                     </div>
-                    <video id="demo_video" width="100%" height="auto">
+                    <video id="demo_video" width="100%" height="100%">
                     </video>
                     <!-- Adjust size -->
                     <video class="input_video" width="360px" height="202.5px"></video>
