@@ -87,14 +87,14 @@ export function onResults(results) {
         results.image, 0, 0, canvasElement.width, canvasElement.height);
 
     // drawn on top of the existing image.
-    // canvasCtx.globalCompositeOperation = 'source-over';
+    canvasCtx.globalCompositeOperation = 'source-over';
     // Joint 線
-    // drawConnectors(canvasCtx, results.poseLandmarks, POSE_CONNECTIONS,
-    //     { color: '#00FF00', lineWidth: 2 });
+    drawConnectors(canvasCtx, results.poseLandmarks, POSE_CONNECTIONS,
+        { color: '#00FF00', lineWidth: 2 });
     // Pose landmarks 
-    // drawLandmarks(canvasCtx, results.poseLandmarks,
-    //     { color: '#FF0000', lineWidth: 1 });
-    // canvasCtx.restore();
+    drawLandmarks(canvasCtx, results.poseLandmarks,
+        { color: '#FF0000', lineWidth: 1 });
+    canvasCtx.restore();
 
     // Landmark Grid - 3D Coordinations
     // grid.updateLandmarks(results.poseWorldLandmarks);
@@ -287,12 +287,18 @@ function bodyAccuracy(RUL, LUL, RLL, LLL, Core) {
 // Start Menu
 const playBtn = document.querySelector(".play-btn");
 const startMenu = document.querySelector("#start-menu");
+const endMenu = document.querySelector("#end-menu-container");
 const fadeElm = document.querySelector('.fade-text');
-const homeBtn = document.querySelector('.home-btn');
 export const video = document.querySelector('#demo_video')
+const homeBtn = document.querySelector('.home-btn');
+const endScore = document.querySelector('.end-score');
+const endAccuracy = document.querySelector('.end-accuracy');
+const endPerfectCount = document.querySelector('#perfect-count');
+const endGreatCount = document.querySelector('#great-count');
+const endCoolCount = document.querySelector('#cool-count');
+const endBadCount = document.querySelector('#bad-count');
 
 playBtn.addEventListener("click", playerReady)
-homeBtn.addEventListener('click', home)
 
 function playVideo() {
     console.log("video.currentime - play: ", video.currentTime);
@@ -317,6 +323,9 @@ function startGame() {
 async function playerReady() {
     fadeElm.style.display = "block"
     playBtn.style.display = "none"
+    // endMenu.style.display = 'none'
+    // test
+    // endMenu.style.display = 'flex'
     await fadeOut(fadeElm)
 }
 
@@ -371,6 +380,9 @@ function restartGame() {
 export let scoreElm = document.querySelector('.score-counter')
 export let accuracyElm = document.querySelector('.accuracy-counter')
 export function resetBoard() {
+    newRecordElm.style.display = 'none'
+    endMenu.style.display = 'none'
+    effectElm.innerText = ""
     scoreElm.innerText = "0"
     accuracyElm.innerText = "00%"
     perfectCounter = 0
@@ -421,27 +433,30 @@ let thirdScore
 let firstName
 let secondName
 let thirdName
-
+let effectElm = document.querySelector('.grade-effect')
 
 function gradeCounter(accuracy) {
-    console.log("gradeCounter");
     if (accuracy >= 0.90) {
         perfectCounter += 1
         score += 100
-        console.log("perfectCounter: ", perfectCounter);
+        effectElm.innerText = "Perfect"
+        effectElm.style.color = "var(--dark-blue)"
     } else if (accuracy >= 0.66 && accuracy <= 0.89) {
         console.log("Great");
         greatCounter += 1
         score += 80
-        console.log("greatCounter: ", greatCounter);
+        effectElm.innerText = "Great"
+        effectElm.style.color = "var(--light-blue)"
     } else if (accuracy >= 0.40 && accuracy <= 0.65) {
         coolCounter += 1
         score += 60
-        console.log("coolCounter: ", coolCounter);
+        effectElm.innerText = "Cool"
+        effectElm.style.color = "var(--light-tone)"
     } else if (accuracy < 0.40) {
         badCounter += 1
         score += 40
-        console.log("badCounter: ", badCounter);
+        effectElm.innerText = "Bad"
+        effectElm.style.color = "var(--first-red)"
     }
     updateScore(score)
 }
@@ -455,12 +470,12 @@ function updateScore(score) {
 
 // Leaderboard Section
 // Get history score from DB
-export let firstNameElm = document.querySelector('.name1')
-export let firstScoreElm = document.querySelector('.score1')
-export let secondNameElm = document.querySelector('.name2')
-export let secondScoreElm = document.querySelector('.score2')
-export let thirdNameElm = document.querySelector('.name3')
-export let thirdScoreElm = document.querySelector('.score3')
+let firstNameElm = document.querySelector('.name1')
+let firstScoreElm = document.querySelector('.score1')
+let secondNameElm = document.querySelector('.name2')
+let secondScoreElm = document.querySelector('.score2')
+let thirdNameElm = document.querySelector('.name3')
+let thirdScoreElm = document.querySelector('.score3')
 
 function updateLeaderboard(score) {
     let userName = user.username
@@ -547,6 +562,7 @@ export async function getUserInfo() {
 }
 
 // update Score if Breaks new record
+let newRecordElm = document.querySelector('.new-record')
 async function getUserScore() {
     let userId = user.id
     let mediaId = window.location.search.split('?')[1]
@@ -564,11 +580,13 @@ async function getUserScore() {
         let personalScore = result.scores[0].scores
         console.log("personalScore: ", personalScore);
         if (score > personalScore) {
+            newRecordElm.style.display = "flex"
             console.log("Run updateUserScore");
             updateUserScore(score)
         }
     } else if (result.message == 'no result') {
         console.log("Run createUserScore");
+        newRecordElm.style.display = "flex"
         createUserScore(score)
     }
 }
@@ -614,4 +632,37 @@ video.onended = function () {
     if (isLoggedIn) {
         getUserScore()
     }
+    endgame()
 }
+
+let endRank = document.querySelector('#end-game-rank')
+function endgame() {
+    endMenu.style.display = 'flex'
+    endScore.innerHTML = scoreElm.innerHTML
+    endAccuracy.innerHTML = accuracyElm.innerHTML
+    endPerfectCount.innerHTML = perfectCounter
+    endGreatCount.innerHTML = greatCounter
+    endCoolCount.innerHTML = coolCounter
+    endBadCount.innerHTML = badCounter
+    let accuracyForRank = Math.round(historyAccuracy * 100 * 100 / calTime) / 100
+    console.log("accuracyForRank: ", accuracyForRank);
+    if (accuracyForRank >= 90) {
+        console.log("Run S")
+        endRank.innerText = "S"
+    } else if (accuracyForRank < 90 && accuracyForRank >= 0.70) {
+        console.log("Run A")
+        endRank.innerText = "A"
+    } else if (accuracyForRank <= 69 && accuracyForRank >= 40) {
+        console.log("Run B")
+        endRank.innerText = "B"
+    } else if (accuracyForRank < 40) {
+        console.log("Run C")
+        endRank.innerText = "C"
+    }
+}
+
+let endRestartBtn = document.querySelector('#end-restart')
+let endExitBtn = document.querySelector('#end-exit')
+
+endRestartBtn.addEventListener('click', restartGame)
+endExitBtn.addEventListener('click', exitGame)

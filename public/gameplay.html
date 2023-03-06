@@ -64,31 +64,48 @@
     <!-- End Game Menu -->
     <div id="end-menu-container">
         <div id="end-menu">
-            <div class="end-container">
-                <div class="end-score-title">Score</div>
-                <div class="end-score">123</div>
-                <div class="end-accuracy-title">Accuracy</div>
-                <div class="end-accuracy">50%</div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="col-2 icon" id="end-game-rank"></div>
+                    <ul class="end-container col-7">
+                        <li class="end-score-container">
+                            <span class="end-score-title">Score</span>
+                            <span class="new-record">New Record</span>
+                            <span class="end-score">123</span>
+                        </li>
+                        <li class="end-accuracy-container">
+                            <span class="end-accuracy-title">Accuracy</span>
+                            <span class="end-accuracy">50%</span>
+                        </li>
+                        <!-- <li id="restart-btn"><i class="bi bi-arrow-clockwise"></i><span>Restart</span></li>
+                        <li id="exit-btn"><i class="bi bi-box-arrow-right"></i><span>Exit Game</span></li> -->
+                    </ul>
+                    <ul class="grade-container col-3">
+                        <li class="grade-subcontainer">
+                            <div class="grade-title" id="perfect-grade">Perfect</div>
+                            <span class="grade-counter" id="perfect-count">123</span>
+                        </li>
+                        <li class="grade-subcontainer">
+                            <div class="grade-title" id="great-grade">Great</div>
+                            <span class="grade-counter" id="great-count">123</span>
+                        </li>
+                        <li class="grade-subcontainer">
+                            <div class="grade-title" id="cool-grade">Cool</div>
+                            <span class="grade-counter" id="cool-count">123</span>
+                        </li>
+                        <li class="grade-subcontainer">
+                            <div class="grade-title" id="bad-grade">Bad</div>
+                            <span class="grade-counter" id="bad-count">123</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="button-container">
+                    <div id="end-restart"><i class="bi bi-arrow-clockwise"></i><span>Restart</span></div>
+                    <div id="end-exit"><i class="bi bi-box-arrow-right"></i><span>Exit Game</span></div>
+                </div>
             </div>
-            <ul class="grade-container">
-                <li>
-                    <span class="grade-title">Perfect</span>
-                    <span class="grade-counter">123</span>
-                </li>
-                <li>
-                    <span class="grade-title">Great</span>
-                    <span class="grade-counter">123</span>
-                </li>
-                <li>
-                    <span class="grade-title">Cool</span>
-                    <span class="grade-counter">123</span>
-                </li>
-                <li>
-                    <span class="grade-title">Bad</span>
-                    <span class="grade-counter">123</span>
-                </li>
-            </ul>
         </div>
+    </div>
     </div>
 
     <!-- Header section -->
@@ -188,7 +205,9 @@
                         <span class="name3"></span>
                         <span class="score3"></span>
                     </div>
-
+                    <div class="grade-effect-container">
+                        <div class="grade-effect"></div>
+                    </div>
                     <div class="score-container">
                         <div class="accuracy-container cyberpunk inverse">
                             <span class="container-title">Accuracy: </span>
