@@ -4,7 +4,8 @@ import { Knex } from "knex";
 export class UserService {
     constructor(private knex: Knex) { }
 
-    async getUserByEmail(userEmail: string) {
+    async getUserByEmail(userEmail: string = "") {
+        console.log("getUserByEmail : ", userEmail)
         let foundUser = (await this.knex.raw(`select * from users where email = ?`, [userEmail])).rows[0]
         return foundUser
     }
