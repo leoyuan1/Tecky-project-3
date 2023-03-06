@@ -62,42 +62,43 @@ export function onResults(results) {
             }
         }
 
-        // camera_data.push(results.poseLandmarks)
-        // console.log(camera_data)
-        canvasCtx.save();
-        canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
 
-        // 綠點 - Segmentation Mask
-        // canvasCtx.drawImage(results.segmentationMask, 0, 0,
-        //     canvasElement.width, canvasElement.height);
-
-        // Only overwrite existing pixels.
-        // source-in = Only the parts of the new image that overlap with the existing image are drawn.
-        canvasCtx.globalCompositeOperation = 'source-in';
-        // Red
-        canvasCtx.fillStyle = '#FF0000';
-        canvasCtx.fillRect(0, 0, canvasElement.width, canvasElement.height);
-
-        // The existing image is drawn on top of the new image, but only where the two images overlap
-        canvasCtx.globalCompositeOperation = 'destination-atop';
-        canvasCtx.drawImage(
-            results.image, 0, 0, canvasElement.width, canvasElement.height);
-
-        // drawn on top of the existing image.
-        canvasCtx.globalCompositeOperation = 'source-over';
-        // Joint 線
-        drawConnectors(canvasCtx, results.poseLandmarks, POSE_CONNECTIONS,
-            { color: '#00FF00', lineWidth: 2 });
-        // Pose landmarks 
-        drawLandmarks(canvasCtx, results.poseLandmarks,
-            { color: '#FF0000', lineWidth: 1 });
-        canvasCtx.restore();
-
-        // Landmark Grid - 3D Coordinations
-        // grid.updateLandmarks(results.poseWorldLandmarks);
-        // console.log("left-wrist: ", results.poseLandmarks[15]);
         interval = Math.round(video.currentTime) + 1
     }
+    // camera_data.push(results.poseLandmarks)
+    // console.log(camera_data)
+    canvasCtx.save();
+    canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+
+    // 綠點 - Segmentation Mask
+    // canvasCtx.drawImage(results.segmentationMask, 0, 0,
+    //     canvasElement.width, canvasElement.height);
+
+    // Only overwrite existing pixels.
+    // source-in = Only the parts of the new image that overlap with the existing image are drawn.
+    canvasCtx.globalCompositeOperation = 'source-in';
+    // Red
+    canvasCtx.fillStyle = '#FF0000';
+    canvasCtx.fillRect(0, 0, canvasElement.width, canvasElement.height);
+
+    // The existing image is drawn on top of the new image, but only where the two images overlap
+    canvasCtx.globalCompositeOperation = 'destination-atop';
+    canvasCtx.drawImage(
+        results.image, 0, 0, canvasElement.width, canvasElement.height);
+
+    // drawn on top of the existing image.
+    // canvasCtx.globalCompositeOperation = 'source-over';
+    // Joint 線
+    // drawConnectors(canvasCtx, results.poseLandmarks, POSE_CONNECTIONS,
+    //     { color: '#00FF00', lineWidth: 2 });
+    // Pose landmarks 
+    // drawLandmarks(canvasCtx, results.poseLandmarks,
+    //     { color: '#FF0000', lineWidth: 1 });
+    // canvasCtx.restore();
+
+    // Landmark Grid - 3D Coordinations
+    // grid.updateLandmarks(results.poseWorldLandmarks);
+    // console.log("left-wrist: ", results.poseLandmarks[15]);
 }
 
 export const pose = new Pose({
@@ -462,28 +463,46 @@ export let thirdNameElm = document.querySelector('.name3')
 export let thirdScoreElm = document.querySelector('.score3')
 
 function updateLeaderboard(score) {
+    let userName = user.username
     if (score > firstScore) {
-        thirdScoreElm.innerText = secondScore
-        secondScoreElm.innerText = firstScore
-        firstScoreElm.innerText = score
-        thirdNameElm.innerText = secondName
-        secondNameElm.innerText = firstName
-        // Amend to user
-        firstNameElm.innerText = "DB"
-        firstScoreElm.parentElement.classList.add('glitched')
-        secondScoreElm.parentElement.classList.remove('glitched')
-        thirdScoreElm.parentElement.classList.remove('glitched')
+        if (userName != firstName) {
+            thirdScoreElm.innerText = secondScore
+            secondScoreElm.innerText = firstScore
+            firstScoreElm.innerText = score
+            thirdNameElm.innerText = secondName
+            secondNameElm.innerText = firstName
+            firstNameElm.innerText = userName
+            firstScoreElm.parentElement.classList.add('glitched')
+            secondScoreElm.parentElement.classList.remove('glitched')
+            thirdScoreElm.parentElement.classList.remove('glitched')
+        } else if (userName = firstName) {
+            firstScoreElm.innerText = score
+            firstScoreElm.parentElement.classList.add('glitched')
+            secondScoreElm.parentElement.classList.remove('glitched')
+            thirdScoreElm.parentElement.classList.remove('glitched')
+        }
     } else if (score > secondScore) {
-        secondScoreElm.innerText = score
-        thirdScoreElm.innerText = secondScore
-        secondNameElm.innerText = "DB"
-        thirdNameElm.innerText = secondName
-        secondScoreElm.parentElement.classList.add('glitched')
-        thirdScoreElm.parentElement.classList.remove('glitched')
+        if (userName != firstName && userName != secondName) {
+            secondScoreElm.innerText = score
+            thirdScoreElm.innerText = secondScore
+            secondNameElm.innerText = userName
+            thirdNameElm.innerText = secondName
+            secondScoreElm.parentElement.classList.add('glitched')
+            thirdScoreElm.parentElement.classList.remove('glitched')
+        } else if (userName == secondName) {
+            secondScoreElm.innerText = score
+            secondScoreElm.parentElement.classList.add('glitched')
+            thirdScoreElm.parentElement.classList.remove('glitched')
+        }
     } else if (score > thirdScore) {
-        thirdScoreElm.innerText = score
-        thirdNameElm.innerText = "DB"
-        thirdScoreElm.parentElement.classList.add('glitched')
+        if (userName != firstName && userName != secondName && userName != thirdName) {
+            thirdScoreElm.innerText = score
+            thirdNameElm.innerText = userName
+            thirdScoreElm.parentElement.classList.add('glitched')
+        } else if (userName == thirdName) {
+            thirdScoreElm.innerText = score
+            thirdScoreElm.parentElement.classList.add('glitched')
+        }
     }
 }
 
@@ -538,12 +557,20 @@ async function getUserScore() {
         },
         body: JSON.stringify({ userId, mediaId })
     })
-    let personalScore = (await res.json()).personalScore.scores
-    console.log("personalScore: ", personalScore);
-    if (score > personalScore) {
-        updateUserScore(personalScore)
+    let result = (await res.json())
+    console.log("result: ", result);
+    if (result.message == 'success') {
+
+        let personalScore = result.scores[0].scores
+        console.log("personalScore: ", personalScore);
+        if (score > personalScore) {
+            console.log("Run updateUserScore");
+            updateUserScore(score)
+        }
+    } else if (result.message == 'no result') {
+        console.log("Run createUserScore");
+        createUserScore(score)
     }
-    // If no personal record -> POST API for create scores
 }
 async function updateUserScore(newScore) {
     let mediaId = window.location.search.split('?')[1]
@@ -560,13 +587,31 @@ async function updateUserScore(newScore) {
     }
 
     let res = await fetch('/update-user-record', updatedScore)
-    let data = res.json()
     if (res.ok) {
+        let data = await res.json()
         console.log(data);
     }
 }
 
+async function createUserScore(score) {
+    let userId = user.id
+    let mediaId = window.location.search.split('?')[1]
+    console.log("userId: ", userId);
+    console.log("mediaId: ", mediaId);
+    let res = await fetch(`/create-user-score`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userId, mediaId, score })
+    })
+    let result = await res.json()
+    console.log("createUserScore - result: ", result);
+}
+
 video.onended = function () {
     console.log("onended Run");
-    getUserScore()
+    if (isLoggedIn) {
+        getUserScore()
+    }
 }
