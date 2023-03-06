@@ -330,7 +330,7 @@ async function fadeOut(element) {
 function home() {
     console.log("Home");
     // Redirect back to songlist
-    window.location.href = "http://localhost:8080/song-list.html"
+    window.location.href = "/song-list.html"
 }
 
 
@@ -353,7 +353,7 @@ $(document).keyup(function (e) {
 function exitGame() {
     console.log("Exit");
     // Redirect back to songlist page
-    window.location.href = "http://localhost:8080/song-list.html"
+    window.location.href = "/song-list.html"
 }
 
 function restartGame() {

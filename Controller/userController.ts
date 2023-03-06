@@ -121,7 +121,6 @@ export class UserController {
             }
         });
         let result = await fetchRes.json();
-        console.log(result);
         let userEmail = result.email
         let hashedPassword = await hashPassword(crypto.randomUUID())
         let userName = result.name
