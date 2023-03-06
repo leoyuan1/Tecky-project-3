@@ -38,19 +38,19 @@ async function getRanking() {
             if (counter % 3 == 0) {
                 html += `
                 <div class="nt-item">
-                <span class="new">${rankingTopOne.song_name}</span> User: ${rankingTopOne.username}
+                <span class="new">${rankingTopOne.song_name}</span>${rankingTopOne.username}
             </div>`
                 counter++
             } else if (counter % 3 == 1) {
                 html += `
                 <div class="nt-item">
-                <span class="strategy">${rankingTopOne.song_name}</span>User: ${rankingTopOne.username}
+                <span class="strategy">${rankingTopOne.song_name}</span>${rankingTopOne.username}
             </div>`
                 counter++
             } else if (counter % 3 == 2) {
                 html += `
                 <div class="nt-item">
-                <span class="racing">${rankingTopOne.song_name}</span>User: ${rankingTopOne.username}
+                <span class="racing">${rankingTopOne.song_name}</span>${rankingTopOne.username}
             </div>`
                 counter++
             }
