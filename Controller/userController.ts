@@ -5,6 +5,7 @@ import { userFormidablePromise } from "../util/formidable"
 import { logger } from "../util/logger"
 import crypto from "crypto"
 import { User } from "../util/session"
+import fetch from 'cross-fetch';
 
 declare module "express-session" {
     interface SessionData {
@@ -114,7 +115,10 @@ export class UserController {
         }
     }
     loginGoogle = async (req: express.Request, res: express.Response) => {
+        console.log("req.session: ", req.session)
         const accessToken = req.session?.['grant'].response.access_token;
+        console.log("accessToken: ", accessToken)
+
         const fetchRes = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
             method: "get",
             headers: {
@@ -122,7 +126,6 @@ export class UserController {
             }
         });
         let result = await fetchRes.json();
-        console.log(result);
         let userEmail = result.email
         let hashedPassword = await hashPassword(crypto.randomUUID())
         let userName = result.name
