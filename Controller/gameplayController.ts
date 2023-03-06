@@ -65,10 +65,18 @@ export class GameplayController {
         try {
             let { userId, mediaId } = req.body
 
-            let personalScore = await this.gameplayService.getUserScoreById(userId, mediaId)
-            res.json({
-                personalScore
-            })
+            let scores = (await this.gameplayService.getUserScoreById(userId, mediaId))
+            console.log("scores: ", scores);
+            if (scores == "") {
+                res.json({
+                    message: 'no result'
+                })
+            } else {
+                res.json({
+                    message: 'success',
+                    scores
+                })
+            }
         } catch (error) {
             logger.error(error)
             res.status(500).json({
@@ -89,8 +97,25 @@ export class GameplayController {
         } catch (error) {
             logger.error(error)
             res.status(500).json({
-                message: '[GPS005] - Server error'
+                message: '[GPS005] - Server Error'
             })
         }
+    }
+
+    createUserRecord = async (req: express.Request, res: express.Response) => {
+        try {
+            let userId = req.body.userId
+            let mediaId = req.body.mediaId
+            let score = req.body.score
+
+            await this.gameplayService.createUserRecord(userId, mediaId, score)
+            res.json({ message: 'OK' })
+        } catch (error) {
+            logger.error(error)
+            res.status(500).json({
+                message: '[GPS006] - Server Error'
+            })
+        }
+
     }
 }

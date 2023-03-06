@@ -13,3 +13,4 @@ gameplayRoutes.post('/get-history-scores', gameplayController.getHistoryScoresBy
 gameplayRoutes.post('/get-video-json', gameplayController.getVideoJsonById)
 gameplayRoutes.post('/get-user-score', gameplayController.getUserScoreById)
 gameplayRoutes.put('/update-user-record', gameplayController.updateUserRecord)
+gameplayRoutes.post('/create-user-score', gameplayController.createUserRecord)
