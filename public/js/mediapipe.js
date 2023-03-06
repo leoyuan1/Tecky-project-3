@@ -613,11 +613,9 @@ async function createUserScore(score) {
 
 video.onended = function () {
     console.log("onended Run");
-<<<<<<< HEAD
     if (isLoggedIn) {
         getUserScore()
     }
-=======
     endgame()
     // getUserScore()
 
@@ -625,5 +623,4 @@ video.onended = function () {
 
 function endgame() {
     endMenu.style.display = 'block'
->>>>>>> james
 }
