@@ -1,3 +1,8 @@
+body {
+	background: url(/img/gradient-collage-metaverse-concept_23-2149391493.avif);
+	background-size: cover;
+}
+
 .content-container {
 	position: absolute;
 	width: 35vw;
