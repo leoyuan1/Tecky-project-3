@@ -58,6 +58,7 @@ export function onResults(results) {
             console.log(interval)
             if (result) {
                 danceAccuracy(result)
+                gradeCounter(result)
             }
         }
 
@@ -361,12 +362,25 @@ function restartGame() {
     pauseMenu.style.display = 'none'
     video.currentTime = '0'
     startMenu.style.display = 'flex'
+    resetBoard()
     playerReady()
     // reset score & calculation
 }
 
+export let scoreElm = document.querySelector('.score-counter')
+export let accuracyElm = document.querySelector('.accuracy-counter')
+export function resetBoard() {
+    scoreElm.innerText = "0"
+    accuracyElm.innerText = "00%"
+    perfectCounter = 0
+    greatCounter = 0
+    coolCounter = 0
+    badCounter = 0
+    score = 0
+}
+
 // call pause menu
-function togglePauseMenu() {
+export function togglePauseMenu() {
     console.log("Paused");
     if (pauseMenu.style.display === "none") {
         pauseMenu.style.display = "flex";
@@ -392,4 +406,167 @@ export async function loadVideo() {
     video.innerHTML = `
     <source src = "${videoPath}" type = "video/mp4">
     `
+}
+
+// grade counter
+let perfectCounter = 0
+let greatCounter = 0
+let coolCounter = 0
+let badCounter = 0
+let score = 0
+let firstScore
+let secondScore
+let thirdScore
+let firstName
+let secondName
+let thirdName
+
+
+function gradeCounter(accuracy) {
+    console.log("gradeCounter");
+    if (accuracy >= 0.90) {
+        perfectCounter += 1
+        score += 100
+        console.log("perfectCounter: ", perfectCounter);
+    } else if (accuracy >= 0.66 && accuracy <= 0.89) {
+        console.log("Great");
+        greatCounter += 1
+        score += 80
+        console.log("greatCounter: ", greatCounter);
+    } else if (accuracy >= 0.40 && accuracy <= 0.65) {
+        coolCounter += 1
+        score += 60
+        console.log("coolCounter: ", coolCounter);
+    } else if (accuracy < 0.40) {
+        badCounter += 1
+        score += 40
+        console.log("badCounter: ", badCounter);
+    }
+    updateScore(score)
+}
+
+function updateScore(score) {
+    if (isLoggedIn) {
+        updateLeaderboard(score)
+    }
+    scoreElm.innerText = `${score}`
+}
+
+// Leaderboard Section
+// Get history score from DB
+export let firstNameElm = document.querySelector('.name1')
+export let firstScoreElm = document.querySelector('.score1')
+export let secondNameElm = document.querySelector('.name2')
+export let secondScoreElm = document.querySelector('.score2')
+export let thirdNameElm = document.querySelector('.name3')
+export let thirdScoreElm = document.querySelector('.score3')
+
+function updateLeaderboard(score) {
+    if (score > firstScore) {
+        thirdScoreElm.innerText = secondScore
+        secondScoreElm.innerText = firstScore
+        firstScoreElm.innerText = score
+        thirdNameElm.innerText = secondName
+        secondNameElm.innerText = firstName
+        // Amend to user
+        firstNameElm.innerText = "DB"
+        firstScoreElm.parentElement.classList.add('glitched')
+        secondScoreElm.parentElement.classList.remove('glitched')
+        thirdScoreElm.parentElement.classList.remove('glitched')
+    } else if (score > secondScore) {
+        secondScoreElm.innerText = score
+        thirdScoreElm.innerText = secondScore
+        secondNameElm.innerText = "DB"
+        thirdNameElm.innerText = secondName
+        secondScoreElm.parentElement.classList.add('glitched')
+        thirdScoreElm.parentElement.classList.remove('glitched')
+    } else if (score > thirdScore) {
+        thirdScoreElm.innerText = score
+        thirdNameElm.innerText = "DB"
+        thirdScoreElm.parentElement.classList.add('glitched')
+    }
+}
+
+export async function loadHistoryScore() {
+    let mediaId = window.location.search.split('?')[1]
+    let res = await fetch(`/get-history-scores`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ mediaId })
+    })
+    let historyScores = (await res.json()).data
+    console.log('historyScores: ', historyScores);
+    // Arrange Ranking
+    firstName = historyScores[0].username
+    firstScore = historyScores[0].scores
+    secondName = historyScores[1].username
+    secondScore = historyScores[1].scores
+    thirdName = historyScores[2].username
+    thirdScore = historyScores[2].scores
+    firstNameElm.innerText = firstName
+    firstScoreElm.innerText = firstScore
+    secondNameElm.innerText = secondName
+    secondScoreElm.innerText = secondScore
+    thirdNameElm.innerText = thirdName
+    thirdScoreElm.innerText = thirdScore
+}
+
+export let user
+export let isLoggedIn = false
+
+export async function getUserInfo() {
+    let res = await fetch('/session')
+    let result = await res.json()
+    if (result.message != 'no session data') {
+        user = result.user
+        isLoggedIn = true
+        console.log("user: ", user);
+        console.log("isLoggedIn: ", isLoggedIn);
+    }
+}
+
+// update Score if Breaks new record
+async function getUserScore() {
+    let userId = user.id
+    let mediaId = window.location.search.split('?')[1]
+    let res = await fetch('/get-user-score', {
+        method: "post",
+        headers: {
+            'Content-type': 'application/json',
+        },
+        body: JSON.stringify({ userId, mediaId })
+    })
+    let personalScore = (await res.json()).personalScore.scores
+    console.log("personalScore: ", personalScore);
+    if (score > personalScore) {
+        updateUserScore(personalScore)
+    }
+    // If no personal record -> POST API for create scores
+}
+async function updateUserScore(newScore) {
+    let mediaId = window.location.search.split('?')[1]
+    let updatedScore = {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            userId: user.id,
+            mediaId,
+            newScore
+        })
+    }
+
+    let res = await fetch('/update-user-record', updatedScore)
+    let data = res.json()
+    if (res.ok) {
+        console.log(data);
+    }
+}
+
+video.onended = function () {
+    console.log("onended Run");
+    getUserScore()
 }

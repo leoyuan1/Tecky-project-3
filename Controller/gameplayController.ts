@@ -60,4 +60,37 @@ export class GameplayController {
             })
         }
     }
+
+    getUserScoreById = async (req: express.Request, res: express.Response) => {
+        try {
+            let { userId, mediaId } = req.body
+
+            let personalScore = await this.gameplayService.getUserScoreById(userId, mediaId)
+            res.json({
+                personalScore
+            })
+        } catch (error) {
+            logger.error(error)
+            res.status(500).json({
+                message: '[GPS004] - Server Error'
+            })
+        }
+    }
+
+    updateUserRecord = async (req: express.Request, res: express.Response) => {
+        try {
+            let userId = req.body.userId
+            let mediaId = req.body.mediaId
+            let newScore = req.body.newScore
+
+            await this.gameplayService.updateUserRecord(userId, mediaId, newScore)
+
+            res.json({ message: 'ok' })
+        } catch (error) {
+            logger.error(error)
+            res.status(500).json({
+                message: '[GPS005] - Server error'
+            })
+        }
+    }
 }
