@@ -1,4 +1,5 @@
 @import 'main.css';
+
 :root {
 	--yellow-color: #f9f002;
 	--border-color: #8ae66e;
@@ -11,6 +12,10 @@
 
 .input_video {
 	display: none;
+}
+
+#demo_video {
+	object-fit: cover;
 }
 
 /* Start Menu */
@@ -55,13 +60,11 @@
 	content: 'START';
 	display: block;
 	position: absolute;
-	background: linear-gradient(
-		45deg,
-		transparent 3%,
-		var(--light-blue) 3%,
-		var(--light-blue) 5%,
-		var(--first-red) 5%
-	);
+	background: linear-gradient(45deg,
+			transparent 3%,
+			var(--light-blue) 3%,
+			var(--light-blue) 5%,
+			var(--first-red) 5%);
 	text-shadow: -3px -3px 0px #f8f005, 3px 3px 0px var(--light-blue);
 	clip-path: var(--slice-0);
 }
@@ -102,6 +105,7 @@
 	display: none;
 	color: var(--light-tone);
 }
+
 /* End of Start Menu */
 
 /* Pause Menu */
@@ -120,19 +124,15 @@
 
 #pause-menu {
 	display: inline-block;
-	background: repeating-linear-gradient(
-			to bottom,
+	background: repeating-linear-gradient(to bottom,
 			transparent 0%,
 			var(--light-scanline) 1px,
 			var(--light-scanline) 4px,
 			var(--light-scanline) 5px,
-			transparent 0.5%
-		),
-		repeating-linear-gradient(
-			to left,
+			transparent 0.5%),
+		repeating-linear-gradient(to left,
 			var(--black-scanline),
-			var(--black-scanline) 100%
-		);
+			var(--black-scanline) 100%);
 	margin: 5px 10px 5px 10px;
 	border-radius: 5%;
 	padding-top: 20px;
@@ -152,7 +152,7 @@
 	text-shadow: var(--first-red) 2px 3px 0px;
 }
 
-#pause-menu li > i {
+#pause-menu li>i {
 	padding-right: 15px;
 }
 
@@ -219,6 +219,7 @@
 	transition: color 0.4s linear;
 	transition: border-color 0.4s linear;
 }
+
 /* End of Pause Menu */
 
 canvas {
@@ -273,13 +274,11 @@ canvas {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background: linear-gradient(
-		45deg,
-		transparent 3%,
-		var(--light-blue) 3%,
-		var(--light-blue) 5%,
-		var(--light-red) 5%
-	);
+	background: linear-gradient(45deg,
+			transparent 3%,
+			var(--light-blue) 3%,
+			var(--light-blue) 5%,
+			var(--light-red) 5%);
 	text-shadow: -3px -3px 0px #f8f005, 3px 3px 0px var(--light-blue);
 	clip-path: var(--slice-0);
 }
@@ -369,16 +368,14 @@ canvas {
 	width: 95%;
 	height: 10px;
 	background-color: var(--dark-blue);
-	clip-path: polygon(
-		0px 0px,
-		85px 0px,
-		90px 5px,
-		100% 5px,
-		100% 6px,
-		85px 6px,
-		80px 10px,
-		0px 10px
-	);
+	clip-path: polygon(0px 0px,
+			85px 0px,
+			90px 5px,
+			100% 5px,
+			100% 6px,
+			85px 6px,
+			80px 10px,
+			0px 10px);
 }
 
 /* glitch animation */
@@ -428,96 +425,84 @@ canvas {
 	0% {
 		left: -4px;
 		transform: skew(-20deg);
-		clip-path: polygon(
-			0px 0px,
-			85px 0px,
-			90px 5px,
-			100% 5px,
-			100% 6px,
-			85px 6px,
-			80px 10px,
-			0px 10px
-		);
+		clip-path: polygon(0px 0px,
+				85px 0px,
+				90px 5px,
+				100% 5px,
+				100% 6px,
+				85px 6px,
+				80px 10px,
+				0px 10px);
 	}
 
 	11% {
 		left: 2px;
 		transform: skew(0deg);
-		clip-path: polygon(
-			0px 0px,
-			85px 0px,
-			90px 5px,
-			100% 5px,
-			100% 6px,
-			85px 6px,
-			80px 10px,
-			0px 10px
-		);
+		clip-path: polygon(0px 0px,
+				85px 0px,
+				90px 5px,
+				100% 5px,
+				100% 6px,
+				85px 6px,
+				80px 10px,
+				0px 10px);
 	}
 
 	50% {
 		transform: skew(0deg);
-		clip-path: polygon(
-			0px 0px,
-			85px 0px,
-			90px 5px,
-			100% 5px,
-			100% 6px,
-			85px 6px,
-			80px 10px,
-			0px 10px
-		);
+		clip-path: polygon(0px 0px,
+				85px 0px,
+				90px 5px,
+				100% 5px,
+				100% 6px,
+				85px 6px,
+				80px 10px,
+				0px 10px);
 	}
 
 	51% {
 		transform: skew(0deg);
-		clip-path: polygon(
-			0px 0px,
-			85px 0px,
-			90px 5px,
-			100% 5px,
-			40% 5px,
-			calc(40% - 30px) 0px,
-			calc(40% + 30px) 0px,
-			calc(45% - 15px) 5px,
-			100% 5px,
-			100% 6px,
-			calc(45% - 14px) 6px,
-			calc(40% + 29px) 1px,
-			calc(40% - 29px) 1px,
-			calc(40% + 1px) 6px,
-			85px 6px,
-			80px 10px,
-			0px 10px
-		);
+		clip-path: polygon(0px 0px,
+				85px 0px,
+				90px 5px,
+				100% 5px,
+				40% 5px,
+				calc(40% - 30px) 0px,
+				calc(40% + 30px) 0px,
+				calc(45% - 15px) 5px,
+				100% 5px,
+				100% 6px,
+				calc(45% - 14px) 6px,
+				calc(40% + 29px) 1px,
+				calc(40% - 29px) 1px,
+				calc(40% + 1px) 6px,
+				85px 6px,
+				80px 10px,
+				0px 10px);
 	}
 
 	60% {
 		transform: skew(0deg);
-		clip-path: polygon(
-			0px 0px,
-			85px 0px,
-			90px 5px,
-			100% 5px,
-			100% 6px,
-			85px 6px,
-			80px 10px,
-			0px 10px
-		);
+		clip-path: polygon(0px 0px,
+				85px 0px,
+				90px 5px,
+				100% 5px,
+				100% 6px,
+				85px 6px,
+				80px 10px,
+				0px 10px);
 	}
 
 	100% {
 		transform: skew(0deg);
-		clip-path: polygon(
-			0px 0px,
-			85px 0px,
-			90px 5px,
-			100% 5px,
-			100% 6px,
-			85px 6px,
-			80px 10px,
-			0px 10px
-		);
+		clip-path: polygon(0px 0px,
+				85px 0px,
+				90px 5px,
+				100% 5px,
+				100% 6px,
+				85px 6px,
+				80px 10px,
+				0px 10px);
 	}
 }
 
@@ -536,20 +521,18 @@ canvas {
 	border-left: 5px solid var(--yellow-color);
 	border-bottom: 24px solid var(--yellow-color);
 	background-color: var(--dark-tone);
-	clip-path: polygon(
-		0px 25px,
-		26px 0px,
-		calc(60% - 25px) 0px,
-		60% 25px,
-		100% 25px,
-		100% calc(100% - 10px),
-		calc(100% - 15px) calc(100% - 10px),
-		calc(80% - 10px) calc(100% - 10px),
-		calc(80% - 15px) 100%,
-		80px calc(100% - 0px),
-		65px calc(100% - 15px),
-		0% calc(100% - 15px)
-	);
+	clip-path: polygon(0px 25px,
+			26px 0px,
+			calc(60% - 25px) 0px,
+			60% 25px,
+			100% 25px,
+			100% calc(100% - 10px),
+			calc(100% - 15px) calc(100% - 10px),
+			calc(80% - 10px) calc(100% - 10px),
+			calc(80% - 15px) 100%,
+			80px calc(100% - 0px),
+			65px calc(100% - 15px),
+			0% calc(100% - 15px));
 }
 
 .cyberpunk.inverse {
@@ -637,12 +620,12 @@ canvas {
 	left: 5px !important;
 }
 
-.csRightUpperLimb > span,
-.csLeftUpperLimb > span,
-.csRightLowerLimb > span,
-.csLeftLowerLimb > span,
-.csCore > span,
-.csWholePosture > span,
+.csRightUpperLimb>span,
+.csLeftUpperLimb>span,
+.csRightLowerLimb>span,
+.csLeftLowerLimb>span,
+.csCore>span,
+.csWholePosture>span,
 .csRightUpperLimb-number,
 .csLeftUpperLimb-number,
 .csRightLowerLimb-number,
@@ -670,4 +653,5 @@ canvas {
 #end-menu li {
 	list-style-type: none;
 }
+
 /* End of End Menu */
