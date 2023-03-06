@@ -114,7 +114,10 @@ export class UserController {
         }
     }
     loginGoogle = async (req: express.Request, res: express.Response) => {
+        console.log("req.session: ", req.session)
         const accessToken = req.session?.['grant'].response.access_token;
+        console.log("accessToken: ", accessToken)
+
         const fetchRes = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
             method: "get",
             headers: {
