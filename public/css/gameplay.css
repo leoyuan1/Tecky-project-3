@@ -671,3 +671,23 @@ canvas {
 	list-style-type: none;
 }
 /* End of End Menu */
+
+/* Grade Effect */
+.grade-effect-container {
+	display: flex;
+	padding-left: 18%;
+	width: 200px;
+	height: 40px;
+	margin-top: 78%;
+}
+.grade-effect {
+	text-transform: uppercase;
+	display: flex;
+	font-weight: bold;
+	font-family: pdark;
+	font-size: 34px;
+	text-shadow: 0px 0px 3px var(--red-glow);
+	animation: fade-inout 1s infinite;
+	width: 200px;
+	justify-content: center;
+}

@@ -288,11 +288,9 @@ function bodyAccuracy(RUL, LUL, RLL, LLL, Core) {
 const playBtn = document.querySelector(".play-btn");
 const startMenu = document.querySelector("#start-menu");
 const fadeElm = document.querySelector('.fade-text');
-const homeBtn = document.querySelector('.home-btn');
 export const video = document.querySelector('#demo_video')
 
 playBtn.addEventListener("click", playerReady)
-homeBtn.addEventListener('click', home)
 
 function playVideo() {
     console.log("video.currentime - play: ", video.currentTime);
@@ -329,13 +327,6 @@ async function fadeOut(element) {
     }, 3000)
 }
 
-function home() {
-    console.log("Home");
-    // Redirect back to songlist
-    window.location.href = "http://localhost:8080/song-list.html"
-}
-
-
 // Pause Function
 let pauseMenu = document.querySelector('#pause-menu-container')
 let restartBtn = document.querySelector('#restart-btn')
@@ -371,6 +362,7 @@ function restartGame() {
 export let scoreElm = document.querySelector('.score-counter')
 export let accuracyElm = document.querySelector('.accuracy-counter')
 export function resetBoard() {
+    effectElm.innerText = ""
     scoreElm.innerText = "0"
     accuracyElm.innerText = "00%"
     perfectCounter = 0
@@ -421,27 +413,30 @@ let thirdScore
 let firstName
 let secondName
 let thirdName
-
+let effectElm = document.querySelector('.grade-effect')
 
 function gradeCounter(accuracy) {
-    console.log("gradeCounter");
     if (accuracy >= 0.90) {
         perfectCounter += 1
         score += 100
-        console.log("perfectCounter: ", perfectCounter);
+        effectElm.innerText = "Perfect"
+        effectElm.style.color = "var(--dark-blue)"
     } else if (accuracy >= 0.66 && accuracy <= 0.89) {
         console.log("Great");
         greatCounter += 1
         score += 80
-        console.log("greatCounter: ", greatCounter);
+        effectElm.innerText = "Great"
+        effectElm.style.color = "var(--light-blue)"
     } else if (accuracy >= 0.40 && accuracy <= 0.65) {
         coolCounter += 1
         score += 60
-        console.log("coolCounter: ", coolCounter);
+        effectElm.innerText = "Cool"
+        effectElm.style.color = "var(--light-tone)"
     } else if (accuracy < 0.40) {
         badCounter += 1
         score += 40
-        console.log("badCounter: ", badCounter);
+        effectElm.innerText = "Bad"
+        effectElm.style.color = "var(--first-red)"
     }
     updateScore(score)
 }
@@ -455,12 +450,12 @@ function updateScore(score) {
 
 // Leaderboard Section
 // Get history score from DB
-export let firstNameElm = document.querySelector('.name1')
-export let firstScoreElm = document.querySelector('.score1')
-export let secondNameElm = document.querySelector('.name2')
-export let secondScoreElm = document.querySelector('.score2')
-export let thirdNameElm = document.querySelector('.name3')
-export let thirdScoreElm = document.querySelector('.score3')
+let firstNameElm = document.querySelector('.name1')
+let firstScoreElm = document.querySelector('.score1')
+let secondNameElm = document.querySelector('.name2')
+let secondScoreElm = document.querySelector('.score2')
+let thirdNameElm = document.querySelector('.name3')
+let thirdScoreElm = document.querySelector('.score3')
 
 function updateLeaderboard(score) {
     let userName = user.username
