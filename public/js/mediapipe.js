@@ -338,16 +338,12 @@ async function fadeOut(element) {
     }, 3000)
 }
 
-<<<<<<< HEAD
 function home() {
     console.log("Home");
     // Redirect back to songlist
     window.location.href = "/song-list.html"
 }
 
-
-=======
->>>>>>> main
 // Pause Function
 let pauseMenu = document.querySelector('#pause-menu-container')
 let restartBtn = document.querySelector('#restart-btn')
