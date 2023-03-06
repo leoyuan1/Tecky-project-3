@@ -286,6 +286,7 @@ function bodyAccuracy(RUL, LUL, RLL, LLL, Core) {
 // Start Menu
 const playBtn = document.querySelector(".play-btn");
 const startMenu = document.querySelector("#start-menu");
+const endMenu = document.querySelector("#start-menu");
 const fadeElm = document.querySelector('.fade-text');
 const homeBtn = document.querySelector('.home-btn');
 export const video = document.querySelector('#demo_video')
@@ -316,6 +317,7 @@ function startGame() {
 async function playerReady() {
     fadeElm.style.display = "block"
     playBtn.style.display = "none"
+    endMenu.style.display = 'none'
     await fadeOut(fadeElm)
 }
 
@@ -568,5 +570,11 @@ async function updateUserScore(newScore) {
 
 video.onended = function () {
     console.log("onended Run");
-    getUserScore()
+    endgame()
+    // getUserScore()
+
+}
+
+function endgame() {
+    endMenu.style.display = 'block'
 }
