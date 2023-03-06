@@ -145,6 +145,7 @@ ol {
 	border: none;
 	background: var(--light-blue);
 	cursor: pointer;
+	font-family: "Triakis";
 }
 
 .site-btn.btn-sm {
