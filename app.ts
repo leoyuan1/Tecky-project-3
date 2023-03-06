@@ -1,4 +1,6 @@
 import express from 'express'
+import dotenv from 'dotenv'
+dotenv.config()
 // import expressSession from 'express-session';
 // import grant from 'grant';
 import { app, PORT, server } from './util/connection-config';
@@ -7,10 +9,9 @@ import { userRoutes } from './userRoutes';
 import { songRoutes } from './songRoutes';
 import { gameplayRoutes } from './gameplayRoutes';
 import { isLoggedIn } from './util/guard';
-import dotenv from 'dotenv'
+
 import { expressSessionConfig, grantExpress } from './util/plugin-config';
 
-dotenv.config()
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 

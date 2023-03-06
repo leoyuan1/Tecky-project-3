@@ -12,7 +12,16 @@ export const grantExpress = grant.express({
 		secret: process.env.GOOGLE_SECRET,
 		scope: ['profile', 'email'],
 		callback: '/login/google'
+		// connect/google/callback
 	}
+})
+
+console.log({
+	key: process.env.GOOGLE_CLIENT_ID,
+	secret: process.env.GOOGLE_SECRET,
+	scope: ['profile', 'email'],
+	callback: '/login/google'
+	// connect/google/callback
 })
 
 export const expressSessionConfig = expressSession({
