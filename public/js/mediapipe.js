@@ -87,14 +87,14 @@ export function onResults(results) {
         results.image, 0, 0, canvasElement.width, canvasElement.height);
 
     // drawn on top of the existing image.
-    // canvasCtx.globalCompositeOperation = 'source-over';
+    canvasCtx.globalCompositeOperation = 'source-over';
     // Joint 線
-    // drawConnectors(canvasCtx, results.poseLandmarks, POSE_CONNECTIONS,
-    //     { color: '#00FF00', lineWidth: 2 });
+    drawConnectors(canvasCtx, results.poseLandmarks, POSE_CONNECTIONS,
+        { color: '#00FF00', lineWidth: 2 });
     // Pose landmarks 
-    // drawLandmarks(canvasCtx, results.poseLandmarks,
-    //     { color: '#FF0000', lineWidth: 1 });
-    // canvasCtx.restore();
+    drawLandmarks(canvasCtx, results.poseLandmarks,
+        { color: '#FF0000', lineWidth: 1 });
+    canvasCtx.restore();
 
     // Landmark Grid - 3D Coordinations
     // grid.updateLandmarks(results.poseWorldLandmarks);
@@ -313,8 +313,8 @@ function pauseVideo() {
 let isStarted = false
 function startGame() {
     console.log("Run Game Lor")
-    isStarted = false
-    // playVideo()
+    isStarted = true
+    playVideo()
     // Delay the display none
     // Start the video in upcoming seconds
     // run the mediapipe calculation
@@ -325,7 +325,7 @@ async function playerReady() {
     playBtn.style.display = "none"
     // endMenu.style.display = 'none'
     // test
-    endMenu.style.display = 'flex'
+    // endMenu.style.display = 'flex'
     await fadeOut(fadeElm)
 }
 
@@ -373,6 +373,8 @@ function restartGame() {
 export let scoreElm = document.querySelector('.score-counter')
 export let accuracyElm = document.querySelector('.accuracy-counter')
 export function resetBoard() {
+    newRecordElm.style.display = 'none'
+    endMenu.style.display = 'none'
     effectElm.innerText = ""
     scoreElm.innerText = "0"
     accuracyElm.innerText = "00%"
@@ -553,6 +555,7 @@ export async function getUserInfo() {
 }
 
 // update Score if Breaks new record
+let newRecordElm = document.querySelector('.new-record')
 async function getUserScore() {
     let userId = user.id
     let mediaId = window.location.search.split('?')[1]
@@ -570,11 +573,13 @@ async function getUserScore() {
         let personalScore = result.scores[0].scores
         console.log("personalScore: ", personalScore);
         if (score > personalScore) {
+            newRecordElm.style.display = "flex"
             console.log("Run updateUserScore");
             updateUserScore(score)
         }
     } else if (result.message == 'no result') {
         console.log("Run createUserScore");
+        newRecordElm.style.display = "flex"
         createUserScore(score)
     }
 }
@@ -621,10 +626,9 @@ video.onended = function () {
         getUserScore()
     }
     endgame()
-    // getUserScore()
-
 }
 
+let endRank = document.querySelector('#end-game-rank')
 function endgame() {
     endMenu.style.display = 'flex'
     endScore.innerHTML = scoreElm.innerHTML
@@ -633,4 +637,25 @@ function endgame() {
     endGreatCount.innerHTML = greatCounter
     endCoolCount.innerHTML = coolCounter
     endBadCount.innerHTML = badCounter
+    let accuracyForRank = Math.round(historyAccuracy * 100 * 100 / calTime) / 100
+    console.log("accuracyForRank: ", accuracyForRank);
+    if (accuracyForRank >= 90) {
+        console.log("Run S")
+        endRank.innerText = "S"
+    } else if (accuracyForRank < 90 && accuracyForRank >= 0.70) {
+        console.log("Run A")
+        endRank.innerText = "A"
+    } else if (accuracyForRank <= 69 && accuracyForRank >= 40) {
+        console.log("Run B")
+        endRank.innerText = "B"
+    } else if (accuracyForRank < 40) {
+        console.log("Run C")
+        endRank.innerText = "C"
+    }
 }
+
+let endRestartBtn = document.querySelector('#end-restart')
+let endExitBtn = document.querySelector('#end-exit')
+
+endRestartBtn.addEventListener('click', restartGame)
+endExitBtn.addEventListener('click', exitGame)
