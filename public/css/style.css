@@ -331,6 +331,7 @@ Header section
 .hero-slider .hs-text {
 	display: table-cell;
 	vertical-align: middle;
+	height: calc(100vh - 97px - 100px);
 }
 
 .hero-slider .hs-text h2 {
