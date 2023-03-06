@@ -58,4 +58,13 @@ export class GameplayService {
             update scores set scores = ? where user_id = ? and media_id = ?
         `, [newScore, userId, mediaId])
     }
+
+
+    async createUserRecord(userId: Number, mediaId: Number, score: Number) {
+        await this.knex('scores').insert({
+            scores: score,
+            user_id: userId,
+            media_id: mediaId
+        })
+    }
 }
