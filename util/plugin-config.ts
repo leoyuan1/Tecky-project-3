@@ -9,19 +9,11 @@ export const grantExpress = grant.express({
 	},
 	google: {
 		key: process.env.GOOGLE_CLIENT_ID,
-		secret: process.env.GOOGLE_SECRET,
+		secret: process.env.GOOGLE_CLIENT_SECRET,
 		scope: ['profile', 'email'],
 		callback: '/login/google'
 		// connect/google/callback
 	}
-})
-
-console.log({
-	key: process.env.GOOGLE_CLIENT_ID,
-	secret: process.env.GOOGLE_SECRET,
-	scope: ['profile', 'email'],
-	callback: '/login/google'
-	// connect/google/callback
 })
 
 export const expressSessionConfig = expressSession({
