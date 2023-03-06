@@ -5,6 +5,7 @@ import { userFormidablePromise } from "../util/formidable"
 import { logger } from "../util/logger"
 import crypto from "crypto"
 import { User } from "../util/session"
+import fetch from 'cross-fetch';
 
 declare module "express-session" {
     interface SessionData {
