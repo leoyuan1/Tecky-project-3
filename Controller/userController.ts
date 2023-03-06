@@ -15,6 +15,7 @@ export class UserController {
     constructor(private userService: UserService) { }
 
     isUser = async (req: express.Request, res: express.Response) => {
+
         if (!req.session.user) {
             res.json({
                 message: 'no session data'

@@ -516,14 +516,11 @@ export async function loadHistoryScore() {
 export let user
 export let isLoggedIn = false
 
-// Get session user failed
-// Didn't log in still res.ok = true
 export async function getUserInfo() {
     let res = await fetch('/session')
-    console.log("res.ok: ", res.ok);
-    console.log("res: ", res);
-    if (res.ok) {
-        user = (await res.json()).user
+    let result = await res.json()
+    if (result.message != 'no session data') {
+        user = result.user
         isLoggedIn = true
         console.log("user: ", user);
         console.log("isLoggedIn: ", isLoggedIn);
@@ -533,20 +530,23 @@ export async function getUserInfo() {
 // update Score if Breaks new record
 async function getUserScore() {
     let userId = user.id
+    let mediaId = window.location.search.split('?')[1]
     let res = await fetch('/get-user-score', {
         method: "post",
         headers: {
             'Content-type': 'application/json',
         },
-        body: JSON.stringify({ userId })
+        body: JSON.stringify({ userId, mediaId })
     })
     let personalScore = (await res.json()).personalScore.scores
     console.log("personalScore: ", personalScore);
     if (score > personalScore) {
         updateUserScore(personalScore)
     }
+    // If no personal record -> POST API for create scores
 }
 async function updateUserScore(newScore) {
+    let mediaId = window.location.search.split('?')[1]
     let updatedScore = {
         method: 'PUT',
         headers: {
@@ -554,6 +554,7 @@ async function updateUserScore(newScore) {
         },
         body: JSON.stringify({
             userId: user.id,
+            mediaId,
             newScore
         })
     }

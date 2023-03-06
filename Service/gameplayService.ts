@@ -41,20 +41,21 @@ export class GameplayService {
         return result
     }
 
-    async getUserScoreById(userId: Number) {
-        let result = (await this.knex
-            .first()
-            .select('scores')
-            .from('scores')
-            .where('user_id', userId))
+    async getUserScoreById(userId: Number, mediaId: Number) {
+        let result = (
+            await this.knex.raw(`
+            select scores from scores
+            where user_id = ? and media_id = ?`,
+                [userId, mediaId])
+        ).rows
+        console.log("result: ", result);
+
         return result
     }
 
-    async updateUserRecord(userId: string, newScore: Number) {
-        await this.knex('scores')
-            .update({
-                scores: newScore
-            })
-            .where('user_id', userId)
+    async updateUserRecord(userId: Number, mediaId: Number, newScore: Number) {
+        await this.knex.raw(`
+            update scores set scores = ? where user_id = ? and media_id = ?
+        `, [newScore, userId, mediaId])
     }
 }
