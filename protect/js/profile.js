@@ -13,7 +13,7 @@ async function getUserTotalSong() {
     let res = await fetch('/get-user-total-song')
     let userAllSongs = await res.json()
     let userAllSongsList = userAllSongs.userTotalSong
-    totalSongElm.innerText = `Total Songs: ${userAllSongsList.length + 1}`
+    totalSongElm.innerText = `Total Songs: ${userAllSongsList.length}`
     for (let userSong of userAllSongsList) {
         console.log(userSong);
         SongListElm.innerHTML += `

@@ -1,48 +1,48 @@
 .content-container {
-    position: absolute;
-    width: 35vw;
-    text-align: center;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -40%);
-    background-color: rgba(0, 0, 0, 0.554);
-    color: var(--light-blue);
-    font-family: 'Triakis';
-    font-size: 33px;
-    border-bottom: 1px solid #ddd;
+	position: absolute;
+	width: 35vw;
+	text-align: center;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -40%);
+	background-color: rgba(0, 0, 0, 0.554);
+	color: var(--light-blue);
+	font-family: 'Triakis';
+	font-size: 33px;
+	border-bottom: 1px solid #ddd;
 }
 
 .table {
-    height: 500px;
-    overflow: auto;
+	height: 500px;
+	overflow: auto;
 }
 
 .user-email {
-    font-size: 33px;
+	font-size: 33px;
 }
 
 .user-username {
-    font-size: 33px;
+	font-size: 33px;
 }
 
 .total-song {
-    font-size: 33px;
+	font-size: 33px;
 }
 
 td {
-    color: var(--first-red);
+	color: var(--first-red);
 }
 
 .play-btn {
-    display: inline-block;
-    text-align: center;
-    font-size: 30px;
-    color: #131313;
-    padding: 0px 0px;
-    min-width: 153px;
-    border-radius: 50px;
-    font-weight: 500;
-    border: none;
-    background: var(--dark-blue);
-    font-family: 'Triakis';
+	display: inline-block;
+	text-align: center;
+	font-size: 30px;
+	color: var(--dark-tone);
+	padding: 0px 0px;
+	min-width: 153px;
+	border-radius: 50px;
+	font-weight: 500;
+	border: none;
+	background: var(--light-blue);
+	font-family: 'Triakis';
 }
