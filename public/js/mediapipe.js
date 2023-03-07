@@ -78,7 +78,7 @@ export function onResults(results) {
     // source-in = Only the parts of the new image that overlap with the existing image are drawn.
     canvasCtx.globalCompositeOperation = 'source-in';
     // Red
-    canvasCtx.fillStyle = '#FF0000';
+    canvasCtx.fillStyle = '#FF2A6D';
     canvasCtx.fillRect(0, 0, canvasElement.width, canvasElement.height);
 
     // The existing image is drawn on top of the new image, but only where the two images overlap
@@ -90,10 +90,10 @@ export function onResults(results) {
     canvasCtx.globalCompositeOperation = 'source-over';
     // Joint 線
     drawConnectors(canvasCtx, results.poseLandmarks, POSE_CONNECTIONS,
-        { color: '#00FF00', lineWidth: 2 });
+        { color: '#05d9e8', lineWidth: 1 });
     // Pose landmarks 
     drawLandmarks(canvasCtx, results.poseLandmarks,
-        { color: '#FF0000', lineWidth: 1 });
+        { color: '#FF2A6D', lineWidth: 1 });
     canvasCtx.restore();
 
     // Landmark Grid - 3D Coordinations
