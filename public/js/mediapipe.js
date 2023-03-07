@@ -344,7 +344,6 @@ function home() {
     window.location.href = "/song-list.html"
 }
 
-
 // Pause Function
 let pauseMenu = document.querySelector('#pause-menu-container')
 let restartBtn = document.querySelector('#restart-btn')
