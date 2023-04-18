@@ -2,3 +2,8 @@ node_modules
 .vscode
 .env
 .DS_Store
+Body-Movement-Comparison-with-Mediapipe/benchmark_video_data
+Body-Movement-Comparison-with-Mediapipe/sample_data
+Body-Movement-Comparison-with-Mediapipe/dance_videos
+
+
